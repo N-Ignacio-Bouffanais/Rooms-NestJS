@@ -16,7 +16,11 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   @Post('login')
   async signIn(@Body() loginDto: LoginDto): Promise<any> {
-    return this.authService.SignIn(loginDto);
+    try {
+      return this.authService.SignIn(loginDto);
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 
   @HttpCode(HttpStatus.CREATED)
