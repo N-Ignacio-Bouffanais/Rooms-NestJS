@@ -8,15 +8,18 @@ import { LoginDto, RegisterDto } from './dto';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AuthService {
   constructor(
     private prisma: PrismaService,
     private jwtService: JwtService,
+    private config: ConfigService,
   ) {}
 
   async SignIn(loginDto: LoginDto) {
+
     const findUser = await this.prisma.user.findUnique({
       where: {
         email: loginDto.email,
@@ -32,16 +35,24 @@ export class AuthService {
 
     if (!checkPassword) throw new HttpException('Contraseña incorrecta', 403);
 
-    const payload = { id: findUser.id, username: findUser.username}
+    const payload = { id: findUser.id, username: findUser.username };
 
-    const token = this.jwtService.sign(payload)
+    const token = this.jwtService.sign(payload, {
+      secret: this.config.get<string>('SECRET_KEY'),
+      expiresIn: '15m',
+    });
 
-    const data = {};
+    const data = {
+      user: findUser.username,
+      email: findUser.email,
+      role: findUser.role,
+      token,
+    };
 
     return data;
   }
 
-  async SignUp(registerDto: RegisterDto):Promise<{}> {
+  async SignUp(registerDto: RegisterDto): Promise<{}> {
     const findUser = await this.prisma.user.findUnique({
       where: {
         email: registerDto.email,
@@ -50,7 +61,7 @@ export class AuthService {
 
     if (!findUser) {
       const hashedPassword = await bcrypt.hash(registerDto.password, 10);
-      return await this.prisma.user.create({
+      const newUser =  await this.prisma.user.create({
         data: {
           email: registerDto.email,
           role: registerDto.role,
@@ -58,6 +69,14 @@ export class AuthService {
           hash: hashedPassword,
         },
       });
+
+      const user = {
+        email: newUser.email,
+        role: newUser.role,
+        username: newUser.username
+      }
+
+      return user
     }
 
     throw new Error(

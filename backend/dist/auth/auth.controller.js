@@ -21,7 +21,12 @@ let AuthController = class AuthController {
         this.authService = authService;
     }
     async signIn(loginDto) {
-        return this.authService.SignIn(loginDto);
+        try {
+            return this.authService.SignIn(loginDto);
+        }
+        catch (error) {
+            throw new common_1.HttpException(error.message, common_1.HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
     async signUp(registerDto) {
         try {
