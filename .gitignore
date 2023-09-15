@@ -17,3 +17,6 @@ build
 
 # environment variables
 .env
+
+#turbo
+.turbo
