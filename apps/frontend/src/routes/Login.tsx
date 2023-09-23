@@ -5,8 +5,8 @@ const Login = () => {
   return (
     <div className="flex w-full flex-col justify-center bg-[#ab2d4b] h-[91dvh]">
       <div className="flex flex-col items-center mx-auto space-y-2 text-center py-6 w-[340px] sm:w-[420px]">
-        <h1 className="text-white text-2xl font-semibold tracking-tight my-2">
-          Bienvenido
+        <h1 className="text-white text-3xl font-semibold tracking-tight my-2">
+          Login
         </h1>
         <LoginForm />
         <p className="px-8 text-center text-sm ">
