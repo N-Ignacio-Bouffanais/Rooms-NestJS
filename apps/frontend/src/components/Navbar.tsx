@@ -4,7 +4,7 @@ export default function Navbar() {
   const logedIn = true;
   return (
     <nav className="flex bg-black h-[9dvh] w-full text-white font-medium">
-      <ul className="flex w-[90dvw] justify-between items-center">
+      <ul className="flex w-[90dvw] mx-auto justify-between items-center">
         <li>
           <Link to="/">Home</Link>
         </li>
