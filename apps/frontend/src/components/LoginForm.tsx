@@ -1,44 +1,80 @@
+import {useForm} from "react-hook-form";
+
+
 function LoginForm() {
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    defaultValues: {
+      correo: "@example.com",
+      password: "",
+    },
+  });
+
+  
+  const onSubmit = handleSubmit((data) => {
+    console.log(data);
+    reset();
+  });
+
+
   return (
-    <form className="flex flex-col">
+    <form onSubmit={onSubmit} className="flex flex-col">
       <label
-        htmlFor=""
+        htmlFor="correo"
         className="flex justify-start font-medium text-slate-800"
       >
         Correo
       </label>
       <input
         type="email"
-        className="outline-blue-600 mb-2 h-8 pl-2 border-2 border-slate-800 rounded-md"
+        {...register("correo", {
+          required: {
+            value: true,
+            message: "Correo es requerido",
+          },
+          pattern: {
+            value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+            message: "Correo no válido",
+          },
+        })}
+        className="w-72 outline-blue-600 mb-2 h-8 pl-2 border-2 border-slate-800 rounded-md"
       />
+      {errors.correo && (
+        <span className="text-red-500 font-semibold text-left">
+          {errors.correo.message}
+        </span>
+      )}
       <label
-        htmlFor=""
+        htmlFor="password"
         className="flex justify-start font-medium text-slate-800"
       >
         Contraseña
       </label>
       <input
         type="password"
-        className="outline-blue-600 mb-2 h-8 pl-2 border-2 border-slate-800 rounded-md"
+        {...register("password", {
+          required: {
+            value: true,
+            message: "Contraseña es requerida",
+          },
+          minLength: {
+            value: 6,
+            message: "Contraseña debe ser mayor a 6 caracteres",
+          },
+        })}
+        className="w-72 outline-blue-600 mb-2 h-8 pl-2 border-2 border-slate-800 rounded-md"
       />
-      <label
-        htmlFor=""
-        className="flex justify-start font-medium text-slate-800"
-      >
-        Rol
-      </label>
-      <select className="focus:border-blue-600 mb-2 h-8 border-2 border-slate-800 rounded-md font-medium">
-        <option value="estudiante" className="font-medium">
-          Estudiante
-        </option>
-        <option value="profesor" className="font-medium">
-          Profesor
-        </option>
-      </select>
-      <div className="flex">
-        <label className="mr-2">Acepto los términos y condiciones</label>
-        <input type="checkbox" required />
-      </div>
+      {errors.password && (
+        <span className="text-red-500 font-semibold text-left w-72 sm:w-full">
+          {errors.password.message}
+        </span>
+      )}
+
       <div className="flex justify-center">
         <button
           type="submit"

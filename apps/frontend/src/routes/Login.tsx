@@ -3,15 +3,17 @@ import LoginForm from "../components/LoginForm";
 
 const Login = () => {
   return (
-    <div className="flex w-full flex-col justify-center bg-slate-400 h-[91dvh]">
-      <div className="flex flex-col items-center mx-auto space-y-2 text-center py-6 bg-white rounded-xl w-[340px] md:w-[420px]">
-        <h1 className="text-2xl font-semibold tracking-tight">Bienvenido</h1>
+    <div className="flex w-full flex-col justify-center bg-[#ab2d4b] h-[91dvh]">
+      <div className="flex flex-col items-center mx-auto space-y-2 text-center py-6 w-[340px] sm:w-[420px]">
+        <h1 className="text-white text-2xl font-semibold tracking-tight my-2">
+          Bienvenido
+        </h1>
         <LoginForm />
-        <p className="px-8 text-center text-sm text-muted-foreground">
+        <p className="px-8 text-center text-sm ">
           No tienes un cuenta?{" "}
           <Link
             to="/register"
-            className="hover:text-brand text-sm text-sky-700"
+            className="hover:text-brand text-sm text-sky-700 font-semibold"
           >
             Registrarme
           </Link>
