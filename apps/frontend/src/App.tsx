@@ -3,12 +3,9 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./routes/root";
 
-const Students_Login = lazy(() => import("./routes/students/Login"));
-const Professor_Login = lazy(() => import("./routes/professor/Login"));
-const Professor_Register = lazy(() => import("./routes/professor/Register"));
-const Students_Register = lazy(() => import("./routes/students/Register"));
-const Dashboard = lazy(() => import("./routes/students/Dashboard"));
-const Pr_Dashboard = lazy(() => import("./routes/professor/Dashboard"));
+const Students_Login = lazy(() => import("./routes/Login"));
+const Students_Register = lazy(() => import("./routes/Register"));
+const Dashboard = lazy(() => import("./routes/Dashboard"));
 
 const App = () => {
   return (
@@ -17,7 +14,7 @@ const App = () => {
       <Routes>
         <Route index element={<Home />} />
         <Route
-          path="/students/dashboard"
+          path="/dashboard"
           element={
             <React.Suspense fallback={<>...</>}>
               <Dashboard />
@@ -25,15 +22,7 @@ const App = () => {
           }
         />
         <Route
-          path="/professor/dashboard"
-          element={
-            <React.Suspense fallback={<>...</>}>
-              <Pr_Dashboard />
-            </React.Suspense>
-          }
-        />
-        <Route
-          path="/students/login"
+          path="/login"
           element={
             <React.Suspense fallback={<>...</>}>
               <Students_Login />
@@ -41,26 +30,10 @@ const App = () => {
           }
         />
         <Route
-          path="/students/register"
+          path="/register"
           element={
             <React.Suspense fallback={<>...</>}>
               <Students_Register />
-            </React.Suspense>
-          }
-        />
-        <Route
-          path="/professor/login"
-          element={
-            <React.Suspense fallback={<>...</>}>
-              <Professor_Login />
-            </React.Suspense>
-          }
-        />
-        <Route
-          path="/professor/register"
-          element={
-            <React.Suspense fallback={<>...</>}>
-              <Professor_Register />
             </React.Suspense>
           }
         />

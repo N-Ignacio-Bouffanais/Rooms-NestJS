@@ -23,10 +23,11 @@ export class AuthService {
     const findUser = await this.prisma.user.findUnique({
       where: {
         email: loginDto.email,
+        role: loginDto.role
       },
     });
 
-    if (!findUser) throw new HttpException('User not found', 404);
+    if (!findUser) throw new HttpException('Usuario no encontrado', 404);
 
     const checkPassword = await bcrypt.compare(
       loginDto.password,
