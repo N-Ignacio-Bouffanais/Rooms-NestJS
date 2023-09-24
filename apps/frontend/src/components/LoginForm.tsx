@@ -1,5 +1,5 @@
 import {useForm} from "react-hook-form";
-
+import axios from "axios";
 
 function LoginForm() {
 
@@ -10,67 +10,75 @@ function LoginForm() {
     reset,
   } = useForm({
     defaultValues: {
-      correo: "@example.com",
+      email: "",
       password: "",
     },
   });
 
   
-  const onSubmit = handleSubmit((data) => {
-    console.log(data);
+  const onSubmit = handleSubmit(async (data) => {
+    const response = await axios.post("http://localhost:3001/auth/login",{
+      email: data.email,
+      password: data.password
+    } );
+    console.log(response)
     reset();
   });
 
 
   return (
-    <form onSubmit={onSubmit} className="flex flex-col">
-      <label
-        htmlFor="correo"
-        className="flex justify-start font-medium text-slate-800"
-      >
-        Correo
-      </label>
-      <input
-        type="email"
-        {...register("correo", {
-          required: {
-            value: true,
-            message: "Correo es requerido",
-          },
-          pattern: {
-            value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-            message: "Correo no válido",
-          },
-        })}
-        className="w-72 outline-blue-600 mb-2 h-8 pl-2 border-2 border-slate-800 rounded-md"
-      />
-      {errors.correo && (
-        <span className="text-red-500 font-semibold text-left">
-          {errors.correo.message}
+    <form onSubmit={onSubmit} className="flex flex-col items-center">
+      <div>
+        <label
+          htmlFor="correo"
+          className="flex justify-start font-medium text-white text-lg"
+        >
+          Correo
+        </label>
+        <input
+          type="email"
+          {...register("email", {
+            required: {
+              value: true,
+              message: "El correo es requerido",
+            },
+            pattern: {
+              value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+              message: "El correo no es válido",
+            },
+          })}
+          className="w-80 mb-2 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-600 placeholder:font-medium"
+        />
+      </div>
+      {errors.email && (
+        <span className="flex text-black font-bold text-left w-80 items-center my-1">
+          {errors.email.message}
         </span>
       )}
-      <label
-        htmlFor="password"
-        className="flex justify-start font-medium text-slate-800"
-      >
-        Contraseña
-      </label>
-      <input
-        type="password"
-        {...register("password", {
-          required: {
-            value: true,
-            message: "Contraseña es requerida",
-          },
-          minLength: {
-            value: 6,
-            message: "Contraseña debe ser mayor a 6 caracteres",
-          },
-        })}
-        className="w-72 outline-blue-600 mb-2 h-8 pl-2 border-2 border-slate-800 rounded-md"
-      />
+      <div>
+        <label
+          htmlFor="password"
+          className="flex justify-start font-medium text-white text-lg"
+        >
+          Contraseña
+        </label>
+        <input
+          type="password"
+          {...register("password", {
+            required: {
+              value: true,
+              message: "La contraseña es requerida",
+            },
+            minLength: {
+              value: 6,
+              message: "La contraseña debe ser mayor a 6 caracteres",
+            },
+          })}
+          className="w-80 mb-2 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-600 placeholder:font-medium"
+        />
+      </div>
       {errors.password && (
-        <span className="text-red-500 font-semibold text-left w-72 sm:w-full">
+        <span className="text-black font-bold text-left w-80 sm:w-96 sm:text-center my-1">
           {errors.password.message}
         </span>
       )}
@@ -78,7 +86,7 @@ function LoginForm() {
       <div className="flex justify-center">
         <button
           type="submit"
-          className="flex justify-center items-center w-36 bg-blue-600 h-10 p-3 m-3 rounded-xl text-white font-medium hover:bg-blue-700"
+          className="flex justify-center items-center w-80 bg-blue-600 h-10 p-3 m-3 rounded-xl text-white text-lg font-medium hover:bg-blue-700"
         >
           Enviar
         </button>

@@ -1,2 +1,2 @@
-# FULLStack WebApplication build with NESTJS, Astro and Reactjs
+# FULLStack WebApplication build with NESTJS and Reactjs
 
