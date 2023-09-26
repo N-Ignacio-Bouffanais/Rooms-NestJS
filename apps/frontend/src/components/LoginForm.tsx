@@ -1,7 +1,10 @@
 import {useForm} from "react-hook-form";
 import axios from "axios";
+import { useAuthStore } from "../store/auth";
 
 function LoginForm() {
+
+  const setToken = useAuthStore(state => state.setToken);
 
   const {
     register,
@@ -22,6 +25,8 @@ function LoginForm() {
       password: data.password
     } );
     console.log(response)
+    console.log(response.data.token)
+    setToken(response.data.token);
     reset();
   });
 

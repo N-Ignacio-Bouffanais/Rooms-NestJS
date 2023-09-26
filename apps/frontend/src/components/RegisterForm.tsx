@@ -10,7 +10,7 @@ function RegisterForm() {
   } = useForm({
     defaultValues: {
       nombre: "",
-      correo: "",
+      email: "",
       password: "",
       confirmarPassword: "",
       aceptaTerminos: false,
@@ -32,8 +32,17 @@ function RegisterForm() {
           Nombre de Usuario
         </label>
         <input
-          type="nombre"
-          placeholder="Ingrese su Nombre"
+          type="email"
+          {...register("email", {
+            required: {
+              value: true,
+              message: "El correo es requerido",
+            },
+            pattern: {
+              value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+              message: "El correo no es válido",
+            },
+          })}
           className="w-80 mb-2 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-600 placeholder:font-medium"
         />
       </div>
@@ -47,7 +56,7 @@ function RegisterForm() {
         <input
           type="email"
           placeholder="Ingrese su Correo"
-          {...register("correo", {
+          {...register("email", {
             required: {
               value: true,
               message: "Correo es requerido",
@@ -59,9 +68,9 @@ function RegisterForm() {
           })}
           className="w-80 mb-2 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-600 placeholder:font-medium"
         />
-        {errors.correo && (
+        {errors.email && (
           <span className="text-red-500 font-semibold text-left">
-            {errors.correo.message}
+            {errors.email.message}
           </span>
         )}
       </div>
@@ -74,10 +83,24 @@ function RegisterForm() {
         </label>
         <input
           type="password"
-          placeholder="******"
-          className=" w-80 mb-2 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-600 placeholder:font-medium"
+          {...register("password", {
+            required: {
+              value: true,
+              message: "La contraseña es requerida",
+            },
+            minLength: {
+              value: 6,
+              message: "La contraseña debe ser mayor a 6 caracteres",
+            },
+          })}
+          className="w-80 mb-2 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-600 placeholder:font-medium"
         />
       </div>
+      {errors.password && (
+        <span className="text-black font-bold text-left w-80 sm:w-96 sm:text-center my-1">
+          {errors.password.message}
+        </span>
+      )}
       <div>
         <label className="flex justify-start font-medium text-white text-lg">
           Confirmar Contraseña:
