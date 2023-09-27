@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./routes/root";
 import { ProtectedRoute } from "./components/ProtectedRoute";
+import { useAuthStore } from "./store/auth";
 
 const Login = lazy(() => import("./routes/auth/Login"));
 const Register = lazy(() => import("./routes/auth/Register"));
@@ -15,6 +16,10 @@ const MyStudents = lazy(() => import("./routes/teacher/MyStudents"));
 const Subject = lazy(() => import("./routes/student/Subject"));
 
 const App = () => {
+
+  const user = useAuthStore.getState().username;
+  const rol = useAuthStore.getState().rol;
+
   return (
     <BrowserRouter>
       <Navbar />
@@ -37,45 +42,53 @@ const App = () => {
         />
         <Route index element={<Home />} />
         <Route
-          path="/panel-de-control"
-          element={
-            <React.Suspense fallback={<>...</>}>
-              <Dashboard />
-            </React.Suspense>
-          }
-        />
+          element={<ProtectedRoute isAllowed={!!user && rol === "student"} />}
+        >
+          <Route
+            path="/panel-de-control"
+            element={
+              <React.Suspense fallback={<>...</>}>
+                <Dashboard />
+              </React.Suspense>
+            }
+          />
+          <Route
+            path="/alumno/mis-notas"
+            element={
+              <React.Suspense fallback={<>...</>}>
+                <MyNotes />
+              </React.Suspense>
+            }
+          />
+          <Route
+            path="/alumno/mis-ramos"
+            element={
+              <React.Suspense fallback={<>...</>}>
+                <MySubjects />
+              </React.Suspense>
+            }
+          />
+          <Route
+            path="/alumno/mis-ramos/:id"
+            element={
+              <React.Suspense fallback={<>...</>}>
+                <Subject />
+              </React.Suspense>
+            }
+          />
+        </Route>
         <Route
-          path="/alumno/mis-notas"
-          element={
-            <React.Suspense fallback={<>...</>}>
-              <MyNotes />
-            </React.Suspense>
-          }
-        />
-        <Route
-          path="/alumno/mis-ramos"
-          element={
-            <React.Suspense fallback={<>...</>}>
-              <MySubjects />
-            </React.Suspense>
-          }
-        />
-        <Route
-          path="/alumno/mis-ramos/:id"
-          element={
-            <React.Suspense fallback={<>...</>}>
-              <Subject />
-            </React.Suspense>
-          }
-        />
-        <Route
-          path="/profesor/mis-alumnos"
-          element={
-            <React.Suspense fallback={<>...</>}>
-              <MyStudents />
-            </React.Suspense>
-          }
-        />
+          element={<ProtectedRoute isAllowed={!!user && rol === "teacher"} />}
+        >
+          <Route
+            path="/profesor/mis-alumnos"
+            element={
+              <React.Suspense fallback={<>...</>}>
+                <MyStudents />
+              </React.Suspense>
+            }
+          />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
