@@ -17,8 +17,8 @@ const Subject = lazy(() => import("./routes/student/Subject"));
 
 const App = () => {
 
-  const user = useAuthStore.getState().username;
-  const rol = useAuthStore.getState().rol;
+  const token = useAuthStore.getState().token;
+  const role = useAuthStore.getState().role;
 
   return (
     <BrowserRouter>
@@ -42,7 +42,7 @@ const App = () => {
         />
         <Route index element={<Home />} />
         <Route
-          element={<ProtectedRoute isAllowed={!!user && rol === "student"} />}
+          element={<ProtectedRoute isAllowed={!!token && role == "estudiante"} />}
         >
           <Route
             path="/panel-de-control"
@@ -78,7 +78,7 @@ const App = () => {
           />
         </Route>
         <Route
-          element={<ProtectedRoute isAllowed={!!user && rol === "teacher"} />}
+          element={<ProtectedRoute isAllowed={!!token && role == "profesor"} />}
         >
           <Route
             path="/profesor/mis-alumnos"

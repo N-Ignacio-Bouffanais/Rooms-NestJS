@@ -5,6 +5,7 @@ import { useAuthStore } from "../store/auth";
 function LoginForm() {
 
   const setToken = useAuthStore(state => state.setToken);
+  const setRole = useAuthStore(state => state.setRole);
 
   const {
     register,
@@ -27,6 +28,7 @@ function LoginForm() {
     console.log(response)
     console.log(response.data.token)
     setToken(response.data.token);
+    setRole(response.data.role);
     reset();
   });
 

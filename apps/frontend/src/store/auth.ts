@@ -4,14 +4,14 @@ import { persist } from "zustand/middleware";
 type State = {
   token: string;
   username: string;
-  rol: string;
+  role: string;
   isAuth: boolean;
 };
 
 type Actions = {
   setToken: (token: string) => void;
   setUsername: (username: string) => void;
-  setRol: (rol: string) => void;
+  setRole: (role: string) => void;
   logout: () => void;
 };
 
@@ -20,7 +20,7 @@ export const useAuthStore = create(
     (set) => ({
       token: "",
       username: "",
-      rol: "",
+      role: "",
       isAuth: false,
       setToken: (token: string) =>
         set(() => ({
@@ -31,7 +31,7 @@ export const useAuthStore = create(
         set(() => ({
           username
         })),
-      setRol: (rol: string) => set(() => ({rol})),
+      setRole: (role: string) => set(() => ({role})),
       logout: () => set(() => ({ token: "", isAuth: false })),
     }),
     {
