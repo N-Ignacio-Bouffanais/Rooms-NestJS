@@ -4,19 +4,40 @@ import Navbar from "./components/Navbar";
 import Home from "./routes/root";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 
-const Login = lazy(() => import("./routes/Login"));
-const Register = lazy(() => import("./routes/Register"));
+const Login = lazy(() => import("./routes/auth/Login"));
+const Register = lazy(() => import("./routes/auth/Register"));
 const Dashboard = lazy(() => import("./routes/Dashboard"));
 const MyNotes = lazy(() => import("./routes/student/MyNotes"));
+const MySubjects = lazy(() => import("./routes/student/MySubjects"));
+const MyStudents = lazy(() => import("./routes/teacher/MyStudents"));
+
+//Dynamic route
+const Subject = lazy(() => import("./routes/student/Subject"));
 
 const App = () => {
   return (
     <BrowserRouter>
       <Navbar />
       <Routes>
+        <Route
+          path="/login"
+          element={
+            <React.Suspense fallback={<>...</>}>
+              <Login />
+            </React.Suspense>
+          }
+        />
+        <Route
+          path="/registro"
+          element={
+            <React.Suspense fallback={<>...</>}>
+              <Register />
+            </React.Suspense>
+          }
+        />
         <Route index element={<Home />} />
         <Route
-          path="/alumno/panel-de-control"
+          path="/panel-de-control"
           element={
             <React.Suspense fallback={<>...</>}>
               <Dashboard />
@@ -32,18 +53,26 @@ const App = () => {
           }
         />
         <Route
-          path="/ingreso"
+          path="/alumno/mis-ramos"
           element={
             <React.Suspense fallback={<>...</>}>
-              <Login />
+              <MySubjects />
             </React.Suspense>
           }
         />
         <Route
-          path="/registro"
+          path="/alumno/mis-ramos/:id"
           element={
             <React.Suspense fallback={<>...</>}>
-              <Register />
+              <Subject />
+            </React.Suspense>
+          }
+        />
+        <Route
+          path="/profesor/mis-alumnos"
+          element={
+            <React.Suspense fallback={<>...</>}>
+              <MyStudents />
             </React.Suspense>
           }
         />

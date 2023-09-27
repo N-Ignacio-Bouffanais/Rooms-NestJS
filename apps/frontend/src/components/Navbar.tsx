@@ -6,8 +6,8 @@ export default function Navbar() {
     <nav className="flex bg-gray-700 h-[9dvh] w-full text-white font-medium">
       <ul className="flex w-[90dvw] mx-auto justify-between items-center">
         <li>
-          <Link to="/" title="Home Page">
-            Home
+          <Link to="/panel-de-control" title="Panel de control">
+            Inicio
           </Link>
         </li>
         {logedIn ? (
