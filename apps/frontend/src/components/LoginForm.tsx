@@ -1,5 +1,5 @@
 import {useForm} from "react-hook-form";
-import axios from "axios";
+import axios from "../libs/axios"
 import { useAuthStore } from "../store/auth";
 
 function LoginForm() {
@@ -20,7 +20,7 @@ function LoginForm() {
 
   
   const onSubmit = handleSubmit(async (data) => {
-    const response = await axios.post("http://localhost:3001/auth/login",{
+    const response = await axios.post("/auth/login",{
       email: data.email,
       password: data.password
     } );
