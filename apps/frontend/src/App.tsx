@@ -2,10 +2,12 @@ import React, { lazy } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./routes/root";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 
-const Students_Login = lazy(() => import("./routes/Login"));
-const Students_Register = lazy(() => import("./routes/Register"));
+const Login = lazy(() => import("./routes/Login"));
+const Register = lazy(() => import("./routes/Register"));
 const Dashboard = lazy(() => import("./routes/Dashboard"));
+const MyNotes = lazy(() => import("./routes/student/MyNotes"));
 
 const App = () => {
   return (
@@ -14,7 +16,7 @@ const App = () => {
       <Routes>
         <Route index element={<Home />} />
         <Route
-          path="/dashboard"
+          path="/alumno/panel-de-control"
           element={
             <React.Suspense fallback={<>...</>}>
               <Dashboard />
@@ -22,18 +24,26 @@ const App = () => {
           }
         />
         <Route
-          path="/login"
+          path="/alumno/mis-notas"
           element={
             <React.Suspense fallback={<>...</>}>
-              <Students_Login />
+              <MyNotes />
             </React.Suspense>
           }
         />
         <Route
-          path="/register"
+          path="/ingreso"
           element={
             <React.Suspense fallback={<>...</>}>
-              <Students_Register />
+              <Login />
+            </React.Suspense>
+          }
+        />
+        <Route
+          path="/registro"
+          element={
+            <React.Suspense fallback={<>...</>}>
+              <Register />
             </React.Suspense>
           }
         />
