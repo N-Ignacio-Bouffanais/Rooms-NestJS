@@ -1,29 +1,50 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuthStore } from "../store/auth";
 
-export default function Navbar() {
-  const logedIn = true;
+interface Props {
+  role?: string;
+  isAuth?: boolean;
+}
+
+function Navbar (props: Props) {
+
+  const navigate = useNavigate();
+  const logout = useAuthStore((state) => state.logout);
+
   return (
     <nav className="flex bg-gray-700 h-[9dvh] w-full text-white font-medium">
       <ul className="flex w-[90dvw] mx-auto justify-between items-center">
         <li>
-          <Link to="/panel-de-control" title="Panel de control">
-            Inicio
-          </Link>
-        </li>
-        {logedIn ? (
-          <li>
-            <Link to="/students/register" title="Login">
-              Cerrar sesion
+          {props.isAuth && (
+            <Link to="/panel-de-control" title="Panel de control">
+              Inicio
             </Link>
+          )}
+        </li>
+        {props.role && props.isAuth == true ? (
+          <li>
+            <button
+              onClick={() => {
+                logout(), navigate("/");
+              }}
+            >
+              Cerrar sesion
+            </button>
           </li>
         ) : (
           <li>
-            <Link to="/students/login" title="Login">
-              Iniciar Sesion
-            </Link>
+            <p
+              onClick={() => {
+                logout(), navigate("/estudiantes/login");
+              }}
+            >
+              Iniciar sesion
+            </p>
           </li>
         )}
       </ul>
     </nav>
   );
 }
+
+export default Navbar;

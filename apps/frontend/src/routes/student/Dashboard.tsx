@@ -2,7 +2,7 @@
 
 const Dashboard = () => {
   return (
-    <div>Dashboard page</div>
+    <div>Panel de control para estufdiantes</div>
   )
 }
 

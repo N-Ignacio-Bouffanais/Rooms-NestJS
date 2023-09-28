@@ -3,12 +3,12 @@ import { Navigate, Outlet } from "react-router-dom";
 interface Props {
   isAllowed: boolean;
   children?: React.ReactNode;
-  redirectTo?: string;
+  redirectTo: string;
 }
 
 export const ProtectedRoute = ({
   isAllowed,
-  redirectTo = "/login",
+  redirectTo,
   children,
 }: Props) => {
   if (!isAllowed) {

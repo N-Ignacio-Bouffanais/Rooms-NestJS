@@ -32,10 +32,11 @@ export const useAuthStore = create(
           username
         })),
       setRole: (role: string) => set(() => ({role})),
-      logout: () => set(() => ({ token: "", isAuth: false })),
+      logout: () => set(() => ({ token: "", isAuth: false, role: "", username:""  })),
     }),
     {
       name: "auth",
     }
-  )
+  ),
+
 );

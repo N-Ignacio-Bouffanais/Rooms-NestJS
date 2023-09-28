@@ -5,50 +5,74 @@ import Home from "./routes/root";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { useAuthStore } from "./store/auth";
 
-const Login = lazy(() => import("./routes/auth/Login"));
-const Register = lazy(() => import("./routes/auth/Register"));
-const Dashboard = lazy(() => import("./routes/Dashboard"));
+//Students routes
+const S_Login = lazy(() => import("./routes/student/auth/Login"));
+const S_Register = lazy(() => import("./routes/student/auth/Register"));
+const S_Dashboard = lazy(() => import("./routes/student/Dashboard"));
 const MyNotes = lazy(() => import("./routes/student/MyNotes"));
 const MySubjects = lazy(() => import("./routes/student/MySubjects"));
+
+//Professor routes
 const MyStudents = lazy(() => import("./routes/teacher/MyStudents"));
+const P_Dashboard = lazy(() => import("./routes/teacher/Dashboard"));
+const P_Login = lazy(() => import("./routes/teacher/auth/Login"));
+const P_Register = lazy(() => import("./routes/teacher/auth/Register"));
 
 //Dynamic route
 const Subject = lazy(() => import("./routes/student/Subject"));
 
 const App = () => {
 
-  const token = useAuthStore.getState().token;
+  const isAuth = useAuthStore.getState().isAuth;
   const role = useAuthStore.getState().role;
 
   return (
     <BrowserRouter>
-      <Navbar />
+      <Navbar role={role} isAuth={isAuth} />
       <Routes>
-        <Route
-          path="/login"
-          element={
-            <React.Suspense fallback={<>...</>}>
-              <Login />
-            </React.Suspense>
-          }
-        />
-        <Route
-          path="/registro"
-          element={
-            <React.Suspense fallback={<>...</>}>
-              <Register />
-            </React.Suspense>
-          }
-        />
         <Route index element={<Home />} />
         <Route
-          element={<ProtectedRoute isAllowed={!!token && role == "estudiante"} />}
+          path="/estudiantes/login"
+          element={
+            <React.Suspense fallback={<>...</>}>
+              <S_Login />
+            </React.Suspense>
+          }
+        />
+        <Route
+          path="/estudiantes/registro"
+          element={
+            <React.Suspense fallback={<>...</>}>
+              <S_Register />
+            </React.Suspense>
+          }
+        />
+        <Route
+          path="/profesor/login"
+          element={
+            <React.Suspense fallback={<>...</>}>
+              <P_Login />
+            </React.Suspense>
+          }
+        />
+        <Route
+          path="/profesor/registro"
+          element={
+            <React.Suspense fallback={<>...</>}>
+              <P_Register />
+            </React.Suspense>
+          }
+        />
+        <Route
+          element={
+            <ProtectedRoute redirectTo="/estudiantes/login" isAllowed={!!isAuth && role == "estudiante"} />
+          }
         >
           <Route
-            path="/panel-de-control"
+            path="/alumno/panel-de-control"
             element={
               <React.Suspense fallback={<>...</>}>
-                <Dashboard />
+                <S_Dashboard />
               </React.Suspense>
             }
           />
@@ -78,13 +102,23 @@ const App = () => {
           />
         </Route>
         <Route
-          element={<ProtectedRoute isAllowed={!!token && role == "profesor"} />}
+          element={
+            <ProtectedRoute redirectTo="/profesor/login"  isAllowed={!!isAuth && role == "profesor"} />
+          }
         >
           <Route
             path="/profesor/mis-alumnos"
             element={
               <React.Suspense fallback={<>...</>}>
                 <MyStudents />
+              </React.Suspense>
+            }
+          />
+          <Route
+            path="/profesor/panel-de-control"
+            element={
+              <React.Suspense fallback={<>...</>}>
+                <P_Dashboard />
               </React.Suspense>
             }
           />

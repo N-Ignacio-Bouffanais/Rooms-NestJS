@@ -1,11 +1,16 @@
-import {useForm} from "react-hook-form";
-import axios from "../libs/axios"
+import { useForm } from "react-hook-form";
+import axios from "../libs/axios";
 import { useAuthStore } from "../store/auth";
+import { useNavigate } from "react-router-dom";
 
-function LoginForm() {
+interface Props{
+  redirectTo: string;
+}
 
-  const setToken = useAuthStore(state => state.setToken);
-  const setRole = useAuthStore(state => state.setRole);
+function LoginForm(props:Props) {
+  const setToken = useAuthStore((state) => state.setToken);
+  const setRole = useAuthStore((state) => state.setRole);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -19,19 +24,17 @@ function LoginForm() {
     },
   });
 
-  
   const onSubmit = handleSubmit(async (data) => {
-    const response = await axios.post("/auth/login",{
+    const response = await axios.post("/auth/login", {
       email: data.email,
-      password: data.password
-    } );
-    console.log(response)
-    console.log(response.data.token)
-    setToken(response.data.token);
-    setRole(response.data.role);
+      password: data.password,
+    });
+    const{token,role} = response.data;
+    setToken(token);
+    setRole(role);
+    navigate(props.redirectTo);
     reset();
   });
-
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col items-center">
