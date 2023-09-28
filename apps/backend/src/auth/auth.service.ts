@@ -1,7 +1,5 @@
 import {
   Injectable,
-  ForbiddenException,
-  HttpStatus,
   HttpException
 } from '@nestjs/common';
 import { LoginDto, RegisterDto } from './dto';
@@ -18,15 +16,14 @@ export class AuthService {
     private config: ConfigService,
   ) {}
 
-  async SignIn(loginDto: LoginDto) {
-
-    const findUser = await this.prisma.user.findUnique({
+  async StuSignIn(loginDto: LoginDto) {
+    const findUser = await this.prisma.student.findUnique({
       where: {
         email: loginDto.email,
       },
     });
 
-    if (!findUser) throw new HttpException('Usuario no encontrado', 404);
+    if (!findUser) throw new HttpException('Estudiante no encontrado', 404);
 
     const checkPassword = await bcrypt.compare(
       loginDto.password,
@@ -35,7 +32,7 @@ export class AuthService {
 
     if (!checkPassword) throw new HttpException('Contraseña incorrecta', 403);
 
-    const payload = { id: findUser.id, username: findUser.username };
+    const payload = { id: findUser.id, firstname: findUser.firstname };
 
     const token = this.jwtService.sign(payload, {
       secret: this.config.get<string>('SECRET_KEY'),
@@ -43,8 +40,40 @@ export class AuthService {
     });
 
     const data = {
-      user: findUser.username,
-      email: findUser.email,
+      firstname: findUser.firstname,
+      lastname: findUser.lastname,
+      role: findUser.role,
+      token,
+    };
+
+    return data;
+  }
+  async ProfSignIn(loginDto: LoginDto) {
+    const findUser = await this.prisma.professor.findUnique({
+      where: {
+        email: loginDto.email,
+      },
+    });
+
+    if (!findUser) throw new HttpException('Profesor no encontrado', 404);
+
+    const checkPassword = await bcrypt.compare(
+      loginDto.password,
+      findUser.hash,
+    );
+
+    if (!checkPassword) throw new HttpException('Contraseña incorrecta', 403);
+
+    const payload = { id: findUser.id, firstname: findUser.firstname };
+
+    const token = this.jwtService.sign(payload, {
+      secret: this.config.get<string>('SECRET_KEY'),
+      expiresIn: '15m',
+    });
+
+    const data = {
+      firstname: findUser.firstname,
+      lastname: findUser.lastname,
       role: findUser.role,
       token,
     };
@@ -52,8 +81,8 @@ export class AuthService {
     return data;
   }
 
-  async SignUp(registerDto: RegisterDto): Promise<{}> {
-    const findUser = await this.prisma.user.findUnique({
+  async StuSignUp(registerDto: RegisterDto): Promise<{}> {
+    const findUser = await this.prisma.student.findUnique({
       where: {
         email: registerDto.email,
       },
@@ -61,26 +90,60 @@ export class AuthService {
 
     if (!findUser) {
       const hashedPassword = await bcrypt.hash(registerDto.password, 10);
-      const newUser =  await this.prisma.user.create({
+      const newUser = await this.prisma.student.create({
         data: {
           email: registerDto.email,
           role: registerDto.role,
-          username: registerDto.username,
+          firstname: registerDto.firstname,
+          lastname: registerDto.lastname,
           hash: hashedPassword,
         },
       });
 
       const user = {
-        email: newUser.email,
+        firstname: newUser.firstname,
+        lastname: newUser.lastname,
         role: newUser.role,
-        username: newUser.username
-      }
+      };
 
-      return user
+      return user;
     }
 
     throw new Error(
-      'Ya existe un usuario con este correo, Por favor intente con otro',
+      'Ya existe un estudiante con este correo, Por favor intente con otro',
+    );
+  }
+
+  async ProfSignUp(registerDto: RegisterDto): Promise<{}> {
+    const findUser = await this.prisma.professor.findUnique({
+      where: {
+        email: registerDto.email,
+      },
+    });
+
+    if (!findUser) {
+      const hashedPassword = await bcrypt.hash(registerDto.password, 10);
+      const newUser = await this.prisma.professor.create({
+        data: {
+          email: registerDto.email,
+          role: registerDto.role,
+          firstname: registerDto.firstname,
+          lastname: registerDto.lastname,
+          hash: hashedPassword,
+        },
+      });
+
+      const user = {
+        firstname: newUser.firstname,
+        lastname: newUser.lastname,
+        role: newUser.role,
+      };
+
+      return user;
+    }
+
+    throw new Error(
+      'Ya existe un profesor con este correo, Por favor intente con otro',
     );
   }
 }

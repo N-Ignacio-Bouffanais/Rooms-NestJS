@@ -12,20 +12,16 @@ export class LoginDto {
   password: string;
 }
 
-export class RegisterDto {
-  @IsNotEmpty()
+export class RegisterDto extends LoginDto {
   @IsString()
-  @IsEmail()
-  email: string;
+  @IsNotEmpty()
+  firstname: string;
 
   @IsString()
   @IsNotEmpty()
-  username: string;
-
-  @IsNotEmpty()
-  @IsString()
-  password: string;
+  lastname: string;
 
   @IsEnum(UserRole)
   readonly role: UserRole;
 }
+

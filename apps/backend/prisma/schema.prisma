@@ -9,17 +9,48 @@ datasource db {
   relationMode = "prisma"
 }
 
+model Subject{
+  id String    @id @default(auto()) @map("_id") @db.ObjectId
+  name String
 
-model User{
+  students Student[]
+  professors Professor[]
+
+  @@map("subject")
+}
+
+model Student{
   id String    @id @default(auto()) @map("_id") @db.ObjectId
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   email String  @unique
-  username String
+  firstname String
+  lastname String
   hash String
   role String
 
-  @@map("users")
+  subjectId String? @db.ObjectId
+  subject Subject? @relation(fields: [subjectId], references: [id])
+  
+
+  @@map("students")
+}
+
+model Professor{
+  id String    @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  email String  @unique
+  firstname String
+  lastname String
+  hash String
+  role String
+
+  subjectId String? @db.ObjectId
+  subject Subject? @relation(fields: [subjectId], references: [id])
+
+  @@map("professors")
 }
 
