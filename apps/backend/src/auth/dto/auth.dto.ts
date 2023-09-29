@@ -21,7 +21,5 @@ export class RegisterDto extends LoginDto {
   @IsNotEmpty()
   lastname: string;
 
-  @IsEnum(UserRole)
-  readonly role: UserRole;
 }
 

@@ -25,7 +25,7 @@ export class AuthController {
 
   @HttpCode(HttpStatus.OK)
   @Post('profesor/login')
-  async signIn(@Body() loginDto: LoginDto): Promise<any> {
+  async ProfSignIn(@Body() loginDto: LoginDto): Promise<any> {
     try {
       return this.authService.ProfSignIn(loginDto);
     } catch (error) {
