@@ -24,12 +24,11 @@ const Subject = lazy(() => import("./routes/student/Subject"));
 
 const App = () => {
 
-  const isAuth = useAuthStore.getState().isAuth;
-  const role = useAuthStore.getState().role;
+  const role = useAuthStore((state)=> state.role)
 
   return (
     <BrowserRouter>
-      <Navbar role={role} isAuth={isAuth} />
+      {role != ""  && <Navbar />}
       <Routes>
         <Route index element={<Home />} />
         <Route
@@ -68,7 +67,7 @@ const App = () => {
           element={
             <ProtectedRoute
               redirectTo="/estudiantes/login"
-              isAllowed={!!isAuth && role == "estudiante"}
+              isAllowed={role == "estudiante"}
             />
           }
         >
@@ -109,7 +108,7 @@ const App = () => {
           element={
             <ProtectedRoute
               redirectTo="/profesor/login"
-              isAllowed={!!isAuth && role == "profesor"}
+              isAllowed={role == "profesor"}
             />
           }
         >

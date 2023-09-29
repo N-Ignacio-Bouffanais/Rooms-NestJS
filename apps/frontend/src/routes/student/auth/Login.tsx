@@ -4,8 +4,8 @@ import {BsFillArrowLeftCircleFill} from "react-icons/bs";
 
 const Login = () => {
   return (
-    <div className="flex w-full flex-col justify-center bg-[#ab2d4b] h-[91dvh]">
-      <div className="flex flex-col items-center mx-auto space-y-2 text-center py-6 w-[340px] sm:w-[420px]">
+    <div className="flex w-full flex-col justify-center bg-[#ab2d4b] h-[100dvh]">
+      <div className="flex flex-col items-center mx-auto space-y-3 text-center py-2 w-[340px] sm:w-[420px]">
         <h1 className="text-white text-4xl font-bold tracking-tight my-2">
           Login
         </h1>
@@ -15,11 +15,14 @@ const Login = () => {
         />
         <Link
           to="/estudiantes/registro"
-          className="flex justify-center items-center w-80 bg-white h-10 p-3 m-3 rounded-full text-blue-600 text-lg font-medium hover:bg-slate-300"
+          className="flex justify-center items-center w-80 bg-white h-10 p-3 rounded-full text-blue-600 text-lg font-medium hover:bg-slate-300"
         >
           Registrarme
         </Link>
-        <Link to="/" className="flex items-center">
+        <Link
+          to="/"
+          className="flex justify-center items-center w-80 bg-[#100f1d] h-10 p-3 rounded-full text-[#0bc4d6] text-lg font-medium hover:bg-black"
+        >
           <i className="mr-1">
             <BsFillArrowLeftCircleFill />
           </i>

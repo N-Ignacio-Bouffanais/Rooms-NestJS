@@ -62,6 +62,7 @@ function ChangeVisibility() {
           Correo
         </label>
         <input
+          placeholder="ingrese su correo"
           type="email"
           {...register("email", {
             required: {
@@ -90,6 +91,7 @@ function ChangeVisibility() {
         </label>
         <div className="relative">
           <input
+            placeholder="******"
             id="password"
             type="password"
             {...register("password", {
@@ -118,10 +120,10 @@ function ChangeVisibility() {
         </span>
       )}
 
-      <div className="flex justify-center">
+      <div className="flex justify-center h-10 mt-3 mb-1">
         <button
           type="submit"
-          className="flex justify-center items-center w-80 bg-blue-600 h-10 p-3 m-3 rounded-full text-white text-lg font-medium hover:bg-blue-700"
+          className="flex justify-center items-center w-80 bg-blue-600 p-3  rounded-full text-white text-lg font-medium hover:bg-blue-700"
         >
           Enviar
         </button>

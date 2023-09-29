@@ -11,6 +11,7 @@ function RegisterForm() {
   } = useForm({
     defaultValues: {
       nombre: "",
+      apellido: "",
       email: "",
       password: "",
       confirmarPassword: "",
@@ -49,19 +50,29 @@ function RegisterForm() {
           htmlFor=""
           className="flex justify-start font-medium text-white "
         >
-          Nombre de Usuario
+          Nombre
         </label>
         <input
-          type="email"
-          {...register("email", {
-            required: {
-              value: true,
-              message: "El correo es requerido",
-            },
-            pattern: {
-              value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-              message: "El correo no es válido",
-            },
+          placeholder="ingrese su nombre"
+          type="text"
+          {...register("nombre", {
+            required: true,
+          })}
+          className="w-80 mb-2 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-600 placeholder:font-medium"
+        />
+      </div>
+      <div>
+        <label
+          htmlFor=""
+          className="flex justify-start font-medium text-white "
+        >
+          Apellido
+        </label>
+        <input
+          placeholder="ingrese su apellido"
+          type="text"
+          {...register("apellido", {
+            required: true,
           })}
           className="w-80 mb-2 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-600 placeholder:font-medium"
         />
@@ -75,7 +86,7 @@ function RegisterForm() {
         </label>
         <input
           type="email"
-          placeholder="Ingrese su Correo"
+          placeholder="ingrese su correo"
           {...register("email", {
             required: {
               value: true,
@@ -103,6 +114,7 @@ function RegisterForm() {
         </label>
         <div className="relative">
           <input
+            placeholder="******"
             id="password"
             type="password"
             {...register("password", {
@@ -136,6 +148,7 @@ function RegisterForm() {
         </label>
         <div className="relative">
           <input
+            placeholder="******"
             id="confirmarPassword"
             type="password"
             {...register("password", {
