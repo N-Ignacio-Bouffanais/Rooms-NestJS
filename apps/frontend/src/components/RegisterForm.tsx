@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { AiOutlineEye } from "react-icons/ai";
 
 function RegisterForm() {
 
@@ -21,6 +22,25 @@ function RegisterForm() {
     console.log(data);
     reset();
   });
+
+  function ChangeVisibility() {
+    let x = document.getElementById("password") as HTMLInputElement;
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }
+
+  function ChangeVisibility2() {
+    let y = document.getElementById("confirmarPassword") as HTMLInputElement;
+    if (y.type === "password") {
+      y.type = "text";
+    } else {
+      y.type = "password";
+    }
+  }
+
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col items-center">
@@ -81,20 +101,29 @@ function RegisterForm() {
         >
           Contraseña
         </label>
-        <input
-          type="password"
-          {...register("password", {
-            required: {
-              value: true,
-              message: "La contraseña es requerida",
-            },
-            minLength: {
-              value: 6,
-              message: "La contraseña debe ser mayor a 6 caracteres",
-            },
-          })}
-          className="w-80 mb-2 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-600 placeholder:font-medium"
-        />
+        <div className="relative">
+          <input
+            id="password"
+            type="password"
+            {...register("password", {
+              required: {
+                value: true,
+                message: "La contraseña es requerida",
+              },
+              minLength: {
+                value: 6,
+                message: "La contraseña debe ser mayor a 6 caracteres",
+              },
+            })}
+            className="w-80 mb-2 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-600 placeholder:font-medium"
+          />
+          <i className="absolute right-2 top-2">
+            <AiOutlineEye
+              className="cursor-pointer"
+              onClick={ChangeVisibility}
+            />
+          </i>
+        </div>
       </div>
       {errors.password && (
         <span className="text-black font-bold text-left w-80 sm:w-96 sm:text-center my-1">
@@ -105,12 +134,29 @@ function RegisterForm() {
         <label className="flex justify-start font-medium text-white text-lg">
           Confirmar Contraseña:
         </label>
-        <input
-          type="password"
-          placeholder="******"
-          name="confirmarPassword"
-          className="w-80 mb-2 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-600 placeholder:font-medium"
-        />
+        <div className="relative">
+          <input
+            id="confirmarPassword"
+            type="password"
+            {...register("password", {
+              required: {
+                value: true,
+                message: "La contraseña es requerida",
+              },
+              minLength: {
+                value: 6,
+                message: "La contraseña debe ser mayor a 6 caracteres",
+              },
+            })}
+            className="w-80 mb-2 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-600 placeholder:font-medium"
+          />
+          <i className="absolute right-2 top-2">
+            <AiOutlineEye
+              className="cursor-pointer"
+              onClick={ChangeVisibility2}
+            />
+          </i>
+        </div>
       </div>
       <div>
         <label

@@ -1,4 +1,5 @@
 import React, { lazy } from "react";
+import { Toaster } from "sonner";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./routes/root";
@@ -65,7 +66,10 @@ const App = () => {
         />
         <Route
           element={
-            <ProtectedRoute redirectTo="/estudiantes/login" isAllowed={!!isAuth && role == "estudiante"} />
+            <ProtectedRoute
+              redirectTo="/estudiantes/login"
+              isAllowed={!!isAuth && role == "estudiante"}
+            />
           }
         >
           <Route
@@ -103,7 +107,10 @@ const App = () => {
         </Route>
         <Route
           element={
-            <ProtectedRoute redirectTo="/profesor/login"  isAllowed={!!isAuth && role == "profesor"} />
+            <ProtectedRoute
+              redirectTo="/profesor/login"
+              isAllowed={!!isAuth && role == "profesor"}
+            />
           }
         >
           <Route
@@ -124,6 +131,7 @@ const App = () => {
           />
         </Route>
       </Routes>
+      <Toaster position="bottom-right" />
     </BrowserRouter>
   );
 };

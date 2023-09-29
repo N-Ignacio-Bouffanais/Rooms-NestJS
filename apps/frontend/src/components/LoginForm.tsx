@@ -2,41 +2,55 @@ import { useForm } from "react-hook-form";
 import axios from "../libs/axios";
 import { useAuthStore } from "../store/auth";
 import { useNavigate } from "react-router-dom";
+import {AiOutlineEye} from "react-icons/ai";
 
-interface Props{
+interface Props {
   redirectTo: string;
   endpoint: string;
 }
 
-function LoginForm(props:Props) {
-  const {endpoint} = props
+function LoginForm(props: Props) {
+  const { endpoint } = props;
   const setToken = useAuthStore((state) => state.setToken);
   const setRole = useAuthStore((state) => state.setRole);
+  const setFirstname = useAuthStore((state) => state.setfirstname);
+  const setLastname = useAuthStore((state) => state.setlastname);
   const navigate = useNavigate();
+
+  type FormData = {
+    email: string;
+    password: string;
+  };
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-  });
+  } = useForm<FormData>();
 
   const onSubmit = handleSubmit(async (data) => {
     const response = await axios.post(`${endpoint}`, {
       email: data.email,
       password: data.password,
     });
-    const { token, role } = response.data;
+    const { token, role, lastname, firstname } = response.data;
     setToken(token);
     setRole(role);
+    setFirstname(firstname);
+    setLastname(lastname);
     navigate(props.redirectTo);
     reset();
   });
+
+function ChangeVisibility() {
+  let x = document.getElementById("password") as HTMLInputElement;
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col items-center">
@@ -74,20 +88,29 @@ function LoginForm(props:Props) {
         >
           Contraseña
         </label>
-        <input
-          type="password"
-          {...register("password", {
-            required: {
-              value: true,
-              message: "La contraseña es requerida",
-            },
-            minLength: {
-              value: 6,
-              message: "La contraseña debe ser mayor a 6 caracteres",
-            },
-          })}
-          className="w-80 mb-2 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-600 placeholder:font-medium"
-        />
+        <div className="relative">
+          <input
+            id="password"
+            type="password"
+            {...register("password", {
+              required: {
+                value: true,
+                message: "La contraseña es requerida",
+              },
+              minLength: {
+                value: 6,
+                message: "La contraseña debe ser mayor a 6 caracteres",
+              },
+            })}
+            className="w-80 mb-2 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-600 placeholder:font-medium"
+          />
+          <i className="absolute right-2 top-2">
+            <AiOutlineEye
+              className="cursor-pointer"
+              onClick={ChangeVisibility}
+            />
+          </i>
+        </div>
       </div>
       {errors.password && (
         <span className="text-black font-bold text-left w-80 sm:w-96 sm:text-center my-1">
