@@ -8,7 +8,10 @@ const Login = () => {
         <h1 className="text-white text-4xl font-bold tracking-tight my-2">
           Login
         </h1>
-        <LoginForm redirectTo="/alumno/panel-de-control" />
+        <LoginForm
+          endpoint="/auth/student/login"
+          redirectTo="/alumno/panel-de-control"
+        />
         <Link
           to="/registro"
           className="flex justify-center items-center w-80 bg-white h-10 p-3 m-3 rounded-xl text-blue-600 text-lg font-medium hover:bg-slate-300"

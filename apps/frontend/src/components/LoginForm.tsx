@@ -5,9 +5,11 @@ import { useNavigate } from "react-router-dom";
 
 interface Props{
   redirectTo: string;
+  endpoint: string;
 }
 
 function LoginForm(props:Props) {
+  const {endpoint} = props
   const setToken = useAuthStore((state) => state.setToken);
   const setRole = useAuthStore((state) => state.setRole);
   const navigate = useNavigate();
@@ -25,11 +27,11 @@ function LoginForm(props:Props) {
   });
 
   const onSubmit = handleSubmit(async (data) => {
-    const response = await axios.post("/auth/login", {
+    const response = await axios.post(`${endpoint}`, {
       email: data.email,
       password: data.password,
     });
-    const{token,role} = response.data;
+    const { token, role } = response.data;
     setToken(token);
     setRole(role);
     navigate(props.redirectTo);

@@ -21,7 +21,7 @@ function Navbar (props: Props) {
             </Link>
           )}
         </li>
-        {props.role && props.isAuth == true ? (
+        {(props.isAuth == true) ? (
           <li>
             <button
               onClick={() => {
@@ -32,15 +32,26 @@ function Navbar (props: Props) {
             </button>
           </li>
         ) : (
-          <li>
-            <p
-              onClick={() => {
-                logout(), navigate("/estudiantes/login");
-              }}
-            >
-              Iniciar sesion
-            </p>
-          </li>
+          <>
+            <li>
+              <p
+                onClick={() => {
+                  logout(), navigate("/profesor/login");
+                }}
+              >
+                Profesores
+              </p>
+            </li>
+            <li>
+              <p
+                onClick={() => {
+                  logout(), navigate("/estudiantes/login");
+                }}
+              >
+                Estudiantes
+              </p>
+            </li>
+          </>
         )}
       </ul>
     </nav>
