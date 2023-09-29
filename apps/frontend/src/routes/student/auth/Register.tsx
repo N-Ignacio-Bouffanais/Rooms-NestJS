@@ -12,7 +12,7 @@ const Register = () => {
         <RegisterForm />
         <Link
           to="/estudiantes/login"
-          className="flex justify-center items-center w-80 bg-white h-10 p-3 m-3 rounded-xl text-blue-600 text-lg font-medium hover:bg-slate-300"
+          className="flex justify-center items-center w-80 bg-white h-10 p-3 m-3 rounded-full text-blue-600 text-lg font-medium hover:bg-slate-300"
         >
           Login
         </Link>

@@ -47,7 +47,7 @@ function RegisterForm() {
       <div>
         <label
           htmlFor=""
-          className="flex justify-start font-medium text-white text-lg"
+          className="flex justify-start font-medium text-white "
         >
           Nombre de Usuario
         </label>
@@ -69,7 +69,7 @@ function RegisterForm() {
       <div>
         <label
           htmlFor=""
-          className="flex justify-start font-medium text-white text-lg"
+          className="flex justify-start font-medium text-white "
         >
           Correo
         </label>
@@ -97,7 +97,7 @@ function RegisterForm() {
       <div>
         <label
           htmlFor=""
-          className="flex justify-start font-medium text-white text-lg"
+          className="flex justify-start font-medium text-white "
         >
           Contraseña
         </label>
@@ -131,7 +131,7 @@ function RegisterForm() {
         </span>
       )}
       <div>
-        <label className="flex justify-start font-medium text-white text-lg">
+        <label className="flex justify-start font-medium text-white">
           Confirmar Contraseña:
         </label>
         <div className="relative">
@@ -158,24 +158,8 @@ function RegisterForm() {
           </i>
         </div>
       </div>
-      <div>
-        <label
-          htmlFor=""
-          className="flex justify-start font-medium text-white text-lg"
-        >
-          Eres Estudiante o Profesor?
-        </label>
-        <select
-          name="rol"
-          id="rol"
-          className="flex w-80 mb-2 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-600 placeholder:font-medium"
-        >
-          <option value="estudiante">Estudiante</option>
-          <option value="profesor">Profesor</option>
-        </select>
-      </div>
       <div className="flex">
-        <label className="flex justify-start font-medium text-white text-lg">
+        <label className="flex justify-start font-medium text-white ">
           Acepto los términos y condiciones
         </label>
         <input type="checkbox" required className="ml-2" />
@@ -183,7 +167,7 @@ function RegisterForm() {
       <div className="flex justify-center">
         <button
           type="submit"
-          className="flex justify-center items-center w-80 bg-blue-600 h-10 p-3 m-3 rounded-xl text-white text-lg font-medium hover:bg-blue-700"
+          className="flex justify-center items-center w-80 bg-blue-600 h-10 p-3 m-3 rounded-full text-white  font-medium hover:bg-blue-700"
         >
           Enviar
         </button>

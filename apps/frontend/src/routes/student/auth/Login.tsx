@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import LoginForm from "../../../components/LoginForm";
+import {BsFillArrowLeftCircleFill} from "react-icons/bs";
 
 const Login = () => {
   return (
@@ -14,9 +15,15 @@ const Login = () => {
         />
         <Link
           to="/estudiantes/registro"
-          className="flex justify-center items-center w-80 bg-white h-10 p-3 m-3 rounded-xl text-blue-600 text-lg font-medium hover:bg-slate-300"
+          className="flex justify-center items-center w-80 bg-white h-10 p-3 m-3 rounded-full text-blue-600 text-lg font-medium hover:bg-slate-300"
         >
           Registrarme
+        </Link>
+        <Link to="/" className="flex items-center">
+          <i className="mr-1">
+            <BsFillArrowLeftCircleFill />
+          </i>
+          Volver atras
         </Link>
       </div>
     </div>
