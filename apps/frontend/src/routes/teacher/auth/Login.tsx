@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import LoginForm from "../../../components/LoginForm";
-import { BsFillArrowLeftCircleFill } from "react-icons/bs";
+import BackButton from "../../../components/BackButton";
 
 const Login = () => {
   return (
@@ -19,12 +19,7 @@ const Login = () => {
         >
           Registrarme
         </Link>
-        <Link to="/" className="flex items-center">
-          <i className="mr-1">
-            <BsFillArrowLeftCircleFill />
-          </i>
-          Volver atras
-        </Link>
+        <BackButton />
       </div>
     </div>
   );
