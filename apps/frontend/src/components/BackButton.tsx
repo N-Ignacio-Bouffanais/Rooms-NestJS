@@ -6,12 +6,12 @@ function BackButton() {
   return (
     <Link
       to="/"
-      className="flex justify-center items-center w-80 bg-[#100f1d] h-10 p-3 rounded-full text-[#0bc4d6] text-lg font-medium hover:bg-black"
+      className="flex justify-center items-center w-80 bg-[#100f1d] h-10 p-3 rounded-full text-white text-lg font-medium hover:bg-black"
     >
       <i className="mr-1">
         <BsFillArrowLeftCircleFill />
       </i>
-      Volver atras
+      Regresar
     </Link>
   );
 }

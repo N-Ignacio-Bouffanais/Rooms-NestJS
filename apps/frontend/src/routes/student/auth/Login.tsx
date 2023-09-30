@@ -11,10 +11,10 @@ const Login = () => {
         </h1>
         <LoginForm
           endpoint="/auth/student/login"
-          redirectTo="/alumno/panel-de-control"
+          redirectTo="/estudiante/panel-de-control"
         />
         <Link
-          to="/estudiantes/registro"
+          to="/estudiante/registro"
           className="flex justify-center items-center w-80 bg-white h-10 p-3 rounded-full text-blue-600 text-lg font-medium hover:bg-slate-300"
         >
           Registrarme

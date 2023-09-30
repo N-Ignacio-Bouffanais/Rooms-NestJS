@@ -123,7 +123,7 @@ function ChangeVisibility() {
       <div className="flex justify-center h-10 mt-3 mb-1">
         <button
           type="submit"
-          className="flex justify-center items-center w-80 bg-blue-600 p-3  rounded-full text-white text-lg font-medium hover:bg-blue-700"
+          className="flex justify-center items-center w-80 bg-blue-700 p-3 rounded-full text-white text-lg font-medium hover:bg-blue-800"
         >
           Enviar
         </button>

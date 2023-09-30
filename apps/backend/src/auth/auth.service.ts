@@ -93,7 +93,7 @@ export class AuthService {
       const newUser = await this.prisma.student.create({
         data: {
           email: registerDto.email,
-          role: 'student',
+          role: 'estudiante',
           firstname: registerDto.firstname,
           lastname: registerDto.lastname,
           hash: hashedPassword,

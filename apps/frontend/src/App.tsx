@@ -1,5 +1,4 @@
 import React, { lazy } from "react";
-import { Toaster } from "sonner";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./routes/root";
@@ -28,11 +27,11 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      {role != ""  && <Navbar />}
+      {role != "" && <Navbar redirectTo={`/${role}/panel-de-control`} />}
       <Routes>
         <Route index element={<Home />} />
         <Route
-          path="/estudiantes/login"
+          path="/estudiante/login"
           element={
             <React.Suspense fallback={<>...</>}>
               <S_Login />
@@ -40,7 +39,7 @@ const App = () => {
           }
         />
         <Route
-          path="/estudiantes/registro"
+          path="/estudiante/registro"
           element={
             <React.Suspense fallback={<>...</>}>
               <S_Register />
@@ -66,13 +65,13 @@ const App = () => {
         <Route
           element={
             <ProtectedRoute
-              redirectTo="/estudiantes/login"
+              redirectTo="/estudiante/login"
               isAllowed={role == "estudiante"}
             />
           }
         >
           <Route
-            path="/alumno/panel-de-control"
+            path="/estudiante/panel-de-control"
             element={
               <React.Suspense fallback={<>...</>}>
                 <S_Dashboard />
@@ -80,7 +79,7 @@ const App = () => {
             }
           />
           <Route
-            path="/alumno/mis-notas"
+            path="/estudiante/mis-notas"
             element={
               <React.Suspense fallback={<>...</>}>
                 <MyNotes />
@@ -88,7 +87,7 @@ const App = () => {
             }
           />
           <Route
-            path="/alumno/mis-ramos"
+            path="/estudiante/mis-ramos"
             element={
               <React.Suspense fallback={<>...</>}>
                 <MySubjects />
@@ -96,7 +95,7 @@ const App = () => {
             }
           />
           <Route
-            path="/alumno/mis-ramos/:id"
+            path="/estudiante/mis-ramos/:id"
             element={
               <React.Suspense fallback={<>...</>}>
                 <Subject />
@@ -113,7 +112,7 @@ const App = () => {
           }
         >
           <Route
-            path="/profesor/mis-alumnos"
+            path="/profesor/mis-estudiante"
             element={
               <React.Suspense fallback={<>...</>}>
                 <MyStudents />
@@ -130,7 +129,6 @@ const App = () => {
           />
         </Route>
       </Routes>
-      <Toaster position="bottom-right" />
     </BrowserRouter>
   );
 };

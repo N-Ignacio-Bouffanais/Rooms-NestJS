@@ -180,7 +180,7 @@ function RegisterForm() {
       <div className="flex justify-center">
         <button
           type="submit"
-          className="flex justify-center items-center w-80 bg-blue-600 h-10 p-3 m-3 rounded-full text-white  font-medium hover:bg-blue-700"
+          className="flex justify-center items-center w-80 bg-blue-700 h-10 p-3 m-3 rounded-full text-white text-lg font-medium hover:bg-blue-800"
         >
           Enviar
         </button>

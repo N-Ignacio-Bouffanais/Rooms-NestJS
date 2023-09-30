@@ -109,7 +109,6 @@ importers:
       react-hook-form: ^7.46.2
       react-icons: ^4.11.0
       react-router-dom: ^6.16.0
-      sonner: ^0.7.4
       tailwindcss: ^3.3.3
       typescript: ^5.0.2
       vite: ^4.4.5
@@ -121,7 +120,6 @@ importers:
       react-hook-form: 7.46.2_react@18.2.0
       react-icons: 4.11.0_react@18.2.0
       react-router-dom: 6.16.0_biqbaboplfbrettd7655fr4n2y
-      sonner: 0.7.4_biqbaboplfbrettd7655fr4n2y
       zustand: 4.4.1_dpmmhqj3uzrk25jjzo7arvivk4
     devDependencies:
       '@types/react': 18.2.22
@@ -5642,16 +5640,6 @@ packages:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
     engines: {node: '>=8'}
     dev: true
-
-  /sonner/0.7.4_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-xRVYOCTAxJge7hRGSwu7q+gIS9B2csuOZw8yNEaXe/qlncft5a7UmkttGNb4LOGu79rAB/GJ6JQbUMpJNf51Nw==}
-    peerDependencies:
-      react: ^18.0.0
-      react-dom: ^18.0.0
-    dependencies:
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-    dev: false
 
   /source-map-js/1.0.2:
     resolution: {integrity: sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==}
