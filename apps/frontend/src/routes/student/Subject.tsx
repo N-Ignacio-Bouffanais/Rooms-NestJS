@@ -1,7 +1,7 @@
 const Subject = () =>{
   return (
     <div>
-      <h1>Nombre del ramo</h1>
+      <h1>Nombre del ramo:</h1>
       <ul>
         <li>
           <div>
