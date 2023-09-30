@@ -1,6 +1,5 @@
-import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
-
+import {AiOutlineArrowLeft} from "react-icons/ai";
 
 function BackButton() {
   return (
@@ -9,7 +8,7 @@ function BackButton() {
       className="flex justify-center items-center w-80 bg-[#100f1d] h-10 p-3 rounded-full text-white text-lg font-medium hover:bg-black"
     >
       <i className="mr-1">
-        <BsFillArrowLeftCircleFill />
+        <AiOutlineArrowLeft />
       </i>
       Regresar
     </Link>
