@@ -5,11 +5,9 @@ import BackButton from "../../../components/BackButton";
 
 const Register = () => {
   return (
-    <div className="flex w-full flex-col justify-center bg-[#219C90] h-[100dvh]">
+    <div className="flex w-full flex-col justify-center bg-[#0B666A] h-[100dvh]">
       <div className="flex flex-col items-center mx-auto text-center w-[340px] sm:w-[420px]">
-        <h1 className="text-black text-4xl font-extrabold mb-3">
-          Bienvenido
-        </h1>
+        <h1 className="text-black text-4xl font-extrabold mb-3">Bienvenido</h1>
         <RegisterForm />
         <Link
           to="/profesor/login"

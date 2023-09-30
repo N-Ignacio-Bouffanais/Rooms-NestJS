@@ -6,4 +6,18 @@ body{
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  width: 100dvw;
+}
+::-webkit-scrollbar{
+  width: 11px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #213555;
+}
+::-webkit-scrollbar-thumb {
+  background: #696969;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #383838;
 }

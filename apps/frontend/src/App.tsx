@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import Home from "./routes/root";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { useAuthStore } from "./store/auth";
+import Footer from "./components/Footer";
 
 //Students routes
 const S_Login = lazy(() => import("./routes/student/auth/Login"));
@@ -129,6 +130,7 @@ const App = () => {
           />
         </Route>
       </Routes>
+      <Footer/>
     </BrowserRouter>
   );
 };
