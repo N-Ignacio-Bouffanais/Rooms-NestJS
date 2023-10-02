@@ -126,7 +126,7 @@ export class AuthService {
       const newUser = await this.prisma.professor.create({
         data: {
           email: registerDto.email,
-          role: "profesor",
+          role: 'profesor',
           firstname: registerDto.firstname,
           lastname: registerDto.lastname,
           hash: hashedPassword,
@@ -145,5 +145,9 @@ export class AuthService {
     throw new Error(
       'Ya existe un profesor con este correo, Por favor intente con otro',
     );
+  }
+
+  async AdminSignUp(loginDto: LoginDto) {
+
   }
 }
