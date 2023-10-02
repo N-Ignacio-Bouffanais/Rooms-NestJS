@@ -57,9 +57,9 @@ export class AuthController {
 
   @HttpCode(HttpStatus.OK)
   @Post('admin/login')
-  async AdminSignUp(@Body() adminDto: LoginDto ): Promise<any> {
+  async AdminSignIn(@Body() adminDto: LoginDto ): Promise<any> {
     try {
-      return 
+      return this.authService.AdminSignIn(adminDto);
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR)
     }

@@ -147,7 +147,7 @@ export class AuthService {
     );
   }
 
-  async AdminSignUp(loginDto: LoginDto) {
-
+  async AdminSignIn(loginDto: LoginDto) {
+    
   }
 }
