@@ -6,6 +6,7 @@ import { ConfigModule } from '@nestjs/config';
 import { PrismaModule } from './prisma/prisma.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { SubjectsModule } from './subjects/subjects.module';
 
 
 @Module({
@@ -16,6 +17,7 @@ import { join } from 'path';
     ConfigModule.forRoot({ isGlobal: true }),
     AuthModule,
     PrismaModule,
+    SubjectsModule,
   ],
   providers: [AppService],
   controllers: [AppController],

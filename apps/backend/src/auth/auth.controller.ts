@@ -54,4 +54,13 @@ export class AuthController {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
+
+  @Post('admin/login')
+  async AdminLogin(@Body() adminDto: LoginDto){
+    try {
+      return this.authService.AdminSignIn(adminDto);
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
 }

@@ -146,4 +146,29 @@ export class AuthService {
       'Ya existe un profesor con este correo, Por favor intente con otro',
     );
   }
+
+  async AdminSignIn(adminDto: LoginDto){
+    const findUser = await this.prisma.admin.findUnique({
+      where: {
+        email: adminDto.email,
+      },
+    });
+    if (!findUser) throw new HttpException('Correo equivocado', 404);
+
+    const checkPassword = await bcrypt.compare(
+      adminDto.password,
+      findUser.password,
+    );
+
+    if (!checkPassword) throw new HttpException('Contraseña incorrecta', 403);
+
+    const payload = { id: findUser.id };
+
+    const token = this.jwtService.sign(payload, {
+      secret: this.config.get<string>('SECRET_KEY'),
+      expiresIn: '15m',
+    });
+
+    return token;
+  }
 }
