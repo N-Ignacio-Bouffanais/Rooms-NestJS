@@ -9,20 +9,10 @@ datasource db {
   relationMode = "prisma"
 }
 
-model Admin{
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  email String  @unique
-  password String
-  
-  subjects Subject[]
-}
-
 model Subject{
   id String    @id @default(auto()) @map("_id") @db.ObjectId
   name String
-
-  adminId String @db.ObjectId
-  admin Admin @relation(fields: [adminId], references: [id])
+  limit Int
 
   students Student[]
   professors Professor[]
