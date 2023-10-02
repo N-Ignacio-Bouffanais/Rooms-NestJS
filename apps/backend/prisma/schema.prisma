@@ -9,9 +9,18 @@ datasource db {
   relationMode = "prisma"
 }
 
+model Admin{
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  
+  subjects Subject[]
+}
+
 model Subject{
   id String    @id @default(auto()) @map("_id") @db.ObjectId
   name String
+
+  adminId String @db.ObjectId
+  admin Admin @relation(fields: [adminId], references: [id])
 
   students Student[]
   professors Professor[]
@@ -30,7 +39,7 @@ model Student{
   hash String
   role String
 
-  subjectId String? @db.ObjectId
+  subjectId String[] @db.ObjectId
   subject Subject? @relation(fields: [subjectId], references: [id])
   
 
@@ -53,4 +62,5 @@ model Professor{
 
   @@map("professors")
 }
+
 
