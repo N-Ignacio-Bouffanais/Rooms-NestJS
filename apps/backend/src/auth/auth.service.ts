@@ -146,8 +146,4 @@ export class AuthService {
       'Ya existe un profesor con este correo, Por favor intente con otro',
     );
   }
-
-  async AdminSignIn(loginDto: LoginDto) {
-    
-  }
 }
