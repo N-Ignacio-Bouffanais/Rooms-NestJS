@@ -1,6 +1,6 @@
 import { useAuthStore } from "../../store/auth";
-import {BsFillCalendarDateFill} from "react-icons/bs"
 import { GrNotes, GrScorecard } from "react-icons/gr";
+import {AiFillSchedule} from "react-icons/ai";
 import {BiExit} from "react-icons/bi"
 import {MdTask} from "react-icons/md";
 import { Link } from "react-router-dom";
@@ -16,10 +16,10 @@ const Dashboard = () => {
           Estudiante: {`${firstname} ${lastname}`}
         </h1>
         <div className="grid grid-cols-2 grid-rows-2 gap-y-3 my-6">
-          <Link to={""} title="Mi horario">
+          <Link to={"/estudiante/toma-de-ramos"} title="Materias">
             <div className="flex justify-center items-center w-40 h-40 bg-[#FF0060] rounded-xl">
               <i>
-                <BsFillCalendarDateFill className="w-12 h-12" />
+                <AiFillSchedule className="w-12 h-12" />
               </i>
             </div>
           </Link>
@@ -46,7 +46,10 @@ const Dashboard = () => {
           </Link>
         </div>
         <div>
-          <button className="font-semibold">Salir<BiExit/></button>
+          <button className="font-semibold">
+            Salir
+            <BiExit />
+          </button>
         </div>
       </div>
     </div>

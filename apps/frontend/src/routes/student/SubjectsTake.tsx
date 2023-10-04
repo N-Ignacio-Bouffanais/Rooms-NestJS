@@ -2,8 +2,8 @@
 
 function SubjectsTake() {
   return (
-    <div>
-      <h1>Toma de ramos</h1>
+    <div className="h-[100dvh]">
+      <h1 className="text-3xl font-bold">Toma de ramos</h1>
     </div>
   )
 }

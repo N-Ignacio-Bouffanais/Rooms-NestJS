@@ -12,6 +12,7 @@ const S_Register = lazy(() => import("./routes/student/auth/Register"));
 const S_Dashboard = lazy(() => import("./routes/student/Dashboard"));
 const MyNotes = lazy(() => import("./routes/student/MyNotes"));
 const MySubjects = lazy(() => import("./routes/student/MySubjects"));
+const SubjectsTake = lazy(() => import("./routes/student/SubjectsTake"));
 
 //Professor routes
 const MyStudents = lazy(() => import("./routes/teacher/MyStudents"));
@@ -88,6 +89,14 @@ const App = () => {
             }
           />
           <Route
+            path="/estudiante/toma-de-ramos"
+            element={
+              <React.Suspense fallback={<>...</>}>
+                <SubjectsTake />
+              </React.Suspense>
+            }
+          />
+          <Route
             path="/estudiante/mis-ramos"
             element={
               <React.Suspense fallback={<>...</>}>
@@ -130,7 +139,7 @@ const App = () => {
           />
         </Route>
       </Routes>
-      <Footer/>
+      <Footer />
     </BrowserRouter>
   );
 };
