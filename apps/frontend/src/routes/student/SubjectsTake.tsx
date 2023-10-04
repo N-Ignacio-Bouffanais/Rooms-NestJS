@@ -6,10 +6,12 @@ function SubjectsTake() {
 
   const {getSubjects, subjects} = useAppStore()
 
-  useEffect(()=>{
-    getSubjects();
-    console.log(subjects);
-  },[])
+  useEffect(() => {
+    return ()=> {
+      getSubjects();
+      console.log(subjects);
+    }
+  }, []);
 
   return (
     <div className="h-[100dvh]">
