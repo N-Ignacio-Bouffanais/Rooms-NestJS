@@ -14,7 +14,9 @@ export const useAppStore = create(
     (set)=>({
       subjects: [],
       getSubjects: async ()=> {
-        const subjects = await ( await fetch("https://jsonplaceholder.typicode.com/posts")).json();
+        const subjects = await(
+          await fetch("http://localhost:3001/subjects")
+        ).json();
         set((state) => ({ ...state, subjects }));
       }}),{
         name: 'subjects'
