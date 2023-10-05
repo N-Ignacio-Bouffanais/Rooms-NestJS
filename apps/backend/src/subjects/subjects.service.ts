@@ -10,6 +10,13 @@ export class SubjectsService {
 
   findAll() {
     return this.prisma.subject.findMany({
+      where:{
+        students:{
+          none:{
+            firstname:"Nicolas"
+          }
+        }
+      },
       orderBy:{
         name:'desc'
       }
