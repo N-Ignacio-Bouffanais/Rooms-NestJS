@@ -1,22 +1,25 @@
 import { Injectable } from '@nestjs/common';
-import { CreateProfesorDto } from './dto/create-profesor.dto';
-import { UpdateProfesorDto } from './dto/update-profesor.dto';
+import { ProfesorDto } from './dto/profesor.dto';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class ProfesorService {
-  create(createProfesorDto: CreateProfesorDto) {
-    return 'This action adds a new profesor';
-  }
-
+  constructor(private prisma:PrismaService){}
   findAll() {
-    return `This action returns all profesor`;
+    return this.prisma.professor.findMany({
+      where:{
+        subject:{
+          isNot:null
+        }
+      }
+    })
   }
 
   findOne(id: number) {
     return `This action returns a #${id} profesor`;
   }
 
-  update(id: number, updateProfesorDto: UpdateProfesorDto) {
+  update(id: number, profesorDto: ProfesorDto) {
     return `This action updates a #${id} profesor`;
   }
 
