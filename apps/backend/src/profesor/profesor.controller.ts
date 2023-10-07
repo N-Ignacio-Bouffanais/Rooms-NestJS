@@ -1,7 +1,6 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Body, Patch, Param, Delete, HttpException, HttpStatus } from '@nestjs/common';
 import { ProfesorService } from './profesor.service';
 import { ProfesorDto } from './dto/profesor.dto';
-import { PrismaService } from 'src/prisma/prisma.service';
 
 @Controller('profesor')
 export class ProfesorController {
@@ -20,11 +19,19 @@ export class ProfesorController {
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() profesorDto: ProfesorDto) {
-    return this.profesorService.update(+id, profesorDto);
+    try {
+      return this.profesorService.update(+id, profesorDto);
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.profesorService.remove(+id);
+    try {
+      return this.profesorService.remove(+id);
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 }
