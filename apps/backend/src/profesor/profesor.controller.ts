@@ -4,9 +4,7 @@ import { ProfesorDto } from './dto/profesor.dto';
 
 @Controller('profesor')
 export class ProfesorController {
-  constructor(
-    private readonly profesorService: ProfesorService,
-  ) {}
+  constructor(private readonly profesorService: ProfesorService) {}
 
   @Get()
   findAll() {

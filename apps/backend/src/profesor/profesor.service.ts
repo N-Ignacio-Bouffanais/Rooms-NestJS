@@ -15,10 +15,6 @@ export class ProfesorService {
     })
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} profesor`;
-  }
-
   update(id: number, profesorDto: ProfesorDto) {
     return `This action updates a #${id} profesor`;
   }

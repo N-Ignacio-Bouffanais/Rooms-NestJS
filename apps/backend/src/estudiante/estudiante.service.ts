@@ -7,7 +7,7 @@ export class EstudianteService {
   constructor(private prisma: PrismaService){}
   
   findAll() {
-    return this;
+    return this.prisma.student.findMany({});
   }
 
   findOne(id: number) {
