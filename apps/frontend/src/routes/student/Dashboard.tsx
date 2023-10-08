@@ -1,4 +1,4 @@
-import { useAuthStore } from "../../store/auth";
+import { useAppStore } from "../../store/app";
 import { GrNotes, GrScorecard } from "react-icons/gr";
 import {AiFillSchedule} from "react-icons/ai";
 import {BiExit} from "react-icons/bi"
@@ -6,8 +6,8 @@ import {MdTask} from "react-icons/md";
 import { Link } from "react-router-dom";
 
 const Dashboard = () => {
-  const firstname = useAuthStore((state)=>state.firstname);
-  const lastname = useAuthStore((state)=>state.lastname);
+  const firstname = useAppStore((state)=>state.firstname);
+  const lastname = useAppStore((state)=>state.lastname);
 
   return (
     <div className="flex flex-col h-[100dvh] ">
@@ -16,14 +16,20 @@ const Dashboard = () => {
           Estudiante: {`${firstname} ${lastname}`}
         </h1>
         <div className="grid grid-cols-2 grid-rows-2 gap-y-3 my-6">
-          <Link to={`/estudiante/${firstname}-${lastname}`} title="Materias">
+          <Link
+            to={`/estudiante/${firstname}-${lastname}`}
+            title="Mis Materias"
+          >
             <div className="flex justify-center items-center w-40 h-40 bg-[#FF0060] rounded-xl">
               <i>
                 <AiFillSchedule className="w-12 h-12" />
               </i>
             </div>
           </Link>
-          <Link to={""} title="Mis notas">
+          <Link
+            to={`/estudiante/toma-de-ramos/${firstname}-${lastname}`}
+            title="Tomar Ramos"
+          >
             <div className="flex justify-center items-center w-40 h-40 bg-[#0079FF] rounded-xl">
               <i>
                 <GrNotes className="w-12 h-12" />

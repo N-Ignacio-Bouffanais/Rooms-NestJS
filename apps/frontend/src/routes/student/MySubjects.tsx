@@ -1,11 +1,11 @@
 import { useEffect } from "react";
-import { useAuthStore } from "../../store/auth";
+import { useAppStore } from "../../store/app";
 
 const MySubjects = () => {
 
-  const { getSubjects, subjects } = useAuthStore();
-  const firstname = useAuthStore((state) => state.firstname);
-  const lastname = useAuthStore((state) => state.lastname);
+  const { getSubjects, subjects } = useAppStore();
+  const firstname = useAppStore((state) => state.firstname);
+  const lastname = useAppStore((state) => state.lastname);
 
   useEffect(() => {
     return () => {

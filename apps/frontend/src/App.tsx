@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./routes/root";
 import { ProtectedRoute } from "./components/ProtectedRoute";
-import { useAuthStore } from "./store/auth";
+import { useAppStore } from "./store/app";
 import Footer from "./components/Footer";
 
 //Students routes
@@ -25,7 +25,7 @@ const Subject = lazy(() => import("./routes/student/Subject"));
 
 const App = () => {
 
-  const role = useAuthStore((state)=> state.role)
+  const role = useAppStore((state) => state.role);
 
   return (
     <BrowserRouter>
@@ -89,7 +89,7 @@ const App = () => {
             }
           />
           <Route
-            path="/estudiante/toma-de-ramos"
+            path="/estudiante/toma-de-ramos/:estudiante"
             element={
               <React.Suspense fallback={<>...</>}>
                 <SubjectsTake />

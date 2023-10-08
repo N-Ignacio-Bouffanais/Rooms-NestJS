@@ -8,14 +8,18 @@ interface Subject{
 
 function SubjectsTake() {
 
-  const {getSubjects, subjects} = useAppStore()
+  const {getAllSubjects, subjects} = useAppStore()
 
   useEffect(() => {
     return ()=> {
-      getSubjects();
+      getAllSubjects();
       console.log(subjects);
     }
   }, []);
+
+  const Inscription = () => {
+
+  }
 
   return (
     <div className="h-[100dvh] w-[100dvw]">
@@ -31,7 +35,7 @@ function SubjectsTake() {
             <ul className="" key={subject.id}>
               <li className="grid w-full grid-cols-3 h-20 my-6">
                 <p className="text-2xl">{subject.name}</p>
-                <button>Incribirse</button>
+                <button onClick={Inscription}>Incribirse</button>
               </li>
             </ul>
           ))}

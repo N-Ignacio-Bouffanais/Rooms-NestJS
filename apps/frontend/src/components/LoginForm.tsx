@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import axios from "../libs/axios";
-import { useAuthStore } from "../store/auth";
+import { useAppStore } from "../store/app";
 import { useNavigate } from "react-router-dom";
 import {AiOutlineEye} from "react-icons/ai";
 
@@ -11,10 +11,10 @@ interface Props {
 
 function LoginForm(props: Props) {
   const { endpoint } = props;
-  const setToken = useAuthStore((state) => state.setToken);
-  const setRole = useAuthStore((state) => state.setRole);
-  const setFirstname = useAuthStore((state) => state.setfirstname);
-  const setLastname = useAuthStore((state) => state.setlastname);
+  const setToken = useAppStore((state) => state.setToken);
+  const setRole = useAppStore((state) => state.setRole);
+  const setFirstname = useAppStore((state) => state.setfirstname);
+  const setLastname = useAppStore((state) => state.setlastname);
   const navigate = useNavigate();
 
   type FormData = {

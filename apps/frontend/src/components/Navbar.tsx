@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useAuthStore } from "../store/auth";
+import { useAppStore } from "../store/app";
 import {DiAtom} from "react-icons/di";
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
 
 function Navbar(props:Props) {
   const navigate = useNavigate();
-  const logout = useAuthStore((state) => state.logout);
+  const logout = useAppStore((state) => state.logout);
 
   return (
     <nav className="flex bg-gray-700 h-[9dvh] w-full text-white font-medium">

@@ -1,5 +1,5 @@
 import axios, { AxiosHeaders } from "axios";
-import { useAuthStore } from "../store/auth";
+import { useAppStore } from "../store/app";
 
 const authApi = axios.create({
   baseURL: "http://localhost:3001",
@@ -7,7 +7,7 @@ const authApi = axios.create({
 
 authApi.interceptors.request.use(config=>{
   config.withCredentials = true;
-  const token = useAuthStore.getState().token
+  const token = useAppStore.getState().token
 
   if (token) {
     (config.headers as AxiosHeaders).set("Authorization", `Bearer ${token}`);
