@@ -6,8 +6,19 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class EstudianteService {
   constructor(private prisma: PrismaService){}
   
-  findAll() {
-    return this.prisma.student.findMany({});
+  findAll(estudianteId:string) {
+    const id = estudianteId.split("-")
+    const lastname = id[1]
+    const firstname = id[0]
+    return this.prisma.student.findMany({
+      where: {
+        firstname: firstname,
+        lastname: lastname,
+        subject:{
+          isNot:null,
+        }
+      }
+    });
   }
 
   findOne(id: number) {

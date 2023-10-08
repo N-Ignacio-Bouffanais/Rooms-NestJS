@@ -16,7 +16,7 @@ const Dashboard = () => {
           Estudiante: {`${firstname} ${lastname}`}
         </h1>
         <div className="grid grid-cols-2 grid-rows-2 gap-y-3 my-6">
-          <Link to={"/estudiante/toma-de-ramos"} title="Materias">
+          <Link to={`/estudiante/${firstname}-${lastname}`} title="Materias">
             <div className="flex justify-center items-center w-40 h-40 bg-[#FF0060] rounded-xl">
               <i>
                 <AiFillSchedule className="w-12 h-12" />

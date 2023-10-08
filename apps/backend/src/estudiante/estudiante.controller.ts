@@ -6,9 +6,9 @@ import { StudentDto } from './dto/student.dto';
 export class EstudianteController {
   constructor(private readonly estudianteService: EstudianteService) {}
 
-  @Get()
-  findAll() {
-    return this.estudianteService.findAll();
+  @Get(':estudianteId')
+  findAll(@Param('estudianteId') estudianteId:string) {
+    return this.estudianteService.findAll(estudianteId);
   }
 
   @Get(':id')
