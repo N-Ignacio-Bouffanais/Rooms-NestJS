@@ -7,8 +7,13 @@ export class EstudianteController {
   constructor(private readonly estudianteService: EstudianteService) {}
 
   @Get(':estudianteId')
-  findAll(@Param('estudianteId') estudianteId:string) {
+  findAll(@Param('estudianteId') estudianteId: string) {
     return this.estudianteService.findAll(estudianteId);
+  }
+
+  @Get(':estudianteId')
+  findInscriptions(@Param('estudianteId') estudianteId: string) {
+    return this.estudianteService.findInscriptions(estudianteId);
   }
 
   @Get(':id')

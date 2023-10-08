@@ -9,16 +9,18 @@ interface Subject{
 function SubjectsTake() {
 
   const {getAllSubjects, subjects} = useAppStore()
+  const firstname = useAppStore((state) => state.firstname);
+  const lastname = useAppStore((state) => state.lastname);
 
   useEffect(() => {
     return ()=> {
-      getAllSubjects();
-      console.log(subjects);
+      getAllSubjects(firstname, lastname);
+      console.log(subjects)
     }
   }, []);
 
   const Inscription = () => {
-
+    console.log("incrito correctamente...")
   }
 
   return (
@@ -31,14 +33,14 @@ function SubjectsTake() {
             <p className="text-gray-600 font-semibold text-lg">Profesor</p>
             <p className="text-gray-600 font-semibold text-lg">Cupos</p>
           </div>
-          {subjects.map((subject: Subject) => (
+          {/* {subjects.map((subject: Subject) => (
             <ul className="" key={subject.id}>
               <li className="grid w-full grid-cols-3 h-20 my-6">
                 <p className="text-2xl">{subject.name}</p>
                 <button onClick={Inscription}>Incribirse</button>
               </li>
             </ul>
-          ))}
+          ))} */}
         </div>
       </div>
     </div>
