@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 import { useAppStore } from "../../store/app"
+import axios from "axios"
 
 interface Subject{
   name: string
@@ -19,9 +20,14 @@ function SubjectsTake() {
     }
   }, []);
 
-  const Inscription = () => {
-    console.log("incrito correctamente...")
-  }
+  const Inscription = async (e: React.SyntheticEvent<EventTarget>) => {
+    const res = axios.patch(`http://localhost:3001/estudiante/`, {
+      firstname: firstname,
+      lastname: lastname,
+      name: (e.target as HTMLButtonElement).id,
+    });
+    console.log(res)
+  };
 
   return (
     <div className="h-[100dvh] w-[100dvw]">
@@ -33,14 +39,14 @@ function SubjectsTake() {
             <p className="text-gray-600 font-semibold text-lg">Profesor</p>
             <p className="text-gray-600 font-semibold text-lg">Cupos</p>
           </div>
-          {/* {subjects.map((subject: Subject) => (
+          {subjects.map((subject: Subject) => (
             <ul className="" key={subject.id}>
               <li className="grid w-full grid-cols-3 h-20 my-6">
                 <p className="text-2xl">{subject.name}</p>
-                <button onClick={Inscription}>Incribirse</button>
+                <button id={subject.name} onClick={Inscription}>Incribirse</button>
               </li>
             </ul>
-          ))} */}
+          ))}
         </div>
       </div>
     </div>

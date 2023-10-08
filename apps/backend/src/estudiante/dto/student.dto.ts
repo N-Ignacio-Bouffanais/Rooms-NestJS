@@ -1,3 +1,12 @@
+import { IsString } from "class-validator";
 
+export class StudentDto {
+  @IsString()
+  subject: string;
 
-export class StudentDto{}
+  @IsString()
+  firstname: string;
+
+  @IsString()
+  lastname: string;
+}

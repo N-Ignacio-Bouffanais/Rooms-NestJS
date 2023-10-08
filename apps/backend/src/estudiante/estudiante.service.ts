@@ -39,12 +39,10 @@ export class EstudianteService {
     });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} estudiante`;
-  }
-
-  update(id: number, estudianteDto: StudentDto) {
-    return `This action updates a #${id} estudiante`;
+  update(estudianteDto: StudentDto) {
+    return this.prisma.student.update({
+      
+    })
   }
 
   remove(id: number) {
