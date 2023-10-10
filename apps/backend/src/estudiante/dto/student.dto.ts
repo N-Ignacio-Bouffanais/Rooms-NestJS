@@ -2,7 +2,7 @@ import { IsString } from "class-validator";
 
 export class StudentDto {
   @IsString()
-  subject: string;
+  subjectName: string;
 
   @IsString()
   firstname: string;
