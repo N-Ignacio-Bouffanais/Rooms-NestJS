@@ -1,7 +1,4 @@
-import {
-  Injectable,
-  HttpException
-} from '@nestjs/common';
+import { Injectable, HttpException } from '@nestjs/common';
 import { LoginDto, RegisterDto } from './dto';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
@@ -32,21 +29,19 @@ export class AuthService {
 
     if (!checkPassword) throw new HttpException('Contraseña incorrecta', 403);
 
-    const payload = { id: findUser.id, firstname: findUser.firstname };
+    const payload = {
+      firstname: findUser.firstname,
+      lastname: findUser.lastname,
+      role: 'estudiante',
+      email: findUser.email,
+    };
 
     const token = this.jwtService.sign(payload, {
       secret: this.config.get<string>('SECRET_KEY'),
-      expiresIn: '15m',
+      expiresIn: '10m',
     });
 
-    const data = {
-      firstname: findUser.firstname,
-      lastname: findUser.lastname,
-      role: findUser.role,
-      token,
-    };
-
-    return data;
+    return token;
   }
   async ProfSignIn(loginDto: LoginDto) {
     const findUser = await this.prisma.professor.findUnique({
@@ -64,21 +59,19 @@ export class AuthService {
 
     if (!checkPassword) throw new HttpException('Contraseña incorrecta', 403);
 
-    const payload = { id: findUser.id, firstname: findUser.firstname };
+    const payload = {
+      firstname: findUser.firstname,
+      lastname: findUser.lastname,
+      role: 'profesor',
+      email: findUser.email,
+    };
 
     const token = this.jwtService.sign(payload, {
       secret: this.config.get<string>('SECRET_KEY'),
       expiresIn: '15m',
     });
 
-    const data = {
-      firstname: findUser.firstname,
-      lastname: findUser.lastname,
-      role: findUser.role,
-      token,
-    };
-
-    return data;
+    return token;
   }
 
   async StuSignUp(registerDto: RegisterDto): Promise<{}> {
@@ -93,20 +86,13 @@ export class AuthService {
       const newUser = await this.prisma.student.create({
         data: {
           email: registerDto.email,
-          role: 'estudiante',
           firstname: registerDto.firstname,
           lastname: registerDto.lastname,
           hash: hashedPassword,
         },
       });
 
-      const user = {
-        firstname: newUser.firstname,
-        lastname: newUser.lastname,
-        role: newUser.role,
-      };
-
-      return user;
+      return "Estudiante creado con exito"
     }
 
     throw new Error(
@@ -126,25 +112,17 @@ export class AuthService {
       const newUser = await this.prisma.professor.create({
         data: {
           email: registerDto.email,
-          role: 'profesor',
           firstname: registerDto.firstname,
           lastname: registerDto.lastname,
           hash: hashedPassword,
         },
       });
 
-      const user = {
-        firstname: newUser.firstname,
-        lastname: newUser.lastname,
-        role: newUser.role,
-      };
-
-      return user;
+      return 'Profesor creado con exito';
     }
 
     throw new Error(
       'Ya existe un profesor con este correo, Por favor intente con otro',
     );
   }
-
 }

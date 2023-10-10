@@ -40,17 +40,17 @@ export class EstudianteService {
   }
 
   update(estudianteDto: StudentDto) {
-    const findStudent = this.prisma.student.findFirst({
+    const newStudent = this.prisma.student.update({
       where:{
         firstname: estudianteDto.firstname,
-        lastname: estudianteDto.lastname
-      }
-    })
-    const newStudent = this.prisma.student.update({
-      data:{},
-      where:{
-        
-      }
+        id: 
+      },
+      data:{
+        subject:{
+          connect: []
+        }
+      },
+      
     });
   }
 
