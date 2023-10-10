@@ -24,9 +24,9 @@ function SubjectsTake() {
     const res = axios.patch(`http://localhost:3001/estudiante/`, {
       firstname: firstname,
       lastname: lastname,
-      name: (e.target as HTMLButtonElement).id,
+      subjectName: (e.target as HTMLButtonElement).id,
     });
-    console.log(res)
+    console.log(res);
   };
 
   return (

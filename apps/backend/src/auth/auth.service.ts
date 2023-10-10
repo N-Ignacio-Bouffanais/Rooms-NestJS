@@ -92,7 +92,12 @@ export class AuthService {
         },
       });
 
-      return "Estudiante creado con exito"
+      const user = {
+        firstname: newUser.firstname,
+        lastname: newUser.lastname,
+      };
+
+      return `Estudiante ${user.firstname} ${user.lastname} creado con exito`
     }
 
     throw new Error(
@@ -118,7 +123,12 @@ export class AuthService {
         },
       });
 
-      return 'Profesor creado con exito';
+      const user = {
+        firstname: newUser.firstname,
+        lastname: newUser.lastname,
+      };
+
+      return `Profesor ${user.firstname} ${user.lastname} creado con exito`
     }
 
     throw new Error(
