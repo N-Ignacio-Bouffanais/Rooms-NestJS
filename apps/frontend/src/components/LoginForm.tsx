@@ -3,10 +3,18 @@ import axios from "../libs/axios";
 import { useAppStore } from "../store/app";
 import { useNavigate } from "react-router-dom";
 import {AiOutlineEye} from "react-icons/ai";
+import jwt_decode from "jwt-decode";
 
 interface Props {
   redirectTo: string;
   endpoint: string;
+}
+
+interface Decoded{
+  role: string;
+  firstname: string;
+  lastname: string;
+  email: string;
 }
 
 function LoginForm(props: Props) {
@@ -34,13 +42,20 @@ function LoginForm(props: Props) {
       email: data.email,
       password: data.password,
     });
-    const { token, role, lastname, firstname } = response.data;
+    const token  = response.data;
     setToken(token);
-    setRole(role);
-    setFirstname(firstname);
-    setLastname(lastname);
-    navigate(props.redirectTo);
-    reset();
+    if(token){
+      //decode token
+      const decoded: Decoded = jwt_decode(token);
+      setRole(decoded.role);
+
+      setFirstname(decoded.firstname);
+      setLastname(decoded.lastname);
+      navigate(props.redirectTo);
+      reset();
+      console.log(decoded);
+    }
+    
   });
 
 function ChangeVisibility() {

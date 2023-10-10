@@ -2,6 +2,7 @@ import {create} from "zustand";
 import { persist } from "zustand/middleware";
 
 type State = {
+  email: string;
   token: string;
   firstname: string;
   lastname: string;
@@ -12,6 +13,7 @@ type State = {
 };
 
 type Actions = {
+  setEmail: (email: string) => void;
   setToken: (token: string) => void;
   setfirstname: (firstname: string) => void;
   setlastname: (lastname: string) => void;
@@ -24,6 +26,7 @@ type Actions = {
 export const useAppStore = create(
   persist<State & Actions>(
     (set) => ({
+      email: "",
       token: "",
       firstname: "",
       lastname: "",
@@ -31,22 +34,27 @@ export const useAppStore = create(
       InsSubjects: [],
       subjects: [],
       isAuth: false,
-      setToken: (token: string) =>
+      setEmail: (email)=> 
+      set(()=>({
+        email,
+      })),
+      setToken: (token) =>
         set(() => ({
           token,
           isAuth: !!token,
         })),
-      setfirstname: (firstname: string) =>
+      setfirstname: (firstname) =>
         set(() => ({
           firstname,
         })),
-      setlastname: (lastname: string) =>
+      setlastname: (lastname) =>
         set(() => ({
           lastname,
         })),
-      setRole: (role: string) => set(() => ({ role })),
+      setRole: (role) => set(() => ({ role })),
       logout: () =>
         set(() => ({
+          email:"",
           token: "",
           isAuth: false,
           role: "",
@@ -55,7 +63,7 @@ export const useAppStore = create(
           InsSubjects: [],
           subjects: [],
         })),
-      getSubjects: async (firstname: string, lastname: string) => {
+      getSubjects: async (firstname, lastname) => {
         const InsSubjects = await (
           await fetch(
             `http://localhost:3001/estudiante/${firstname}-${lastname}`
@@ -63,7 +71,7 @@ export const useAppStore = create(
         ).json();
         set((state) => ({ ...state, InsSubjects }));
       },
-      getAllSubjects: async (firstname: string, lastname: string) => {
+      getAllSubjects: async (firstname, lastname) => {
         const subjects = await(
           await fetch(
             `http://localhost:3001/estudiante/${firstname}-${lastname}`
