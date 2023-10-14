@@ -13,6 +13,12 @@ model Subject{
   name String
   limit Int
 
+  //Student
+  student Student[]
+
+  //professor
+  professor Professor[]
+
   @@map("subject")
 }
 
@@ -26,7 +32,8 @@ model Student{
   lastname String
   hash String
 
-  
+  //Subject
+  subject Subject[]
 
   @@map("students")
 }
@@ -40,6 +47,9 @@ model Professor{
   firstname String
   lastname String
   hash String
+
+  //Subject
+  subject Subject[]
 
 
   @@map("professors")
