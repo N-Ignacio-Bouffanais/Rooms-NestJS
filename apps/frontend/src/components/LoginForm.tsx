@@ -23,6 +23,7 @@ function LoginForm(props: Props) {
   const setRole = useAppStore((state) => state.setRole);
   const setFirstname = useAppStore((state) => state.setfirstname);
   const setLastname = useAppStore((state) => state.setlastname);
+  const setEmail = useAppStore((state) => state.setEmail);
   const navigate = useNavigate();
 
   type FormData = {
@@ -51,9 +52,9 @@ function LoginForm(props: Props) {
 
       setFirstname(decoded.firstname);
       setLastname(decoded.lastname);
+      setEmail(decoded.email);
       navigate(props.redirectTo);
       reset();
-      console.log(decoded);
     }
     
   });

@@ -12,6 +12,7 @@ function SubjectsTake() {
   const {getAllSubjects, subjects} = useAppStore()
   const firstname = useAppStore((state) => state.firstname);
   const lastname = useAppStore((state) => state.lastname);
+  const email = useAppStore((state) => state.email);
 
   useEffect(() => {
     return ()=> {
@@ -22,8 +23,7 @@ function SubjectsTake() {
 
   const Inscription = async (e: React.SyntheticEvent<EventTarget>) => {
     const res = axios.patch(`http://localhost:3001/estudiante/`, {
-      firstname: firstname,
-      lastname: lastname,
+      email,
       subjectName: (e.target as HTMLButtonElement).id,
     });
     console.log(res);

@@ -4,23 +4,20 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
-  relationMode = "prisma"
 }
 
 model Subject{
-  id String    @id @default(auto()) @map("_id") @db.ObjectId
+  id String @id @default(cuid())
   name String
-
-  students Student[]
-  professors Professor[]
+  limit Int
 
   @@map("subject")
 }
 
 model Student{
-  id String    @id @default(auto()) @map("_id") @db.ObjectId
+  id String @id @default(cuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -29,15 +26,13 @@ model Student{
   lastname String
   hash String
 
-  subjectId String[] @db.ObjectId
-  subject Subject? @relation(fields: [subjectId], references: [id])
   
 
   @@map("students")
 }
 
 model Professor{
-  id String    @id @default(auto()) @map("_id") @db.ObjectId
+  id String @id @default(cuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -46,8 +41,6 @@ model Professor{
   lastname String
   hash String
 
-  subjectId String? @db.ObjectId
-  subject Subject? @relation(fields: [subjectId], references: [id])
 
   @@map("professors")
 }
