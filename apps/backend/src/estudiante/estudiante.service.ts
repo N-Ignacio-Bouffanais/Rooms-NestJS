@@ -40,16 +40,7 @@ export class EstudianteService {
   }
 
   update(estudianteDto: StudentDto) {
-    return this.prisma.student.update({
-      where:{
-        email: estudianteDto.email
-      },
-      data:{
-        subject:[
-          
-        ]
-      }
-    })
+    
   }
 
   remove(id: number) {
