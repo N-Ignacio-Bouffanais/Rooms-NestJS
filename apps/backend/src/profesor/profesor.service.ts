@@ -7,11 +7,7 @@ export class ProfesorService {
   constructor(private prisma:PrismaService){}
   findAll() {
     return this.prisma.professor.findMany({
-      where:{
-        subject:{
-          isNot:null
-        }
-      }
+      
     })
   }
 
