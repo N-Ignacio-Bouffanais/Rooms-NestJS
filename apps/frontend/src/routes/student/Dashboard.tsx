@@ -13,13 +13,13 @@ const Dashboard = () => {
   return (
     <div className="flex flex-col ">
       <div className="w-[90dvw] mx-auto">
-        <h1 className="flex justify-start font-bold text-2xl my-4">{`${firstname} ${lastname}`}</h1>
+        <h1 className="flex justify-start font-bold text-3xl text-blue-900 my-6">{`${firstname} ${lastname}`}</h1>
         <div className="grid grid-cols-1 grid-rows-2 gap-y-3 my-6 xs:grid-cols-2">
-          <div className="flex flex-col items-center justify-center w-full xs:w-56  h-40 bg-[#FF0060] rounded-xl">
+          <div className="flex flex-col items-center justify-center w-full xs:w-56  h-40 bg-[#FF0060] rounded-xl sm:h-52 sm:w-64 md:w-80 lg:w-[400px]">
             <i>
               <AiFillSchedule className="w-14 h-14" />
             </i>
-            <div className="flex justify-center items-center mt-2">
+            <div className="flex justify-center items-center mt-2 sm:mt-">
               <p className="font-bold text-2xl mr-3">Mis ramos</p>
               <Link
                 to={`/estudiante/mysubjects/${firstname}-${lastname}`}
@@ -29,42 +29,50 @@ const Dashboard = () => {
               </Link>
             </div>
           </div>
-          <div className="flex flex-col items-center justify-center w-full xs:w-56  h-40 bg-[#0079FF] rounded-xl">
+          <div className="flex flex-col items-center justify-center w-full xs:w-56  h-40 bg-[#0079FF] rounded-xl sm:h-52 sm:w-64 md:w-80 lg:w-[400px]">
             <i>
               <GrNotes className="w-14 h-14" />
             </i>
-            <Link
-              className="flex justify-center items-center w-36 h-8 mt-3 bg-white rounded-lg font-bold"
-              to={`/estudiante/toma-de-ramos/${firstname}-${lastname}`}
-              title="Tomar Ramos"
-            >
-              Tomar Ramos
-            </Link>
+            <div className="flex justify-center items-center mt-2 sm:mt-">
+              <p className="font-bold text-2xl mr-3">Tomar ramos</p>
+              <Link
+                to={`/estudiante/toma-de-ramos/${firstname}-${lastname}`}
+                title="Tomar Ramos"
+              >
+                <BsArrowRightShort className="w-9 h-9 p-1 bg-white rounded-full" />
+              </Link>
+            </div>
           </div>
 
-          <div className="flex flex-col items-center justify-center w-full xs:w-56  h-40 bg-[#00DFA2] rounded-xl">
+          <div className="flex flex-col items-center justify-center w-full xs:w-56 h-40 bg-[#00DFA2] rounded-xl sm:h-52 sm:w-64 md:w-80 lg:w-[400px]">
             <i>
               <GrScorecard className="w-14 h-14" />
             </i>
-            <Link
-              className="flex justify-center items-center w-36 h-8 mt-3 bg-white rounded-lg font-bold"
-              to={""}
-            ></Link>
+            <div className="flex justify-center items-center mt-2 sm:mt-">
+              <p className="font-bold text-2xl mr-3">Tomar ramos</p>
+              <Link
+                to={`/estudiante/toma-de-ramos/${firstname}-${lastname}`}
+                title="Tomar Ramos"
+              >
+                <BsArrowRightShort className="w-9 h-9 p-1 bg-white rounded-full" />
+              </Link>
+            </div>
           </div>
 
-          <div className="flex flex-col items-center justify-center w-full xs:w-56  h-40 bg-[#40128B] rounded-xl">
+          <div className="flex flex-col items-center justify-center w-full xs:w-56  h-40 bg-[#40128B] rounded-xl sm:h-52 sm:w-64 md:w-80 lg:w-[400px]">
             <i>
               <MdTask className="w-14 h-14" />
             </i>
-            <Link
-              className="flex justify-center items-center w-36 h-8 mt-3 bg-white rounded-lg font-bold"
-              to={""}
-            ></Link>
+            <div className="flex justify-center items-center mt-2 sm:mt-">
+              <p className="font-bold text-2xl mr-3">Mis tareas</p>
+              <Link to={``} title="Mis tareas">
+                <BsArrowRightShort className="w-9 h-9 p-1 bg-white rounded-full" />
+              </Link>
+            </div>
           </div>
         </div>
         <div className="flex justify-center">
-          <button className="flex justify-center font-semibold bg-black rounded-xl w-full xs:w-56  h-12 text-white items-center my-4">
-            Salir
+          <button className="flex justify-center font-semibold bg-black rounded-xl w-full xs:w-56 md:w-80  h-12 text-white items-center my-4">Salir
             <BiExit className="ml-2" />
           </button>
         </div>
