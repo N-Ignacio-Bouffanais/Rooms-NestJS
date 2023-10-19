@@ -5,6 +5,7 @@ import axios from "axios"
  export type Subject ={
   name: string
   id: string
+  limit: number
 }
 
 function SubjectsTake() {
@@ -43,7 +44,7 @@ function SubjectsTake() {
             <ul className="" key={subject.id}>
               <li className="grid w-full grid-cols-3 h-20 my-6">
                 <p className="text-2xl">{subject.name}</p>
-                <button id={subject.name} onClick={Inscription}>Incribirse</button>
+                <button className="w-60 h-12 bg-green-500 rounded-lg font-bold" id={subject.name} onClick={Inscription}>Incribirse</button>
               </li>
             </ul>
           ))}
