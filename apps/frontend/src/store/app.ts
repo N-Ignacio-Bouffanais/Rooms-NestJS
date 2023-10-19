@@ -2,6 +2,7 @@ import {create} from "zustand";
 import { persist } from "zustand/middleware";
 
 type State = {
+  inscrpModal: boolean
   email: string;
   token: string;
   firstname: string;
@@ -13,6 +14,7 @@ type State = {
 };
 
 type Actions = {
+  setModal: (inscrpModal:boolean) => void;
   setEmail: (email: string) => void;
   setToken: (token: string) => void;
   setfirstname: (firstname: string) => void;
@@ -26,6 +28,7 @@ type Actions = {
 export const useAppStore = create(
   persist<State & Actions>(
     (set) => ({
+      inscrpModal: false,
       email: "",
       token: "",
       firstname: "",
@@ -34,10 +37,14 @@ export const useAppStore = create(
       InsSubjects: [],
       subjects: [],
       isAuth: false,
-      setEmail: (email)=> 
-      set(()=>({
-        email,
-      })),
+      setModal: (inscrpModal) =>
+        set(() => ({
+          inscrpModal: !inscrpModal
+        })),
+      setEmail: (email) =>
+        set(() => ({
+          email,
+        })),
       setToken: (token) =>
         set(() => ({
           token,
@@ -54,7 +61,7 @@ export const useAppStore = create(
       setRole: (role) => set(() => ({ role })),
       logout: () =>
         set(() => ({
-          email:"",
+          email: "",
           token: "",
           isAuth: false,
           role: "",
@@ -64,7 +71,7 @@ export const useAppStore = create(
           subjects: [],
         })),
       getSubjects: async (firstname, lastname) => {
-        const InsSubjects = await(
+        const InsSubjects = await (
           await fetch(
             `http://localhost:3001/estudiante/mysubjects/${firstname}-${lastname}`
           )
@@ -72,7 +79,7 @@ export const useAppStore = create(
         set((state) => ({ ...state, InsSubjects }));
       },
       getAllSubjects: async (firstname, lastname) => {
-        const subjects = await(
+        const subjects = await (
           await fetch(
             `http://localhost:3001/estudiante/${firstname}-${lastname}`
           )

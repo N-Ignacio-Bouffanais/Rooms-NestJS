@@ -1,8 +1,10 @@
 import { useEffect } from "react";
 import { useAppStore } from "../../store/app";
 import { Subject } from "./SubjectsTake";
+import { useNavigate } from "react-router-dom";
 
 function MySubjects() {
+  const navigate = useNavigate();
   const { getSubjects, InsSubjects } = useAppStore();
   const firstname = useAppStore((state) => state.firstname);
   const lastname = useAppStore((state) => state.lastname);
@@ -19,19 +21,32 @@ function MySubjects() {
       <h1 className="flex justify-start font-bold text-3xl text-blue-900 my-6">
         Mis Ramos
       </h1>
-      <table className="w-full">
-        <tr className="text-xl bg-gray-300 text-gray-500 text-left">
-          <th className="">Id</th>
-          <th>Clase</th>
-          <th>Limite</th>
-        </tr>
-        {InsSubjects.map((subject: Subject) => (
-          <tr className="font-medium">
-            <td className="">{subject.id.slice(10)}</td>
-            <td>{subject.name}</td>
-            <td>{subject.limit}</td>
+      <table className="w-full mb-10 mt-4">
+        <tbody>
+          <tr className="text-xl bg-gray-300 text-gray-500 text-left h-12">
+            <th>Clase</th>
+            <th className="xs:w-80">Accion</th>
           </tr>
-        ))}
+          {InsSubjects.map((subject: Subject) => (
+            <tr className="font-medium h-12" key={subject.id}>
+              <td className="font-semibold">{subject.name}</td>
+              <td className="xs:w-80">
+                <button
+                  className="w-16 h-11 my-3 rounded-lg text-white bg-[#0177fb] mx-2"
+                  onClick={(e) => {
+                    // navigate(`/estudiante/${}`)
+                    console.log((e.target as HTMLButtonElement).id);
+                  }}
+                >
+                  Ver
+                </button>
+                <button className="w-24 h-11 my-3 rounded-lg text-white bg-[#fb3b52] mx-2">
+                  Eliminar
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
       </table>
     </div>
   );
