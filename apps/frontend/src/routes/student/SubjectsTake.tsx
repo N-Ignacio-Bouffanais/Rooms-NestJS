@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { useAppStore } from "../../store/app"
 import axios from "axios"
 
-interface Subject{
+ export type Subject ={
   name: string
   id: string
 }

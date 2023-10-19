@@ -29,7 +29,15 @@ export class EstudianteService {
     const id = estudianteId.split('-');
     const lastname = id[1];
     const firstname = id[0];
-    
+    return this.prisma.subject.findMany({
+      where: {
+          student: {
+            some:{
+              firstname: firstname,
+            }
+          },
+        },
+    });
   }
 
   update(estudianteDto: StudentDto) {

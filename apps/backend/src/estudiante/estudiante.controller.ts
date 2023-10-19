@@ -11,7 +11,7 @@ export class EstudianteController {
     return this.estudianteService.findAll(estudianteId);
   }
 
-  @Get(':estudianteId')
+  @Get('mysubjects/:estudianteId')
   findInscriptions(@Param('estudianteId') estudianteId: string) {
     return this.estudianteService.findInscriptions(estudianteId);
   }

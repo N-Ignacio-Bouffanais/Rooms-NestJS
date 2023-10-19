@@ -64,9 +64,9 @@ export const useAppStore = create(
           subjects: [],
         })),
       getSubjects: async (firstname, lastname) => {
-        const InsSubjects = await (
+        const InsSubjects = await(
           await fetch(
-            `http://localhost:3001/estudiante/${firstname}-${lastname}`
+            `http://localhost:3001/estudiante/mysubjects/${firstname}-${lastname}`
           )
         ).json();
         set((state) => ({ ...state, InsSubjects }));
