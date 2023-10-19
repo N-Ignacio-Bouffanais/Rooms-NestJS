@@ -2,6 +2,7 @@ import { useAppStore } from "../../store/app";
 import { GrNotes, GrScorecard } from "react-icons/gr";
 import { AiFillSchedule } from "react-icons/ai";
 import { BiExit } from "react-icons/bi";
+import { BsArrowRightShort } from "react-icons/bs";
 import { MdTask } from "react-icons/md";
 import { Link } from "react-router-dom";
 
@@ -18,20 +19,22 @@ const Dashboard = () => {
             <i>
               <AiFillSchedule className="w-14 h-14" />
             </i>
-            <Link
-              className="flex justify-center items-center w-36 h-9 mt-2 bg-white rounded-lg font-bold"
-              to={`/estudiante/mysubjects/${firstname}-${lastname}`}
-              title="Mis Materias"
-            >
-              Mis materias
-            </Link>
+            <div className="flex justify-center items-center mt-2">
+              <p className="font-bold text-2xl mr-3">Mis ramos</p>
+              <Link
+                to={`/estudiante/mysubjects/${firstname}-${lastname}`}
+                title="Mis Materias"
+              >
+                <BsArrowRightShort className="w-9 h-9 p-1 bg-white rounded-full" />
+              </Link>
+            </div>
           </div>
           <div className="flex flex-col items-center justify-center w-full xs:w-56  h-40 bg-[#0079FF] rounded-xl">
             <i>
               <GrNotes className="w-14 h-14" />
             </i>
             <Link
-              className="flex justify-center items-center w-36 h-9 mt-2 bg-white rounded-lg font-bold"
+              className="flex justify-center items-center w-36 h-8 mt-3 bg-white rounded-lg font-bold"
               to={`/estudiante/toma-de-ramos/${firstname}-${lastname}`}
               title="Tomar Ramos"
             >
@@ -44,7 +47,7 @@ const Dashboard = () => {
               <GrScorecard className="w-14 h-14" />
             </i>
             <Link
-              className="flex justify-center items-center w-36 h-9 mt-2 bg-white rounded-lg font-bold"
+              className="flex justify-center items-center w-36 h-8 mt-3 bg-white rounded-lg font-bold"
               to={""}
             ></Link>
           </div>
@@ -54,7 +57,7 @@ const Dashboard = () => {
               <MdTask className="w-14 h-14" />
             </i>
             <Link
-              className="flex justify-center items-center w-36 h-9 mt-2 bg-white rounded-lg font-bold"
+              className="flex justify-center items-center w-36 h-8 mt-3 bg-white rounded-lg font-bold"
               to={""}
             ></Link>
           </div>
