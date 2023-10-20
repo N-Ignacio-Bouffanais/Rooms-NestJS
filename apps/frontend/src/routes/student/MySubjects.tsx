@@ -23,14 +23,17 @@ function MySubjects() {
       </h1>
       <table className="w-full mb-10 mt-4">
         <tbody>
-          <tr className="text-xl bg-gray-300 text-gray-500 text-left h-12">
-            <th>Clase</th>
+          <tr className="text-xl">
+            <th className="text-left">Clase</th>
             <th className="xs:w-80">Accion</th>
           </tr>
           {InsSubjects.map((subject: Subject) => (
-            <tr className="font-medium h-12" key={subject.id}>
+            <tr
+              className="font-medium h-12 "
+              key={subject.id}
+            >
               <td className="font-semibold">{subject.name}</td>
-              <td className="xs:w-80">
+              <td className="flex justify-center xs:w-80">
                 <button
                   className="w-16 h-11 my-3 rounded-lg text-white bg-[#0177fb] mx-2"
                   onClick={(e) => {
