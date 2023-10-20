@@ -4,9 +4,9 @@ import BackButton from "../../../components/BackButton";
 
 const Login = () => {
   return (
-    <div className="flex w-full flex-col justify-center bg-[#0B666A] h-[100dvh]">
-      <div className="flex flex-col items-center mx-auto space-y-3 text-center py-6 w-[340px] sm:w-[420px]">
-        <h1 className="text-white text-4xl font-bold tracking-tight my-2">
+    <div className="flex w-full flex-col justify-center bg-gradient-to-r from-red-600 to-violet-900 h-[100dvh]">
+      <div className="flex flex-col items-center mb-6 mx-auto space-y-3 text-center py-6 w-[340px] sm:w-[420px]">
+        <h1 className="text-white text-5xl font-semibold tracking-tight my-2">
           Login
         </h1>
         <LoginForm

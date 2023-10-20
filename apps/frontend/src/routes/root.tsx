@@ -26,7 +26,7 @@ const Home = () => {
             onClick={() => {
               navigate("/estudiante/login");
             }}
-            className="flex justify-center items-center w-52 bg-[#4942E4] h-10 p-3 m-3 rounded-xl text-white font-medium hover:bg-[#40128B]"
+            className="flex justify-center items-center w-52 bg-blue-600 h-11 p-3 m-3 rounded-xl text-white font-medium hover:bg-[#1e128b]"
           >
             Soy Estudiante
           </button>
@@ -35,7 +35,7 @@ const Home = () => {
             onClick={() => {
               navigate("/profesor/login");
             }}
-            className="flex justify-center items-center w-52 bg-[#05BFDB] h-10 p-3 m-3 rounded-xl text-white font-medium hover:bg-[#016A70]"
+            className="flex justify-center items-center w-52 bg-[#fa2d38] h-11 p-3 m-3 rounded-xl text-white font-medium hover:bg-red-700"
           >
             Soy Profesor
           </button>
