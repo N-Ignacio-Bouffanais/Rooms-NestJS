@@ -105,7 +105,7 @@ const App = () => {
             }
           />
           <Route
-            path="/estudiante/:estudiante/:id"
+            path="/estudiante/:id"
             element={
               <React.Suspense fallback={<>...</>}>
                 <Subject />

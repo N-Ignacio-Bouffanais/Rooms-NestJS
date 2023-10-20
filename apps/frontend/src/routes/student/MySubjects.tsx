@@ -39,10 +39,10 @@ function MySubjects() {
               </td>
               <td className="flex justify-center items-center">
                 <button
+                id={subject.name}
                   className="w-16 h-11 my-3 rounded-lg text-white bg-[#0177fb] mx-2"
-                  onClick={(e) => {
-                    // navigate(`/estudiante/${}`)
-                    console.log((e.target as HTMLButtonElement).id);
+                  onClick={() => {
+                    navigate(`/estudiante/${subject.name}`)
                   }}
                 >
                   Ver
