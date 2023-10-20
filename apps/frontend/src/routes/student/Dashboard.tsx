@@ -19,60 +19,56 @@ const Dashboard = () => {
             <i>
               <AiFillSchedule className="w-14 h-14" />
             </i>
-            <div className="flex justify-center items-center mt-2 sm:mt-">
-              <p className="font-bold text-2xl mr-3">Mis ramos</p>
-              <Link
-                to={`/estudiante/mysubjects/${firstname}-${lastname}`}
-                title="Mis Materias"
-              >
-                <BsArrowRightShort className="w-9 h-9 p-1 bg-white rounded-full" />
-              </Link>
-            </div>
+            <Link
+              className="flex mt-3"
+              to={`/estudiante/mysubjects/${firstname}-${lastname}`}
+              title="Mis Materias"
+            >
+              <p className="font-bold text-2xl">Mis ramos</p>
+              <BsArrowRightShort className="w-9 h-9" />
+            </Link>
           </div>
           <div className="flex flex-col items-center justify-center w-full xs:w-56  h-40 bg-[#0079FF] rounded-xl sm:h-52 sm:w-64 md:w-80 lg:w-[400px]">
             <i>
               <GrNotes className="w-14 h-14" />
             </i>
-            <div className="flex justify-center items-center mt-2 sm:mt-">
-              <p className="font-bold text-2xl mr-3">Tomar ramos</p>
-              <Link
-                to={`/estudiante/toma-de-ramos/${firstname}-${lastname}`}
-                title="Tomar Ramos"
-              >
-                <BsArrowRightShort className="w-9 h-9 p-1 bg-white rounded-full" />
-              </Link>
-            </div>
+            <Link
+              className="flex mt-3"
+              to={`/estudiante/toma-de-ramos/${firstname}-${lastname}`}
+              title="Tomar Ramos"
+            >
+              <p className="font-bold text-2xl">Tomar ramos</p>
+              <BsArrowRightShort className="w-9 h-9" />
+            </Link>
           </div>
 
           <div className="flex flex-col items-center justify-center w-full xs:w-56 h-40 bg-[#00DFA2] rounded-xl sm:h-52 sm:w-64 md:w-80 lg:w-[400px]">
             <i>
               <GrScorecard className="w-14 h-14" />
             </i>
-            <div className="flex justify-center items-center mt-2 sm:mt-">
-              <p className="font-bold text-2xl mr-3">Tomar ramos</p>
-              <Link
-                to={`/estudiante/toma-de-ramos/${firstname}-${lastname}`}
-                title="Tomar Ramos"
-              >
-                <BsArrowRightShort className="w-9 h-9 p-1 bg-white rounded-full" />
-              </Link>
-            </div>
+            <Link
+              className="flex mt-3"
+              to={`/estudiante/toma-de-ramos/${firstname}-${lastname}`}
+              title="Tomar Ramos"
+            >
+              <p className="font-bold text-2xl">Tomar ramos</p>
+              <BsArrowRightShort className="w-9 h-9" />
+            </Link>
           </div>
 
           <div className="flex flex-col items-center justify-center w-full xs:w-56  h-40 bg-[#40128B] rounded-xl sm:h-52 sm:w-64 md:w-80 lg:w-[400px]">
             <i>
               <MdTask className="w-14 h-14" />
             </i>
-            <div className="flex justify-center items-center mt-2 sm:mt-">
-              <p className="font-bold text-2xl mr-3">Mis tareas</p>
-              <Link to={``} title="Mis tareas">
-                <BsArrowRightShort className="w-9 h-9 p-1 bg-white rounded-full" />
+              <Link className="flex mt-3" to={``} title="Mis tareas">
+                <p className="font-bold text-2xl">Mis tareas</p>
+                <BsArrowRightShort className="w-9 h-9" />
               </Link>
-            </div>
           </div>
         </div>
         <div className="flex justify-center">
-          <button className="flex justify-center font-semibold bg-black rounded-xl w-full xs:w-56 md:w-80  h-12 text-white items-center my-4">Salir
+          <button className="flex justify-center font-semibold bg-black rounded-xl w-full xs:w-56 md:w-80  h-12 text-white items-center my-4">
+            Salir
             <BiExit className="ml-2" />
           </button>
         </div>
