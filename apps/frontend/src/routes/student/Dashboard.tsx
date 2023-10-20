@@ -14,7 +14,7 @@ const Dashboard = () => {
     <div className="flex flex-col ">
       <div className="w-[90dvw] mx-auto">
         <h1 className="flex justify-start font-bold text-3xl text-blue-900 my-6">{`${firstname} ${lastname}`}</h1>
-        <div className="grid grid-cols-1 grid-rows-2 gap-y-3 my-6 xs:grid-cols-2">
+        <div className="grid grid-cols-1 grid-rows-2 gap-y-6 my-6 xs:grid-cols-2">
           <div className="flex flex-col items-center justify-center w-full xs:w-56  h-40 bg-[#FF0060] rounded-xl sm:h-52 sm:w-64 md:w-80 lg:w-[400px]">
             <i>
               <AiFillSchedule className="w-14 h-14" />
