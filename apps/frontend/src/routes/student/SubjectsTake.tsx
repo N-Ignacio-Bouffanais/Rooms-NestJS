@@ -41,11 +41,18 @@ function SubjectsTake() {
       {inscrpModal && (
         <div className="fixed inset-0 bg-zinc-900/20 z-10">
           <div className="container flex items-center h-full max-w-lg mx-auto">
-            <div className="relative bg-white w-full h-fit py-20 px-2 rounded-lg">
+            <div className="relative bg-white w-full h-fit py-8 px-4 rounded-lg">
               <div className="absolute top-4 right-4">
                 <button onClick={() => setModal(true)}>
-                  <RxCross2 className="w-7 h-7"/>
+                  <RxCross2 className="w-7 h-7" />
                 </button>
+              </div>
+              <div className="flex justify-center">
+                <p className="text-2xl font-bold">Estas seguro?</p>
+              </div>
+              <div className="flex justify-center my-3">
+                <button className="rounded-lg font-semibold mx-2 text-white w-12 h-10 bg-[#0177fb]">Si</button>
+                <button className="rounded-lg font-semibold mx-2 text-white w-12 h-10 bg-[#fb3b52]">No</button>
               </div>
             </div>
           </div>
@@ -64,9 +71,9 @@ function SubjectsTake() {
               </tr>
               {subjects.map((subject: Subject) => (
                 <tr key={subject.id}>
-                  <td className="flex bg-white rounded-lg h-10 my-3">
+                  <td className="flex h-10 my-3 ">
                     <button
-                      className="w-full"
+                      className="w-full font-semibold text-lg text-left pl-3 "
                       id={subject.name}
                       onClick={Modal}
                     >
