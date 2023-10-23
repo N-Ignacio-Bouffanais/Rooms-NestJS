@@ -38,17 +38,19 @@ function SubjectsTake() {
 
   return (
     <>
-      <div className="fixed inset-0 bg-zinc-900/20 z-10">
-        <div className="container flex items-center h-full max-w-lg mx-auto">
-          <div className="relative bg-white w-full h-fit py-20 px-2 rounded-lg">
-            <div className="absolute top-4 right-4">
-              <button onClick={() => setModal(false)}>
-                <RxCross2 />
-              </button>
+      {inscrpModal && (
+        <div className="fixed inset-0 bg-zinc-900/20 z-10">
+          <div className="container flex items-center h-full max-w-lg mx-auto">
+            <div className="relative bg-white w-full h-fit py-20 px-2 rounded-lg">
+              <div className="absolute top-4 right-4">
+                <button onClick={() => setModal(true)}>
+                  <RxCross2 className="w-7 h-7"/>
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
       <div className="h-[100dvh] w-[100dvw]">
         <div className="mx-auto w-[90dvw] sm:w-[85dvw] md:w-[80dvw]">
           <h1 className="text-4xl font-bold my-8">Toma de ramos</h1>
