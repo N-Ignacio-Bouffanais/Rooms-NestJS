@@ -74,16 +74,16 @@ function SubjectsTake() {
           <table className="w-full">
             <tbody>
               <tr className="text-left">
-                <th className="text-gray-600 font-semibold text-lg">Ramo</th>
                 <th className="text-gray-600 font-semibold text-lg">
                   Profesor
                 </th>
+                <th className="text-gray-600 font-semibold text-lg">Ramo</th>
               </tr>
               {subjects.map((subject: Subject) => (
                 <tr key={subject.id}>
                   <td className="flex h-10 my-3 ">
                     <button
-                      className="w-full font-semibold text-lg text-left pl-3 "
+                      className="w-full font-semibold text-lg text-left "
                       id={subject.name}
                       onClick={(e) => {
                         setModal(false);
@@ -97,6 +97,7 @@ function SubjectsTake() {
               ))}
             </tbody>
           </table>
+          <button>Agregar ramos</button>
         </div>
       </div>
     </>

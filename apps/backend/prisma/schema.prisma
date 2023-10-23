@@ -17,7 +17,8 @@ model Subject{
   student Student[]
 
   //professor
-  professor Professor[]
+  professor Professor? @relation(fields: [professorId], references: [id])
+  professorId String?
 
   @@map("subject")
 }
