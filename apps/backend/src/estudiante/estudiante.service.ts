@@ -12,17 +12,16 @@ export class EstudianteService {
     const firstname = id[0];
     return this.prisma.subject.findMany({
       where: {
-        NOT:{
-          student:{
-            some:{
+        NOT: {
+          student: {
+            some: {
               firstname: firstname,
-              lastname: lastname
-            }
-          }
-        }
-      }
-    })
-    
+              lastname: lastname,
+            },
+          },
+        },
+      },
+    });
   }
 
   findInscriptions(estudianteId: string) {
@@ -31,45 +30,40 @@ export class EstudianteService {
     const firstname = id[0];
     return this.prisma.subject.findMany({
       where: {
-          student: {
-            some:{
-              firstname: firstname,
-              lastname,
-            }
+        student: {
+          some: {
+            firstname: firstname,
+            lastname,
           },
         },
+      },
     });
   }
 
   async update(estudianteDto: StudentDto) {
-    const student = await this.prisma.student.findUnique({
-      where:{
-        email: estudianteDto.email
-      }
-    })
-    
-    const newSubject = await this.prisma.subject.update({
+    const student = await this.prisma.student.findFirst({
       where: {
-        name: estudianteDto.subjectName
-      },
-      data:{
-        student:{
-          upsert:{
-            where:{
-              email: estudianteDto.email
-            },
-            create:{
-              email: student.email,
-              firstname: student.firstname,
-              hash: student.hash,
-              lastname: student.lastname,
-            },
-            update:{},
-          },
-        },
+        email: estudianteDto.email,
       },
     });
-    return newSubject
+    if (student) {
+      const updatedSubject = await this.prisma.subject.update({
+        where: {
+          name: estudianteDto.subjectName,
+        },
+        data: {
+          student: {
+            connect: {
+              id: student.id,
+            },
+          },
+        },
+      });
+      return updatedSubject;
+    }
+  }
+  async dropSubject(estudianteDto: StudentDto) {
+    console.log(estudianteDto)
   }
 
   remove(id: number) {

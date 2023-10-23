@@ -21,6 +21,11 @@ export class EstudianteController {
     return this.estudianteService.update(studentDto);
   }
 
+  @Patch('dropSubject')
+  dropSubject(@Body() studentDto: StudentDto) {
+    return this.estudianteService.dropSubject(studentDto);
+  }
+
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.estudianteService.remove(+id);
