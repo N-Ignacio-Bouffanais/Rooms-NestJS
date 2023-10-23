@@ -34,14 +34,42 @@ export class EstudianteService {
           student: {
             some:{
               firstname: firstname,
+              lastname,
             }
           },
         },
     });
   }
 
-  update(estudianteDto: StudentDto) {
+  async update(estudianteDto: StudentDto) {
+    const student = await this.prisma.student.findUnique({
+      where:{
+        email: estudianteDto.email
+      }
+    })
     
+    const newSubject = await this.prisma.subject.update({
+      where: {
+        name: estudianteDto.subjectName
+      },
+      data:{
+        student:{
+          upsert:{
+            where:{
+              email: estudianteDto.email
+            },
+            create:{
+              email: student.email,
+              firstname: student.firstname,
+              hash: student.hash,
+              lastname: student.lastname,
+            },
+            update:{},
+          },
+        },
+      },
+    });
+    return newSubject
   }
 
   remove(id: number) {
