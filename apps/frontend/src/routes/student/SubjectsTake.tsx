@@ -13,7 +13,8 @@ function SubjectsTake() {
   const { getAllSubjects, subjects } = useAppStore();
   const firstname = useAppStore((state) => state.firstname);
   const lastname = useAppStore((state) => state.lastname);
-  //const email = useAppStore((state) => state.email);
+  const email = useAppStore((state) => state.email);
+  const {setSelectSubject,selectSubject } = useAppStore();
   const { inscrpModal, setModal } = useAppStore();
 
   useEffect(() => {
@@ -22,18 +23,17 @@ function SubjectsTake() {
       console.log(subjects);
     };
   }, []);
+  const HandleSelect = (e: React.SyntheticEvent<EventTarget>) => {
+    console.log(e)
+    setSelectSubject((e.target as HTMLButtonElement).id);
+  };
 
-  // const Inscription = async () => {
-  //   // const res = axios.patch(`http://localhost:3001/estudiante/`, {
-  //   //   email,
-  //   //   subjectName: (e.target as HTMLButtonElement).id,
-  //   // });
-  //   // console.log(res);
-  //   console.log(e)
-  // };
-  const Modal = async (e: React.SyntheticEvent<EventTarget>) => {
-    const selected = (e.target as HTMLButtonElement).id;
-    setModal(inscrpModal);
+  const Inscription = async () => {
+    const res = axios.patch(`http://localhost:3001/estudiante/`, {
+      email,
+      subjectName:selectSubject
+    });
+    console.log(res);
   };
 
   return (
@@ -51,8 +51,18 @@ function SubjectsTake() {
                 <p className="text-2xl font-bold">Estas seguro?</p>
               </div>
               <div className="flex justify-center my-3">
-                <button className="rounded-lg font-semibold mx-2 text-white w-12 h-10 bg-[#0177fb]">Si</button>
-                <button className="rounded-lg font-semibold mx-2 text-white w-12 h-10 bg-[#fb3b52]">No</button>
+                <button
+                  onClick={() => Inscription()}
+                  className="rounded-lg font-semibold mx-2 text-white w-12 h-10 bg-[#0177fb]"
+                >
+                  Si
+                </button>
+                <button
+                  className="rounded-lg font-semibold mx-2 text-white w-12 h-10 bg-[#fb3b52]"
+                  onClick={() => setModal(true)}
+                >
+                  No
+                </button>
               </div>
             </div>
           </div>
@@ -75,7 +85,10 @@ function SubjectsTake() {
                     <button
                       className="w-full font-semibold text-lg text-left pl-3 "
                       id={subject.name}
-                      onClick={Modal}
+                      onClick={(e) => {
+                        setModal(false);
+                        HandleSelect(e);
+                      }}
                     >
                       {subject.name}
                     </button>

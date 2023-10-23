@@ -11,10 +11,12 @@ type State = {
   isAuth: boolean;
   InsSubjects: [];
   subjects:[];
+  selectSubject: string;
 };
 
 type Actions = {
-  setModal: (inscrpModal:boolean) => void;
+  setSelectSubject: (selectSubject: string) => void;
+  setModal: (inscrpModal: boolean) => void;
   setEmail: (email: string) => void;
   setToken: (token: string) => void;
   setfirstname: (firstname: string) => void;
@@ -28,6 +30,7 @@ type Actions = {
 export const useAppStore = create(
   persist<State & Actions>(
     (set) => ({
+      selectSubject:"",
       inscrpModal: false,
       email: "",
       token: "",
@@ -37,6 +40,10 @@ export const useAppStore = create(
       InsSubjects: [],
       subjects: [],
       isAuth: false,
+      setSelectSubject:(selectSubject)=>
+      set(()=>({
+        selectSubject,
+      })),
       setModal: (inscrpModal) =>
         set(() => ({
           inscrpModal: !inscrpModal
