@@ -46,7 +46,6 @@ function LoginForm(props: Props) {
     const token  = response.data;
     setToken(token);
     if(token){
-      //decode token
       const decoded: Decoded = jwt_decode(token);
       setRole(decoded.role);
 

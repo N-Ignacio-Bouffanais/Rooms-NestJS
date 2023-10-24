@@ -1,26 +1,41 @@
+import axios from "../libs/axios";
 import { useForm } from "react-hook-form";
 import { AiOutlineEye } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
-function RegisterForm() {
+interface Props {
+  redirectTo: string;
+  endpoint: string;
+}
+
+function RegisterForm(props: Props) {
+  const { endpoint, redirectTo } = props;
+
+  const navigate = useNavigate();
+
+  type FormData = {
+    email: string;
+    password: string;
+    firstname: string;
+    lastname: string;
+  };
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({
-    defaultValues: {
-      nombre: "",
-      apellido: "",
-      email: "",
-      password: "",
-      confirmarPassword: "",
-      aceptaTerminos: false,
-    },
-  });
+  } = useForm<FormData>();
 
-  const onSubmit = handleSubmit((data) => {
-    console.log(data);
+  const onSubmit = handleSubmit(async (data) => {
+    const response = await axios.post(`${endpoint}`, {
+      email: data.email,
+      password: data.password,
+      firstname: data.firstname,
+      lastname: data.lastname,
+    });
+    console.log(response);
+    navigate(redirectTo);
     reset();
   });
 
@@ -42,7 +57,6 @@ function RegisterForm() {
     }
   }
 
-
   return (
     <form onSubmit={onSubmit} className="flex flex-col items-center">
       <div>
@@ -55,11 +69,16 @@ function RegisterForm() {
         <input
           placeholder="ingrese su nombre"
           type="text"
-          {...register("nombre", {
+          {...register("firstname", {
             required: true,
           })}
           className="w-80 mb-2 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-600 placeholder:font-medium"
         />
+        {errors.firstname && (
+          <span className="text-red-500 font-semibold text-left">
+            {errors.firstname.message}
+          </span>
+        )}
       </div>
       <div>
         <label
@@ -71,11 +90,16 @@ function RegisterForm() {
         <input
           placeholder="ingrese su apellido"
           type="text"
-          {...register("apellido", {
+          {...register("lastname", {
             required: true,
           })}
           className="w-80 mb-2 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-600 placeholder:font-medium"
         />
+        {errors.lastname && (
+          <span className="text-red-500 font-semibold text-left">
+            {errors.lastname.message}
+          </span>
+        )}
       </div>
       <div>
         <label

@@ -10,7 +10,7 @@ const Register = () => {
         <h1 className="text-white text-5xl font-semibold tracking-tight mb-3">
           Bienvenido
         </h1>
-        <RegisterForm />
+        <RegisterForm redirectTo="/" endpoint="/auth/student/register" />
         <Link
           to="/estudiante/login"
           className="flex justify-center items-center w-80 bg-white h-10 p-3 m-3 rounded-full text-blue-600 text-lg font-medium hover:bg-slate-300"

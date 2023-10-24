@@ -74,7 +74,7 @@ export class AuthService {
     return token;
   }
 
-  async StuSignUp(registerDto: RegisterDto): Promise<{}> {
+  async StuSignUp(registerDto: RegisterDto) {
     const findUser = await this.prisma.student.findUnique({
       where: {
         email: registerDto.email,
@@ -105,34 +105,35 @@ export class AuthService {
     );
   }
 
-  async ProfSignUp(registerDto: RegisterDto): Promise<{}> {
-    const findUser = await this.prisma.professor.findUnique({
-      where: {
-        email: registerDto.email,
-      },
-    });
+  async ProfSignUp(registerDto: RegisterDto) {
+    console.log(registerDto)
+    // const findUser = await this.prisma.professor.findUnique({
+    //   where: {
+    //     email: registerDto.email,
+    //   },
+    // });
 
-    if (!findUser) {
-      const hashedPassword = await bcrypt.hash(registerDto.password, 10);
-      const newUser = await this.prisma.professor.create({
-        data: {
-          email: registerDto.email,
-          firstname: registerDto.firstname,
-          lastname: registerDto.lastname,
-          hash: hashedPassword,
-        },
-      });
+    // if (!findUser) {
+    //   const hashedPassword = await bcrypt.hash(registerDto.password, 10);
+    //   const newUser = await this.prisma.professor.create({
+    //     data: {
+    //       email: registerDto.email,
+    //       firstname: registerDto.firstname,
+    //       lastname: registerDto.lastname,
+    //       hash: hashedPassword,
+    //     },
+    //   });
 
-      const user = {
-        firstname: newUser.firstname,
-        lastname: newUser.lastname,
-      };
+    //   const user = {
+    //     firstname: newUser.firstname,
+    //     lastname: newUser.lastname,
+    //   };
 
-      return `Profesor ${user.firstname} ${user.lastname} creado con exito`
-    }
+    //   return `Profesor ${user.firstname} ${user.lastname} creado con exito`
+    // }
 
-    throw new Error(
-      'Ya existe un profesor con este correo, Por favor intente con otro',
-    );
+    // throw new Error(
+    //   'Ya existe un profesor con este correo, Por favor intente con otro',
+    // );
   }
 }
