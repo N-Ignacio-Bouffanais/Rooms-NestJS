@@ -2,6 +2,7 @@ import axios from "../libs/axios";
 import { useForm } from "react-hook-form";
 import { AiOutlineEye } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import { useAppStore } from "../store/app";
 
 interface Props {
   redirectTo: string;
@@ -10,6 +11,7 @@ interface Props {
 
 function RegisterForm(props: Props) {
   const { endpoint, redirectTo } = props;
+  const { AcceptTerms,setTerms} = useAppStore()
 
   const navigate = useNavigate();
 
@@ -199,12 +201,20 @@ function RegisterForm(props: Props) {
         <label className="flex justify-start font-medium text-white ">
           Acepto los términos y condiciones
         </label>
-        <input type="checkbox" required className="ml-2" />
+        <input
+          type="checkbox"
+          required
+          className="ml-2"
+          onClick={() => {
+            setTerms(AcceptTerms);
+          }}
+        />
       </div>
       <div className="flex justify-center">
         <button
+          disabled={AcceptTerms}
           type="submit"
-          className="flex justify-center items-center w-80 bg-blue-700 h-10 p-3 m-3 rounded-full text-white text-lg font-medium hover:bg-blue-800"
+          className="flex justify-center items-center w-80 bg-blue-700 h-10 p-3 m-3 rounded-full text-white text-lg font-medium hover:bg-blue-800 disabled:bg-gray-600 disabled:cursor-not-allowed"
         >
           Enviar
         </button>

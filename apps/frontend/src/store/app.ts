@@ -2,6 +2,7 @@ import {create} from "zustand";
 import { persist } from "zustand/middleware";
 
 type State = {
+  AcceptTerms: boolean
   inscrpModal: boolean
   email: string;
   token: string;
@@ -15,6 +16,7 @@ type State = {
 };
 
 type Actions = {
+  setTerms: (AcceptTerms:boolean)=>void;
   setSelectSubject: (selectSubject: string) => void;
   setModal: (inscrpModal: boolean) => void;
   setEmail: (email: string) => void;
@@ -30,7 +32,8 @@ type Actions = {
 export const useAppStore = create(
   persist<State & Actions>(
     (set) => ({
-      selectSubject:"",
+      AcceptTerms: false,
+      selectSubject: "",
       inscrpModal: false,
       email: "",
       token: "",
@@ -40,13 +43,17 @@ export const useAppStore = create(
       InsSubjects: [],
       subjects: [],
       isAuth: false,
-      setSelectSubject:(selectSubject)=>
-      set(()=>({
-        selectSubject,
-      })),
+      setTerms: (AcceptTerms) =>
+        set(() => ({
+          AcceptTerms: !AcceptTerms,
+        })),
+      setSelectSubject: (selectSubject) =>
+        set(() => ({
+          selectSubject,
+        })),
       setModal: (inscrpModal) =>
         set(() => ({
-          inscrpModal: !inscrpModal
+          inscrpModal: !inscrpModal,
         })),
       setEmail: (email) =>
         set(() => ({
