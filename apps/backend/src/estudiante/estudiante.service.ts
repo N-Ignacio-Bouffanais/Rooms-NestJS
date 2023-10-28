@@ -64,6 +64,26 @@ export class EstudianteService {
   }
   async dropSubject(estudianteDto: StudentDto) {
     console.log(estudianteDto)
+    const student = await this.prisma.student.findFirst({
+      where: {
+        email: estudianteDto.email,
+      },
+    });
+    if (student) {
+      const updatedSubject = await this.prisma.subject.update({
+        where: {
+          name: estudianteDto.subjectName,
+        },
+        data: {
+          student: {
+            disconnect: {
+              id: student.id,
+            },
+          },
+        },
+      });
+      return updatedSubject;
+    }
   }
 
   remove(id: number) {

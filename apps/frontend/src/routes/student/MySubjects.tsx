@@ -1,7 +1,7 @@
 import { useAppStore } from "../../store/app";
 import { Subject } from "./SubjectsTake";
 import { useNavigate } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 
@@ -9,6 +9,17 @@ function MySubjects() {
   const navigate = useNavigate();
   const firstname = useAppStore((state) => state.firstname);
   const lastname = useAppStore((state) => state.lastname);
+  const email = useAppStore((state) => state.email);
+  const { setSubjects, selectSubject } = useAppStore();
+
+  const GetSubjects = async () => {
+      const response = await axios.get(
+        `http://localhost:3001/estudiante/mysubjects/${firstname}-${lastname}`
+      );
+      const subjects = response.data;
+      console.log(subjects);
+      return subjects;
+    }
 
   const {
     isPending,
@@ -17,18 +28,23 @@ function MySubjects() {
     error,
   } = useQuery({
     queryKey: ["subjects"],
-    queryFn: async () => {
-      const response = await axios.get(
-        `http://localhost:3001/estudiante/mysubjects/${firstname}-${lastname}`
-      );
-      const subjects = response.data;
-      return subjects;
+    queryFn: GetSubjects,
+  });
+
+
+  useMutation({
+    mutationFn: () => {
       
     },
   });
 
   const DropSubject = () =>{
-    console.log("eliminar")
+    const res = axios.patch(`http://localhost:3001/estudiante/dropSubject`, {
+      email,
+      subjectName: selectSubject,
+    });
+    console.log(res);
+    return res;
   }
 
   if (isPending) {
@@ -72,9 +88,10 @@ function MySubjects() {
                     Ver
                   </button>
                   <button
+                    id={subject.name}
                     className="w-24 h-11 my-3 rounded-lg text-white bg-[#fb3b52] mx-2"
-                    onClick={() => {
-                      DropSubject();
+                    onClick={(e: React.SyntheticEvent<EventTarget>) => {
+                      setSubjects((e.target as HTMLButtonElement).id);
                     }}
                   >
                     Eliminar

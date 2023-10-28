@@ -1,7 +1,7 @@
-import { useEffect } from "react";
 import { useAppStore } from "../../store/app";
 import axios from "axios";
 import { RxCross2 } from "react-icons/rx";
+import { useQuery } from "@tanstack/react-query";
 
 export type Subject = {
   name: string;
@@ -10,23 +10,11 @@ export type Subject = {
 };
 
 function SubjectsTake() {
-  const { getAllSubjects, subjects } = useAppStore();
   const firstname = useAppStore((state) => state.firstname);
   const lastname = useAppStore((state) => state.lastname);
   const email = useAppStore((state) => state.email);
-  const { setSelectSubject, selectSubject } = useAppStore();
+  const { setSubjects, selectSubject } = useAppStore();
   const { inscrpModal, setModal } = useAppStore();
-
-  useEffect(() => {
-    return () => {
-      getAllSubjects(firstname, lastname);
-      console.log(subjects);
-    };
-  }, []);
-  const HandleSelect = (e: React.SyntheticEvent<EventTarget>) => {
-    console.log(e);
-    setSelectSubject((e.target as HTMLButtonElement).id);
-  };
 
   const Inscription = async () => {
     const res = axios.patch(`http://localhost:3001/estudiante/`, {
@@ -35,6 +23,35 @@ function SubjectsTake() {
     });
     console.log(res);
   };
+
+  const {
+    isPending,
+    isError,
+    data: Allsubjects,
+    error,
+  } = useQuery({
+    queryKey: ["Allsubjects"],
+    queryFn: async () => {
+      const response = await axios.get(
+        `http://localhost:3001/estudiante/${firstname}-${lastname}`
+      );
+      const Allsubjects = response.data;
+      return Allsubjects;
+    },
+  });
+
+  const HandleSelect = (e: React.SyntheticEvent<EventTarget>) => {
+    console.log(e);
+    setSubjects((e.target as HTMLButtonElement).id);
+  };
+
+  if (isPending) {
+    return <span>Loading...</span>;
+  }
+
+  if (isError) {
+    return <span>Error: {error.message}</span>;
+  }
 
   return (
     <>
@@ -52,7 +69,10 @@ function SubjectsTake() {
               </div>
               <div className="flex justify-center my-3">
                 <button
-                  onClick={() => Inscription()}
+                  onClick={() => {
+                    Inscription();
+                    setModal(true)
+                  }}
                   className="rounded-lg font-semibold mx-2 text-white w-12 h-10 bg-[#0177fb]"
                 >
                   Si
@@ -79,7 +99,7 @@ function SubjectsTake() {
                 </th>
                 <th className="text-gray-600 font-semibold text-lg">Ramo</th>
               </tr>
-              {subjects.map((subject: Subject) => (
+              {Allsubjects.map((subject: Subject) => (
                 <tr key={subject.id}>
                   <td className="flex h-10 my-3 ">
                     <button
@@ -97,9 +117,13 @@ function SubjectsTake() {
               ))}
             </tbody>
           </table>
-          <button onClick={()=>{
-            console.log("enviando...");
-          }}>Agregar ramos</button>
+          <button
+            onClick={() => {
+              console.log("enviando...");
+            }}
+          >
+            Agregar ramos
+          </button>
         </div>
       </div>
     </>

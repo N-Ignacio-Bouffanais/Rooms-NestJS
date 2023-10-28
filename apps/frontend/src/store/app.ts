@@ -10,13 +10,12 @@ type State = {
   lastname: string;
   role: string;
   isAuth: boolean;
-  subjects:[];
   selectSubject: string;
 };
 
 type Actions = {
   setTerms: (AcceptTerms:boolean)=>void;
-  setSelectSubject: (selectSubject: string) => void;
+  setSubjects: (selectSubject: string) => void;
   setModal: (inscrpModal: boolean) => void;
   setEmail: (email: string) => void;
   setToken: (token: string) => void;
@@ -24,7 +23,6 @@ type Actions = {
   setlastname: (lastname: string) => void;
   setRole: (role: string) => void;
   logout: () => void;
-  getAllSubjects: (firstname: string, lastname: string) => Promise<void>;
 };
 
 export const useAppStore = create(
@@ -38,13 +36,12 @@ export const useAppStore = create(
       firstname: "",
       lastname: "",
       role: "",
-      subjects: [],
       isAuth: false,
       setTerms: (AcceptTerms) =>
         set(() => ({
           AcceptTerms: !AcceptTerms,
         })),
-      setSelectSubject: (selectSubject) =>
+      setSubjects: (selectSubject) =>
         set(() => ({
           selectSubject,
         })),
@@ -78,16 +75,8 @@ export const useAppStore = create(
           role: "",
           firstname: "",
           lastname: "",
-          subjects: [],
+          selectSubject: "",
         })),
-      getAllSubjects: async (firstname, lastname) => {
-        const subjects = await (
-          await fetch(
-            `http://localhost:3001/estudiante/${firstname}-${lastname}`
-          )
-        ).json();
-        set((state) => ({ ...state, subjects }));
-      },
     }),
     {
       name: "appStore",
