@@ -14,7 +14,7 @@ function SubjectsTake() {
   const firstname = useAppStore((state) => state.firstname);
   const lastname = useAppStore((state) => state.lastname);
   const email = useAppStore((state) => state.email);
-  const {setSelectSubject,selectSubject } = useAppStore();
+  const { setSelectSubject, selectSubject } = useAppStore();
   const { inscrpModal, setModal } = useAppStore();
 
   useEffect(() => {
@@ -24,14 +24,14 @@ function SubjectsTake() {
     };
   }, []);
   const HandleSelect = (e: React.SyntheticEvent<EventTarget>) => {
-    console.log(e)
+    console.log(e);
     setSelectSubject((e.target as HTMLButtonElement).id);
   };
 
   const Inscription = async () => {
     const res = axios.patch(`http://localhost:3001/estudiante/`, {
       email,
-      subjectName:selectSubject
+      subjectName: selectSubject,
     });
     console.log(res);
   };
@@ -97,7 +97,9 @@ function SubjectsTake() {
               ))}
             </tbody>
           </table>
-          <button>Agregar ramos</button>
+          <button onClick={()=>{
+            console.log("enviando...");
+          }}>Agregar ramos</button>
         </div>
       </div>
     </>

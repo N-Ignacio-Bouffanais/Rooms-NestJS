@@ -10,7 +10,6 @@ type State = {
   lastname: string;
   role: string;
   isAuth: boolean;
-  InsSubjects: [];
   subjects:[];
   selectSubject: string;
 };
@@ -25,7 +24,6 @@ type Actions = {
   setlastname: (lastname: string) => void;
   setRole: (role: string) => void;
   logout: () => void;
-  getSubjects: (firstname: string, lastname: string) => Promise<void>;
   getAllSubjects: (firstname: string, lastname: string) => Promise<void>;
 };
 
@@ -40,7 +38,6 @@ export const useAppStore = create(
       firstname: "",
       lastname: "",
       role: "",
-      InsSubjects: [],
       subjects: [],
       isAuth: false,
       setTerms: (AcceptTerms) =>
@@ -81,17 +78,8 @@ export const useAppStore = create(
           role: "",
           firstname: "",
           lastname: "",
-          InsSubjects: [],
           subjects: [],
         })),
-      getSubjects: async (firstname, lastname) => {
-        const InsSubjects = await (
-          await fetch(
-            `http://localhost:3001/estudiante/mysubjects/${firstname}-${lastname}`
-          )
-        ).json();
-        set((state) => ({ ...state, InsSubjects }));
-      },
       getAllSubjects: async (firstname, lastname) => {
         const subjects = await (
           await fetch(

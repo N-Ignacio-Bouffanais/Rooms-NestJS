@@ -93,6 +93,7 @@ importers:
 
   apps/frontend:
     specifiers:
+      '@tanstack/react-query': ^5.0.5
       '@types/react': ^18.2.15
       '@types/react-dom': ^18.2.7
       '@typescript-eslint/eslint-plugin': ^6.0.0
@@ -110,12 +111,12 @@ importers:
       react-hook-form: ^7.46.2
       react-icons: ^4.11.0
       react-router-dom: ^6.16.0
-      sonner: ^1.0.3
       tailwindcss: ^3.3.3
       typescript: ^5.0.2
       vite: ^4.4.5
       zustand: ^4.4.1
     dependencies:
+      '@tanstack/react-query': 5.0.5_biqbaboplfbrettd7655fr4n2y
       axios: 1.5.0
       jwt-decode: 3.1.2
       react: 18.2.0
@@ -123,7 +124,6 @@ importers:
       react-hook-form: 7.46.2_react@18.2.0
       react-icons: 4.11.0_react@18.2.0
       react-router-dom: 6.16.0_biqbaboplfbrettd7655fr4n2y
-      sonner: 1.0.3_biqbaboplfbrettd7655fr4n2y
       zustand: 4.4.1_dpmmhqj3uzrk25jjzo7arvivk4
     devDependencies:
       '@types/react': 18.2.22
@@ -1527,6 +1527,27 @@ packages:
   /@swc/types/0.1.4:
     resolution: {integrity: sha512-z/G02d+59gyyUb7KYhKi9jOhicek6QD2oMaotUyG+lUkybpXoV49dY9bj7Ah5Q+y7knK2jU67UTX9FyfGzaxQg==}
     dev: true
+
+  /@tanstack/query-core/5.0.5:
+    resolution: {integrity: sha512-MThCETMkHDHTnFZHp71L+SqTtD5d6XHftFCVR1xRJdWM3qGrlQ2VCXaj0SKVcyJej2e1Opa2c7iknu1llxCDNQ==}
+    dev: false
+
+  /@tanstack/react-query/5.0.5_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-ZG0Q4HZ0iuI8mWiZ2/MdVYPHbrmAVhMn7+gLOkxJh6zLIgCL4luSZlohzN5Xt4MjxfxxWioO1nemwpudaTsmQg==}
+    peerDependencies:
+      react: ^18.0.0
+      react-dom: ^18.0.0
+      react-native: '*'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+    dependencies:
+      '@tanstack/query-core': 5.0.5
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
 
   /@tsconfig/node10/1.0.9:
     resolution: {integrity: sha512-jNsYVVxU8v5g43Erja32laIDHXeoNvFEpX33OK4d6hljo3jDhCBDhx5dhCCTMWUojscpAagGiRkBKxpdl9fxqA==}
@@ -5648,16 +5669,6 @@ packages:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
     engines: {node: '>=8'}
     dev: true
-
-  /sonner/1.0.3_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-hBoA2zKuYW3lUnpx4K0vAn8j77YuYiwvP9sLQfieNS2pd5FkT20sMyPTDJnl9S+5T27ZJbwQRPiujwvDBwhZQg==}
-    peerDependencies:
-      react: ^18.0.0
-      react-dom: ^18.0.0
-    dependencies:
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-    dev: false
 
   /source-map-js/1.0.2:
     resolution: {integrity: sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==}
