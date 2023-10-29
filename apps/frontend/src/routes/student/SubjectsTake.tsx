@@ -1,7 +1,8 @@
 import { useAppStore } from "../../store/app";
 import axios from "axios";
 import { RxCross2 } from "react-icons/rx";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import queryClient from "../../queryClient";
 
 export type Subject = {
   name: string;
@@ -16,7 +17,7 @@ function SubjectsTake() {
   const { setSubjects, selectSubject } = useAppStore();
   const { inscrpModal, setModal } = useAppStore();
 
-  const Inscription = async () => {
+  const TakeSubject = async () => {
     const res = axios.patch(`http://localhost:3001/estudiante/`, {
       email,
       subjectName: selectSubject,
@@ -40,10 +41,12 @@ function SubjectsTake() {
     },
   });
 
-  const HandleSelect = (e: React.SyntheticEvent<EventTarget>) => {
-    console.log(e);
-    setSubjects((e.target as HTMLButtonElement).id);
-  };
+  const { mutateAsync } = useMutation({
+    mutationFn: TakeSubject,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["Allsubjects"] });
+    },
+  });
 
   if (isPending) {
     return <span>Loading...</span>;
@@ -70,7 +73,7 @@ function SubjectsTake() {
               <div className="flex justify-center my-3">
                 <button
                   onClick={() => {
-                    Inscription();
+                    mutateAsync()
                     setModal(true)
                   }}
                   className="rounded-lg font-semibold mx-2 text-white w-12 h-10 bg-[#0177fb]"
@@ -107,7 +110,7 @@ function SubjectsTake() {
                       id={subject.name}
                       onClick={(e) => {
                         setModal(false);
-                        HandleSelect(e);
+                        setSubjects((e.target as HTMLButtonElement).id)
                       }}
                     >
                       {subject.name}
