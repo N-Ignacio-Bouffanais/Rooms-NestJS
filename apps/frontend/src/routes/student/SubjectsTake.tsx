@@ -25,6 +25,14 @@ function SubjectsTake() {
     console.log(res);
   };
 
+  const GetSubjects = async () => {
+    const response = await axios.get(
+      `http://localhost:3001/estudiante/${firstname}-${lastname}`
+    );
+    const Allsubjects = response.data;
+    return Allsubjects;
+  };
+
   const {
     isPending,
     isError,
@@ -32,16 +40,10 @@ function SubjectsTake() {
     error,
   } = useQuery({
     queryKey: ["Allsubjects"],
-    queryFn: async () => {
-      const response = await axios.get(
-        `http://localhost:3001/estudiante/${firstname}-${lastname}`
-      );
-      const Allsubjects = response.data;
-      return Allsubjects;
-    },
+    queryFn: GetSubjects,
   });
 
-  const { mutateAsync } = useMutation({
+  const { mutateAsync:UpdateSubject } = useMutation({
     mutationFn: TakeSubject,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["Allsubjects"] });
@@ -60,21 +62,21 @@ function SubjectsTake() {
     <>
       {inscrpModal && (
         <div className="fixed inset-0 bg-zinc-900/20 z-10">
-          <div className="container flex items-center h-full max-w-lg mx-auto">
-            <div className="relative bg-white w-full h-fit py-8 px-4 rounded-lg">
-              <div className="absolute top-4 right-4">
+          <div className="container flex items-center justify-center h-full max-w-lg mx-auto">
+            <div className="relative bg-white w-72 sm:w-full h-fit p-4 rounded-lg">
+              <div className="absolute top-3 right-3">
                 <button onClick={() => setModal(true)}>
                   <RxCross2 className="w-7 h-7" />
                 </button>
               </div>
-              <div className="flex justify-center">
-                <p className="text-2xl font-bold">Estas seguro?</p>
+              <div className="flex justify-center my-4">
+                <p className="text-xl text-center font-bold">Agregar {selectSubject}?</p>
               </div>
               <div className="flex justify-center my-3">
                 <button
                   onClick={() => {
-                    mutateAsync()
-                    setModal(true)
+                    setModal(true);
+                    UpdateSubject();
                   }}
                   className="rounded-lg font-semibold mx-2 text-white w-12 h-10 bg-[#0177fb]"
                 >
@@ -110,7 +112,7 @@ function SubjectsTake() {
                       id={subject.name}
                       onClick={(e) => {
                         setModal(false);
-                        setSubjects((e.target as HTMLButtonElement).id)
+                        setSubjects((e.target as HTMLButtonElement).id);
                       }}
                     >
                       {subject.name}
@@ -120,13 +122,16 @@ function SubjectsTake() {
               ))}
             </tbody>
           </table>
-          <button
-            onClick={() => {
-              console.log("enviando...");
-            }}
-          >
-            Agregar ramos
-          </button>
+          <div className="flex justify-center my-3">
+            <button
+              className="w-40 h-11 my-3 px-2 rounded-2xl text-white font-semibold bg-[#0177fb] hover:bg-sky-700"
+              onClick={() => {
+                console.log("enviando...");
+              }}
+            >
+              Agregar ramos
+            </button>
+          </div>
         </div>
       </div>
     </>

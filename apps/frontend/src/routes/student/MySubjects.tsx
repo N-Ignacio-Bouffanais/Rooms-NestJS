@@ -21,7 +21,7 @@ function MySubjects() {
     return subjects;
   };
 
-  const DropSubject = () => {
+  const DropSubject = async () => {
     const res = axios.patch(`http://localhost:3001/estudiante/dropSubject`, {
       email,
       subjectName: selectSubject,
