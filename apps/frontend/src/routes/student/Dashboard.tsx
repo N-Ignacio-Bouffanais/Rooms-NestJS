@@ -4,11 +4,13 @@ import { AiFillSchedule } from "react-icons/ai";
 import { BiExit } from "react-icons/bi";
 import { BsArrowRightShort } from "react-icons/bs";
 import { MdTask } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const firstname = useAppStore((state) => state.firstname);
   const lastname = useAppStore((state) => state.lastname);
+  const navigate = useNavigate();
+  const logout = useAppStore((state) => state.logout);
 
   return (
     <div className="flex flex-col ">
@@ -41,7 +43,15 @@ const Dashboard = () => {
               <BsArrowRightShort className="w-9 h-9" />
             </Link>
           </div>
-
+          <div className="flex flex-col items-center justify-center w-full xs:w-56  h-40 bg-[#40128B] rounded-xl sm:h-52 sm:w-64 md:w-80 lg:w-[400px]">
+            <i>
+              <MdTask className="w-14 h-14" />
+            </i>
+            <Link className="flex mt-3" to={``} title="Mis tareas">
+              <p className="font-bold text-2xl">Mis tareas</p>
+              <BsArrowRightShort className="w-9 h-9" />
+            </Link>
+          </div>
           <div className="flex flex-col items-center justify-center w-full xs:w-56 h-40 bg-[#00DFA2] rounded-xl sm:h-52 sm:w-64 md:w-80 lg:w-[400px]">
             <i>
               <GrScorecard className="w-14 h-14" />
@@ -55,19 +65,14 @@ const Dashboard = () => {
               <BsArrowRightShort className="w-9 h-9" />
             </Link>
           </div>
-
-          <div className="flex flex-col items-center justify-center w-full xs:w-56  h-40 bg-[#40128B] rounded-xl sm:h-52 sm:w-64 md:w-80 lg:w-[400px]">
-            <i>
-              <MdTask className="w-14 h-14" />
-            </i>
-              <Link className="flex mt-3" to={``} title="Mis tareas">
-                <p className="font-bold text-2xl">Mis tareas</p>
-                <BsArrowRightShort className="w-9 h-9" />
-              </Link>
-          </div>
         </div>
         <div className="flex justify-center">
-          <button className="flex justify-center font-semibold bg-black rounded-xl w-full xs:w-56 md:w-80  h-12 text-white items-center my-4">
+          <button
+            className="flex justify-center font-semibold bg-black rounded-xl w-full xs:w-56 md:w-80  h-12 text-white items-center my-4"
+            onClick={() => {
+              logout(), navigate("/");
+            }}
+          >
             Salir
             <BiExit className="ml-2" />
           </button>
