@@ -3,7 +3,7 @@ import { Subject } from "./SubjectsTake";
 import { useNavigate } from "react-router-dom";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
-
+import queryClient from "../../queryClient";
 
 function MySubjects() {
   const navigate = useNavigate();
@@ -13,13 +13,22 @@ function MySubjects() {
   const { setSubjects, selectSubject } = useAppStore();
 
   const GetSubjects = async () => {
-      const response = await axios.get(
-        `http://localhost:3001/estudiante/mysubjects/${firstname}-${lastname}`
-      );
-      const subjects = response.data;
-      console.log(subjects);
-      return subjects;
-    }
+    const response = await axios.get(
+      `http://localhost:3001/estudiante/mysubjects/${firstname}-${lastname}`
+    );
+    const subjects = response.data;
+    console.log(subjects);
+    return subjects;
+  };
+
+  const DropSubject = () => {
+    const res = axios.patch(`http://localhost:3001/estudiante/dropSubject`, {
+      email,
+      subjectName: selectSubject,
+    });
+    console.log(res);
+    return res;
+  };
 
   const {
     isPending,
@@ -31,21 +40,12 @@ function MySubjects() {
     queryFn: GetSubjects,
   });
 
-
-  useMutation({
-    mutationFn: () => {
-      
-    },
-  });
-
-  const DropSubject = () =>{
-    const res = axios.patch(`http://localhost:3001/estudiante/dropSubject`, {
-      email,
-      subjectName: selectSubject,
-    });
-    console.log(res);
-    return res;
-  }
+  const {mutateAsync: UpdateSubject} = useMutation({
+    mutationFn: DropSubject,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["subjects"] });
+    }
+  })
 
   if (isPending) {
     return <span>Loading...</span>;
@@ -92,6 +92,7 @@ function MySubjects() {
                     className="w-24 h-11 my-3 rounded-lg text-white bg-[#fb3b52] mx-2"
                     onClick={(e: React.SyntheticEvent<EventTarget>) => {
                       setSubjects((e.target as HTMLButtonElement).id);
+                      UpdateSubject()
                     }}
                   >
                     Eliminar
