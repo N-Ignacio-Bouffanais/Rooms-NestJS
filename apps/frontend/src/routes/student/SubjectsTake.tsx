@@ -50,6 +50,14 @@ function SubjectsTake() {
     },
   });
 
+  if(Allsubjects.length == 0) {
+    return (
+      <div className="h-[100dvh] flex justify-center">
+        <p className="font-semibold text-xl my-20 mx-auto w-[90dvw]">Por el momento no hay ramos que puedas tomar</p>
+      </div>
+    );
+  }
+
   if (isPending) {
     return <span>Loading...</span>;
   }
@@ -96,6 +104,7 @@ function SubjectsTake() {
       <div className="h-[100dvh] w-[100dvw]">
         <div className="mx-auto w-[90dvw] sm:w-[85dvw] md:w-[80dvw]">
           <h1 className="text-4xl font-bold my-8">Toma de ramos</h1>
+          <p className="my-6 font-semibold text-xl">Seleccione el ramo que desea tomar:</p>
           <table className="w-full">
             <tbody>
               <tr className="text-left">
@@ -122,16 +131,6 @@ function SubjectsTake() {
               ))}
             </tbody>
           </table>
-          <div className="flex justify-center my-3">
-            <button
-              className="w-40 h-11 my-3 px-2 rounded-2xl text-white font-semibold bg-[#0177fb] hover:bg-sky-700"
-              onClick={() => {
-                console.log("enviando...");
-              }}
-            >
-              Agregar ramos
-            </button>
-          </div>
         </div>
       </div>
     </>
