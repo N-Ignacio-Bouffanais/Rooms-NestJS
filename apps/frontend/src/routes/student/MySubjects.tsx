@@ -1,9 +1,9 @@
 import { useAppStore } from "../../store/app";
-import { Subject } from "./SubjectsTake";
 import { useNavigate } from "react-router-dom";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import axios from "../../libs/axios"
 import queryClient from "../../queryClient";
+import { Subject } from "../../types/subject.type";
 
 function MySubjects() {
   const navigate = useNavigate();
@@ -14,15 +14,14 @@ function MySubjects() {
 
   const GetSubjects = async () => {
     const response = await axios.get(
-      `http://localhost:3001/estudiante/mysubjects/${firstname}-${lastname}`
+      `estudiante/mysubjects/${firstname}-${lastname}`
     );
     const subjects = response.data;
-    console.log(subjects);
     return subjects;
   };
 
   const DropSubject = async () => {
-    const res = axios.patch(`http://localhost:3001/estudiante/dropSubject`, {
+    const res = axios.patch(`estudiante/dropSubject`, {
       email,
       subjectName: selectSubject,
     });

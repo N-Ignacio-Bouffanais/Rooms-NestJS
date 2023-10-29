@@ -1,14 +1,9 @@
 import { useAppStore } from "../../store/app";
-import axios from "axios";
+import axios from "../../libs/axios"
 import { RxCross2 } from "react-icons/rx";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import queryClient from "../../queryClient";
-
-export type Subject = {
-  name: string;
-  id: string;
-  limit: number;
-};
+import { Subject } from "../../types/subject.type";
 
 function SubjectsTake() {
   const firstname = useAppStore((state) => state.firstname);
@@ -18,7 +13,7 @@ function SubjectsTake() {
   const { inscrpModal, setModal } = useAppStore();
 
   const TakeSubject = async () => {
-    const res = axios.patch(`http://localhost:3001/estudiante/`, {
+    const res = axios.patch(`estudiante/`, {
       email,
       subjectName: selectSubject,
     });
@@ -27,7 +22,7 @@ function SubjectsTake() {
 
   const GetSubjects = async () => {
     const response = await axios.get(
-      `http://localhost:3001/estudiante/${firstname}-${lastname}`
+      `estudiante/${firstname}-${lastname}`
     );
     const Allsubjects = response.data;
     return Allsubjects;
@@ -49,14 +44,6 @@ function SubjectsTake() {
       queryClient.invalidateQueries({ queryKey: ["Allsubjects"] });
     },
   });
-
-  if(Allsubjects.length == 0) {
-    return (
-      <div className="h-[100dvh] flex justify-center">
-        <p className="font-semibold text-xl my-20 mx-auto w-[90dvw]">Por el momento no hay ramos que puedas tomar</p>
-      </div>
-    );
-  }
 
   if (isPending) {
     return <span>Loading...</span>;
