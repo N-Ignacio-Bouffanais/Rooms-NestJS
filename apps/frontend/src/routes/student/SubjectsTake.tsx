@@ -65,7 +65,9 @@ function SubjectsTake() {
                 </button>
               </div>
               <div className="flex justify-center my-4">
-                <p className="text-xl text-center font-bold">Agregar {selectSubject}?</p>
+                <p className="text-xl text-center font-bold">
+                  Agregar {selectSubject}?
+                </p>
               </div>
               <div className="flex justify-center my-3">
                 <button
@@ -91,7 +93,9 @@ function SubjectsTake() {
       <div className="h-[100dvh] w-[100dvw]">
         <div className="mx-auto w-[90dvw] sm:w-[85dvw] md:w-[80dvw]">
           <h1 className="text-4xl font-bold my-8">Toma de ramos</h1>
-          <p className="my-6 font-semibold text-xl">Seleccione el ramo que desea tomar:</p>
+          <p className="my-6 font-semibold text-xl">
+            Seleccione el ramo que desea tomar:
+          </p>
           <table className="w-full">
             <tbody>
               <tr className="text-left">
@@ -100,22 +104,28 @@ function SubjectsTake() {
                 </th>
                 <th className="text-gray-600 font-semibold text-lg">Ramo</th>
               </tr>
-              {Allsubjects.map((subject: Subject) => (
-                <tr key={subject.id}>
-                  <td className="flex h-10 my-3 ">
-                    <button
-                      className="w-full font-semibold text-lg text-left "
-                      id={subject.name}
-                      onClick={(e) => {
-                        setModal(false);
-                        setSubjects((e.target as HTMLButtonElement).id);
-                      }}
-                    >
-                      {subject.name}
-                    </button>
-                  </td>
+              {Array.isArray(Allsubjects) ? (
+                Allsubjects.map((subject: Subject) => (
+                  <tr key={subject.id}>
+                    <td className="flex h-10 my-3 ">
+                      <button
+                        className="w-full font-semibold text-lg text-left "
+                        id={subject.name}
+                        onClick={(e) => {
+                          setModal(false);
+                          setSubjects((e.target as HTMLButtonElement).id);
+                        }}
+                      >
+                        {subject.name}
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td>Error al obtener los ramos desde el servidor</td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>

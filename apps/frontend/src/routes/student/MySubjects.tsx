@@ -67,37 +67,43 @@ function MySubjects() {
             </tr>
           </thead>
           <tbody>
-            {subjects?.map((subject: Subject) => (
-              <tr
-                className=" font-semibold text-lg grid grid-cols-2 auto-rows-auto"
-                key={subject.id}
-              >
-                <td className="flex justify-center items-center">
-                  {subject.name}
-                </td>
-                <td className="flex justify-center items-center">
-                  <button
-                    id={subject.name}
-                    className="w-16 h-11 my-3 rounded-lg text-white bg-[#0177fb] mx-2"
-                    onClick={() => {
-                      navigate(`/estudiante/${subject.name}`);
-                    }}
-                  >
-                    Ver
-                  </button>
-                  <button
-                    id={subject.name}
-                    className="w-24 h-11 my-3 rounded-lg text-white bg-[#fb3b52] mx-2"
-                    onClick={(e: React.SyntheticEvent<EventTarget>) => {
-                      setSubjects((e.target as HTMLButtonElement).id);
-                      UpdateSubject()
-                    }}
-                  >
-                    Eliminar
-                  </button>
-                </td>
+            {Array.isArray(subjects) ? (
+              subjects.map((subject: Subject) => (
+                <tr
+                  className=" font-semibold text-lg grid grid-cols-2 auto-rows-auto"
+                  key={subject.id}
+                >
+                  <td className="flex justify-center items-center">
+                    {subject.name}
+                  </td>
+                  <td className="flex justify-center items-center">
+                    <button
+                      id={subject.name}
+                      className="w-16 h-11 my-3 rounded-lg text-white bg-[#0177fb] mx-2"
+                      onClick={() => {
+                        navigate(`/estudiante/${subject.name}`);
+                      }}
+                    >
+                      Ver
+                    </button>
+                    <button
+                      id={subject.name}
+                      className="w-24 h-11 my-3 rounded-lg text-white bg-[#fb3b52] mx-2"
+                      onClick={(e: React.SyntheticEvent<EventTarget>) => {
+                        setSubjects((e.target as HTMLButtonElement).id);
+                        UpdateSubject();
+                      }}
+                    >
+                      Eliminar
+                    </button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td>Error al obtener los ramos desde el servidor</td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>
