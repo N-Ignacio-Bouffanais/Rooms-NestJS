@@ -17,7 +17,7 @@ function Dashboard() {
             Profesor:{`${firstname} ${lastname}`}
           </h1>
           <div className="grid grid-cols-1 grid-rows-2 gap-y-6 my-6 xs:grid-cols-2">
-            <div className="flex flex-col items-center justify-center w-full xs:w-56  h-40 bg-[#FF0060] rounded-xl sm:h-52 sm:w-64 md:w-80 lg:w-[400px]">
+            <div className="flex flex-col items-center justify-center w-full xs:w-56 h-40 bg-[#ff5e23] rounded-xl sm:h-52 sm:w-64 md:w-80 lg:w-[400px]">
               <i>
                 <AiFillSchedule className="w-14 h-14" />
               </i>
@@ -30,7 +30,7 @@ function Dashboard() {
                 <BsArrowRightShort className="w-9 h-9" />
               </Link>
             </div>
-            <div className="flex flex-col items-center justify-center w-full xs:w-56 h-40 bg-[#00DFA2] rounded-xl sm:h-52 sm:w-64 md:w-80 lg:w-[400px]">
+            <div className="flex flex-col items-center justify-center w-full xs:w-56 h-40 bg-[#00c0c2] rounded-xl sm:h-52 sm:w-64 md:w-80 lg:w-[400px]">
               <i>
                 <GrScorecard className="w-14 h-14" />
               </i>
