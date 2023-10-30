@@ -8,8 +8,5 @@
 - I will implement Sooner, that is a toast library for reactjs.
 
 ## Screenshot
-- Login
+- Login screenshot
 ![student_login](./project_views/std_login.png)
-
-- Homepage
-![Homepage](./project_views/home.png)
