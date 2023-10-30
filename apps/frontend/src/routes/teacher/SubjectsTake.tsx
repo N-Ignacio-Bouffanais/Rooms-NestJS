@@ -22,6 +22,7 @@ function Subjects() {
   const GetSubjects = async () => {
     const res = await axios.get(`profesor/${firstname}-${lastname}`);
     const subjects = res.data;
+    console.log(subjects)
     return subjects;
   };
 
@@ -99,13 +100,14 @@ function Subjects() {
             <tbody>
               <tr className="text-left">
                 <th className="text-gray-600 font-semibold text-lg">
-                  Profesor
+                  Estudiantes
                 </th>
                 <th className="text-gray-600 font-semibold text-lg">Ramo</th>
               </tr>
               {Array.isArray(Allsubjects) ? (
                 Allsubjects.map((subject: Subject) => (
                   <tr key={subject.id}>
+                    <td>0/{subject.limit}</td>
                     <td className="flex h-10 my-3 ">
                       <button
                         className="w-full font-semibold text-lg text-left "
