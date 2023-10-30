@@ -5,7 +5,22 @@ import { PrismaService } from 'src/prisma/prisma.service';
 @Injectable()
 export class ProfesorService {
   constructor(private prisma: PrismaService) {}
-  findAll(professorId:string) {
+  findAll(professorId: string) {
+    const id = professorId.split('-');
+    const lastname = id[1];
+    const firstname = id[0];
+    return this.prisma.subject.findMany({
+      where: {
+        NOT:{
+          professor:{
+            firstname: firstname,
+            lastname: lastname
+          }
+        }
+      },
+    });
+  }
+  findInscripted(professorId: string) {
     const id = professorId.split('-');
     const lastname = id[1];
     const firstname = id[0];
@@ -13,10 +28,10 @@ export class ProfesorService {
       where:{
         professor:{
           firstname:firstname,
-          lastname:lastname
+          lastname:lastname,
         }
       }
-    });
+    })
   }
 
   update(id: number, profesorDto: ProfesorDto) {

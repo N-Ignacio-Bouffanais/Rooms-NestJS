@@ -6,10 +6,18 @@ import { ProfesorDto } from './dto/profesor.dto';
 export class ProfesorController {
   constructor(private readonly profesorService: ProfesorService) {}
 
-  @Get(":id")
-  findAll(@Param("id") professorId:string) {
+  @Get(':id')
+  findAll(@Param('id') professorId: string) {
     try {
       return this.profesorService.findAll(professorId);
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+  @Get('mysubjects/:id')
+  findInscripted(@Param() professorId: string) {
+    try {
+      return this.profesorService.findInscripted(professorId)
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
