@@ -3,7 +3,7 @@ import { useAppStore } from "../../store/app";
 import axios from "../../libs/axios"
 import { Subject } from "../../types/subject.type";
 
-const Dashboard = () => {
+function Dashboard(){
   const firstname = useAppStore((state) => state.firstname);
   const lastname = useAppStore((state) => state.lastname);
 
@@ -32,16 +32,17 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="flex flex-col">
-      <div className="w-[90dvw] mx-auto">
-        <h1 className="flex justify-start font-bold text-2xl text-blue-900 my-6">
-          Profesor:{`${firstname} ${lastname}`}
-        </h1>
-        {subjects.map((subject: Subject)=>(
-          <p>{subject.name}</p>
-        ))}
+    <>
+      <div className="flex flex-col">
+        <div className="w-[90dvw] mx-auto">
+          <h1 className="flex justify-start font-bold text-2xl text-blue-900 my-6">
+            Profesor:{`${firstname} ${lastname}`}
+          </h1>
+          {subjects &&
+            subjects.map((subject: Subject) => <p>{subject.name}</p>)}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

@@ -8,5 +8,8 @@
 - I will implement Sooner, that is a toast library for reactjs.
 
 ## Screenshot
-Register Responsive
-![solution](./project_views/register.png)
+- Login
+![student_login](./project_views/std_login.png)
+
+- Homepage
+![Homepage](./project_views/home.png)

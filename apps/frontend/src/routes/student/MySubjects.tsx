@@ -25,7 +25,6 @@ function MySubjects() {
       email,
       subjectName: selectSubject,
     });
-    console.log(res);
     return res;
   };
 
@@ -68,7 +67,7 @@ function MySubjects() {
             </tr>
           </thead>
           <tbody>
-            {subjects.map((subject: Subject) => (
+            {subjects?.map((subject: Subject) => (
               <tr
                 className=" font-semibold text-lg grid grid-cols-2 auto-rows-auto"
                 key={subject.id}
