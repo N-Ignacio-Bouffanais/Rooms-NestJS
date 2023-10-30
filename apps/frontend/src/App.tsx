@@ -15,18 +15,17 @@ const S_Dashboard = lazy(() => import("./routes/student/Dashboard"));
 const MyNotes = lazy(() => import("./routes/student/MyNotes"));
 const MySubjects = lazy(() => import("./routes/student/MySubjects"));
 const SubjectsTake = lazy(() => import("./routes/student/SubjectsTake"));
+const Subject = lazy(() => import("./routes/student/Subject"));
 
 //Professor routes
-const MyStudents = lazy(() => import("./routes/teacher/MyStudents"));
 const P_Dashboard = lazy(() => import("./routes/teacher/Dashboard"));
 const P_Login = lazy(() => import("./routes/teacher/auth/Login"));
 const P_Register = lazy(() => import("./routes/teacher/auth/Register"));
-
-//Dynamic route
-const Subject = lazy(() => import("./routes/student/Subject"));
+const P_MySubjects = lazy(() => import("./routes/teacher/MySubjects"));
+const Subjects = lazy(() => import("./routes/teacher/SubjectsTake"));
+const P_Subject = lazy(() => import("./routes/teacher/Subject"));
 
 const App = () => {
-
   const role = useAppStore((state) => state.role);
 
   return (
@@ -125,18 +124,34 @@ const App = () => {
             }
           >
             <Route
-              path="/profesor/mis-estudiante"
-              element={
-                <React.Suspense fallback={<>...</>}>
-                  <MyStudents />
-                </React.Suspense>
-              }
-            />
-            <Route
               path="/profesor/panel-de-control"
               element={
                 <React.Suspense fallback={<>...</>}>
                   <P_Dashboard />
+                </React.Suspense>
+              }
+            />
+            <Route
+              path="/profesor/mis-clases"
+              element={
+                <React.Suspense fallback={<>...</>}>
+                  <P_MySubjects />
+                </React.Suspense>
+              }
+            />
+            <Route
+              path="/profesor/subjects"
+              element={
+                <React.Suspense fallback={<>...</>}>
+                  <Subjects />
+                </React.Suspense>
+              }
+            />
+            <Route
+              path="/profesor/:subject"
+              element={
+                <React.Suspense fallback={<>...</>}>
+                  <P_Subject />
                 </React.Suspense>
               }
             />

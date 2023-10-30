@@ -6,10 +6,10 @@ import { ProfesorDto } from './dto/profesor.dto';
 export class ProfesorController {
   constructor(private readonly profesorService: ProfesorService) {}
 
-  @Get()
-  findAll() {
+  @Get(":id")
+  findAll(@Param("id") professorId:string) {
     try {
-      return this.profesorService.findAll();
+      return this.profesorService.findAll(professorId);
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
