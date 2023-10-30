@@ -1,11 +1,23 @@
 import { useAppStore } from "../../store/app";
 import axios from "../../libs/axios"
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { Subject } from "../../types/subject.type";
+import queryClient from "../../queryClient";
+import { RxCross2 } from "react-icons/rx";
 
 function Subjects() {
-    const firstname = useAppStore((state) => state.firstname);
-    const lastname = useAppStore((state) => state.lastname);
+  const firstname = useAppStore((state) => state.firstname);
+  const lastname = useAppStore((state) => state.lastname);
+  const email = useAppStore((state) => state.email);
+  const { setSubjects, selectSubject } = useAppStore();
+  const { inscrpModal, setModal } = useAppStore();
+
+  const TakeSubject = async () => {
+    return await axios.patch(`profesor/`, {
+      email,
+      subjectName: selectSubject,
+    });
+  };
 
   const GetSubjects = async () => {
     const res = await axios.get(`profesor/${firstname}-${lastname}`);
@@ -14,13 +26,20 @@ function Subjects() {
   };
 
   const {
-    data: subjects,
+    data: Allsubjects,
     error,
     isError,
     isPending,
   } = useQuery({
     queryKey: ["mysubjects"],
     queryFn: GetSubjects,
+  });
+
+  const { mutateAsync: UpdateSubject } = useMutation({
+    mutationFn: TakeSubject,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["Allsubjects"] });
+    },
   });
 
   if (isPending) {
@@ -33,20 +52,81 @@ function Subjects() {
 
   return (
     <>
+      {inscrpModal && (
+        <div className="fixed inset-0 bg-zinc-900/20 z-10">
+          <div className="container flex items-center justify-center h-full max-w-lg mx-auto">
+            <div className="relative bg-white w-72 sm:w-full h-fit p-4 rounded-lg">
+              <div className="absolute top-3 right-3">
+                <button onClick={() => setModal(true)}>
+                  <RxCross2 className="w-7 h-7" />
+                </button>
+              </div>
+              <div className="flex justify-center my-4">
+                <p className="text-xl text-center font-bold">
+                  Agregar {selectSubject}?
+                </p>
+              </div>
+              <div className="flex justify-center my-3">
+                <button
+                  onClick={() => {
+                    setModal(true);
+                    UpdateSubject();
+                  }}
+                  className="rounded-lg font-semibold mx-2 text-white w-12 h-10 bg-[#0177fb]"
+                >
+                  Si
+                </button>
+                <button
+                  className="rounded-lg font-semibold mx-2 text-white w-12 h-10 bg-[#fb3b52]"
+                  onClick={() => setModal(true)}
+                >
+                  No
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
       <div className="flex flex-col">
         <div className="w-[90dvw] mx-auto">
           <h1 className="flex justify-start font-bold text-2xl text-blue-900 my-6">
             Profesor:{`${firstname} ${lastname}`}
           </h1>
-          {Array.isArray(subjects) ? (
-            subjects.map((subject: Subject) => (
-              <p key={subject.id}>{subject.name}</p>
-            ))
-          ) : (
-            <div>
-              <p>Error al obtener los datos desde el servidor</p>
-            </div>
-          )}
+          <p className="my-6 font-semibold text-xl">
+            Seleccione el ramo que desea tomar:
+          </p>
+          <table className="w-full">
+            <tbody>
+              <tr className="text-left">
+                <th className="text-gray-600 font-semibold text-lg">
+                  Profesor
+                </th>
+                <th className="text-gray-600 font-semibold text-lg">Ramo</th>
+              </tr>
+              {Array.isArray(Allsubjects) ? (
+                Allsubjects.map((subject: Subject) => (
+                  <tr key={subject.id}>
+                    <td className="flex h-10 my-3 ">
+                      <button
+                        className="w-full font-semibold text-lg text-left "
+                        id={subject.name}
+                        onClick={(e) => {
+                          setModal(false);
+                          setSubjects((e.target as HTMLButtonElement).id);
+                        }}
+                      >
+                        {subject.name}
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td>Error al obtener los ramos desde el servidor</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
         </div>
       </div>
     </>

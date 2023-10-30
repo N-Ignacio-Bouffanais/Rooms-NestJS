@@ -1,4 +1,4 @@
-import { Controller, Get, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Body, Patch, Param } from '@nestjs/common';
 import { EstudianteService } from './estudiante.service';
 import { StudentDto} from './dto/student.dto';
 
@@ -24,10 +24,5 @@ export class EstudianteController {
   @Patch('dropSubject')
   dropSubject(@Body() studentDto: StudentDto) {
     return this.estudianteService.dropSubject(studentDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.estudianteService.remove(+id);
   }
 }

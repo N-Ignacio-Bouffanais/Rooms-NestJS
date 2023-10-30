@@ -23,7 +23,6 @@ const P_Login = lazy(() => import("./routes/teacher/auth/Login"));
 const P_Register = lazy(() => import("./routes/teacher/auth/Register"));
 const P_MySubjects = lazy(() => import("./routes/teacher/MySubjects"));
 const Subjects = lazy(() => import("./routes/teacher/SubjectsTake"));
-const P_Subject = lazy(() => import("./routes/teacher/Subject"));
 
 const App = () => {
   const role = useAppStore((state) => state.role);
@@ -132,15 +131,7 @@ const App = () => {
               }
             />
             <Route
-              path="/profesor/mis-clases"
-              element={
-                <React.Suspense fallback={<>...</>}>
-                  <P_MySubjects />
-                </React.Suspense>
-              }
-            />
-            <Route
-              path="/profesor/subjects"
+              path="/profesor/toma-de-ramos/:profesor"
               element={
                 <React.Suspense fallback={<>...</>}>
                   <Subjects />
@@ -148,10 +139,10 @@ const App = () => {
               }
             />
             <Route
-              path="/profesor/:subject"
+              path="/profesor/mis-ramos/:profesor"
               element={
                 <React.Suspense fallback={<>...</>}>
-                  <P_Subject />
+                  <P_MySubjects />
                 </React.Suspense>
               }
             />

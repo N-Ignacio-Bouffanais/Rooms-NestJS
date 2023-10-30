@@ -1,5 +1,5 @@
 import { useAppStore } from "../../store/app";
-import axios from "../../libs/axios"
+import axios from "../../libs/axios";
 import { RxCross2 } from "react-icons/rx";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import queryClient from "../../queryClient";
@@ -13,18 +13,16 @@ function SubjectsTake() {
   const { inscrpModal, setModal } = useAppStore();
 
   const TakeSubject = async () => {
-    const res = axios.patch(`estudiante/`, {
+    return await axios.patch(`estudiante/`, {
       email,
       subjectName: selectSubject,
     });
-    console.log(res);
   };
 
   const GetSubjects = async () => {
-    const response = await axios.get(
-      `estudiante/${firstname}-${lastname}`
-    );
+    const response = await axios.get(`estudiante/${firstname}-${lastname}`);
     const Allsubjects = response.data;
+    console.log(Allsubjects)
     return Allsubjects;
   };
 
@@ -38,7 +36,7 @@ function SubjectsTake() {
     queryFn: GetSubjects,
   });
 
-  const { mutateAsync:UpdateSubject } = useMutation({
+  const { mutateAsync: UpdateSubject } = useMutation({
     mutationFn: TakeSubject,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["Allsubjects"] });
@@ -107,6 +105,9 @@ function SubjectsTake() {
               {Array.isArray(Allsubjects) ? (
                 Allsubjects.map((subject: Subject) => (
                   <tr key={subject.id}>
+                    <td>
+                      <p>{subject.professorId}</p>
+                    </td>
                     <td className="flex h-10 my-3 ">
                       <button
                         className="w-full font-semibold text-lg text-left "

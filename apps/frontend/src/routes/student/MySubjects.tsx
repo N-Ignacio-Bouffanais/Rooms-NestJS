@@ -21,11 +21,10 @@ function MySubjects() {
   };
 
   const DropSubject = async () => {
-    const res = axios.patch(`estudiante/dropSubject`, {
+    return await axios.patch(`estudiante/dropSubject`, {
       email,
       subjectName: selectSubject,
     });
-    return res;
   };
 
   const {

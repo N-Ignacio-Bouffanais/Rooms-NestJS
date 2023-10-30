@@ -6,7 +6,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class EstudianteService {
   constructor(private prisma: PrismaService) {}
 
-  findAll(estudianteId: string) {
+  async findAll(estudianteId: string) {
     const id = estudianteId.split('-');
     const lastname = id[1];
     const firstname = id[0];
@@ -24,7 +24,7 @@ export class EstudianteService {
     });
   }
 
-  findInscriptions(estudianteId: string) {
+  async findInscriptions(estudianteId: string) {
     const id = estudianteId.split('-');
     const lastname = id[1];
     const firstname = id[0];
@@ -63,7 +63,6 @@ export class EstudianteService {
     }
   }
   async dropSubject(estudianteDto: StudentDto) {
-    console.log(estudianteDto)
     const student = await this.prisma.student.findFirst({
       where: {
         email: estudianteDto.email,
@@ -84,9 +83,5 @@ export class EstudianteService {
       });
       return updatedSubject;
     }
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} estudiante`;
   }
 }

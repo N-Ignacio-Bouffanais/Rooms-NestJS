@@ -5,40 +5,75 @@ import { PrismaService } from 'src/prisma/prisma.service';
 @Injectable()
 export class ProfesorService {
   constructor(private prisma: PrismaService) {}
-  findAll(professorId: string) {
+  async findAll(professorId: string) {
+    console.log(professorId)
+    return this.prisma.subject.findMany({
+      where: {
+        professor:{
+          is:null
+        }
+      },
+    });
+  }
+  async findInscripted(professorId: string) {
+    console.log(professorId);
     const id = professorId.split('-');
     const lastname = id[1];
     const firstname = id[0];
     return this.prisma.subject.findMany({
       where: {
-        NOT:{
-          professor:{
-            firstname: firstname,
-            lastname: lastname
-          }
-        }
+        professor: {
+          firstname: firstname,
+          lastname:lastname
+        },
       },
     });
   }
-  findInscripted(professorId: string) {
-    const id = professorId.split('-');
-    const lastname = id[1];
-    const firstname = id[0];
-    return this.prisma.subject.findMany({
-      where:{
-        professor:{
-          firstname:firstname,
-          lastname:lastname,
-        }
-      }
-    })
+
+  async update(profesorDto: ProfesorDto) {
+    console.log(profesorDto)
+    const professor = await this.prisma.professor.findFirst({
+      where: {
+        email: profesorDto.email,
+      },
+    });
+    if (professor) {
+      const updatedSubject = await this.prisma.subject.update({
+        where: {
+          name: profesorDto.subjectName,
+        },
+        data: {
+          professor: {
+            connect: {
+              id: professor.id
+            },
+          },
+        },
+      });
+      return updatedSubject;
+    }
   }
 
-  update(id: number, profesorDto: ProfesorDto) {
-    return `This action updates a #${id} profesor`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} profesor`;
+  async dropSubject(profesorDto:ProfesorDto) {
+    const profesor = await this.prisma.professor.findFirst({
+      where: {
+        email: profesorDto.email,
+      },
+    });
+    if (profesor) {
+      const updatedSubject = await this.prisma.subject.update({
+        where: {
+          name: profesorDto.subjectName,
+        },
+        data: {
+          professor: {
+            disconnect: {
+              id: profesor.id
+            },
+          },
+        },
+      });
+      return updatedSubject;
+    }
   }
 }

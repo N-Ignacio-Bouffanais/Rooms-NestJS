@@ -2,7 +2,7 @@ import { IsString, IsEmail } from "class-validator";
 
 export class ProfesorDto {
   @IsString()
-  subject: string;
+  subjectName: string;
   @IsEmail()
   email: string;
 }
