@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useAppStore } from "../store/app";
-import {DiAtom} from "react-icons/di";
+import { DiAtom } from "react-icons/di";
 import { BsMoonStarsFill } from "react-icons/bs";
 import { useEffect, useState } from "react";
 
@@ -8,25 +8,32 @@ interface Props {
   redirectTo: string;
 }
 
-function Navbar(props:Props) {
+function Navbar(props: Props) {
   const navigate = useNavigate();
   const logout = useAppStore((state) => state.logout);
-  const [theme,setTheme] = useState("light")
 
-  useEffect(()=>{
-    if(theme === 'dark'){
-      document.querySelector('html')?.classList.add('dark')
-    } else{
-      document.querySelector('html')?.classList.remove('dark')
+  const [theme, setTheme] = useState(() => {
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      return "dark";
     }
-  },[theme])
+    return "light";
+  });
 
-  const HandleTheme = () =>{
-    setTheme(prevTheme => prevTheme === 'light'? 'dark' : 'light')
-  }
+  useEffect(() => {
+    const doc = document.querySelector("html") as HTMLElement;
+    if (theme === "dark") {
+      doc.classList.add("dark");
+    } else {
+      doc.classList.remove("dark");
+    }
+  }, [theme]);
+
+  const HandleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+  };
 
   return (
-    <nav className="flex bg-gray-700 h-[9dvh] w-full text-white font-medium dark:bg-red-700">
+    <nav className="flex bg-gray-700 h-[9dvh] w-full text-white font-medium">
       <ul className="flex w-[90dvw] mx-auto justify-between items-center">
         <li>
           <Link
