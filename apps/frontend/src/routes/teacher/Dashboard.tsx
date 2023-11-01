@@ -23,10 +23,10 @@ function Dashboard() {
               </i>
               <Link
                 className="flex mt-3"
-                to={`/profesor/mis-ramos/${firstname}-${lastname}`}
-                title="Mis Materias"
+                to={`/profesor/my-subjects/${firstname}-${lastname}`}
+                title="My subjects"
               >
-                <p className="font-bold text-2xl">Mis ramos</p>
+                <p className="font-bold text-2xl">My subjects</p>
                 <BsArrowRightShort className="w-9 h-9" />
               </Link>
             </div>
@@ -36,10 +36,10 @@ function Dashboard() {
               </i>
               <Link
                 className="flex mt-3"
-                to={`/profesor/toma-de-ramos/${firstname}-${lastname}`}
-                title="Tomar Ramos"
+                to={`/professor/subjects-take/${firstname}-${lastname}`}
+                title="Subjects take"
               >
-                <p className="font-bold text-2xl">Tomar ramos</p>
+                <p className="font-bold text-2xl">Subjects take</p>
                 <BsArrowRightShort className="w-9 h-9" />
               </Link>
             </div>

@@ -45,7 +45,7 @@ export class ProfesorService {
         data: {
           professor: {
             connect: {
-              id: professor.id
+              id: professor.firstname
             },
           },
         },
@@ -55,12 +55,12 @@ export class ProfesorService {
   }
 
   async dropSubject(profesorDto:ProfesorDto) {
-    const profesor = await this.prisma.professor.findFirst({
+    const professor = await this.prisma.professor.findFirst({
       where: {
         email: profesorDto.email,
       },
     });
-    if (profesor) {
+    if (professor) {
       const updatedSubject = await this.prisma.subject.update({
         where: {
           name: profesorDto.subjectName,
@@ -68,7 +68,7 @@ export class ProfesorService {
         data: {
           professor: {
             disconnect: {
-              id: profesor.id
+              id: professor.firstname,
             },
           },
         },

@@ -56,13 +56,13 @@ function MySubjects() {
     <>
       <div className="w-[90dvw] mx-auto">
         <h1 className="flex justify-start font-bold text-3xl text-blue-900 my-6">
-          Mis Ramos
+          My classes
         </h1>
         <table className="w-full mb-10 mt-4 bg-white rounded-2xl p-6">
           <thead>
             <tr className="text-xl grid grid-cols-2 h-12 items-center border-y">
-              <th>Clase</th>
-              <th>Accion</th>
+              <th>Class</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -80,10 +80,10 @@ function MySubjects() {
                       id={subject.name}
                       className="w-16 h-11 my-3 rounded-lg text-white bg-[#0177fb] mx-2"
                       onClick={() => {
-                        navigate(`/estudiante/${subject.name}`);
+                        navigate(`/student/${subject.name}`);
                       }}
                     >
-                      Ver
+                      See more
                     </button>
                     <button
                       id={subject.name}
@@ -93,14 +93,14 @@ function MySubjects() {
                         UpdateSubject();
                       }}
                     >
-                      Eliminar
+                      Delete
                     </button>
                   </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td>Error al obtener los ramos desde el servidor</td>
+                <td>Error at the time to get data from server</td>
               </tr>
             )}
           </tbody>

@@ -64,12 +64,12 @@ function RegisterForm(props: Props) {
       <div>
         <label
           htmlFor=""
-          className="flex justify-start font-medium text-white "
+          className="flex justify-start font-medium text-white text-lg "
         >
-          Nombre
+          Name
         </label>
         <input
-          placeholder="ingrese su nombre"
+          placeholder="Enter your name"
           type="text"
           {...register("firstname", {
             required: true,
@@ -85,12 +85,12 @@ function RegisterForm(props: Props) {
       <div>
         <label
           htmlFor=""
-          className="flex justify-start font-medium text-white "
+          className="flex justify-start font-medium text-white text-lg "
         >
-          Apellido
+          Lastname
         </label>
         <input
-          placeholder="ingrese su apellido"
+          placeholder="Enter your lastname"
           type="text"
           {...register("lastname", {
             required: true,
@@ -106,21 +106,21 @@ function RegisterForm(props: Props) {
       <div>
         <label
           htmlFor=""
-          className="flex justify-start font-medium text-white "
+          className="flex justify-start font-medium text-white text-lg "
         >
-          Correo
+          Email
         </label>
         <input
           type="email"
-          placeholder="ingrese su correo"
+          placeholder="enter your email"
           {...register("email", {
             required: {
               value: true,
-              message: "Correo es requerido",
+              message: "Email is required",
             },
             pattern: {
               value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-              message: "Correo no válido",
+              message: "Email is not valid",
             },
           })}
           className="w-80 mb-2 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-600 placeholder:font-medium"
@@ -134,9 +134,9 @@ function RegisterForm(props: Props) {
       <div>
         <label
           htmlFor=""
-          className="flex justify-start font-medium text-white "
+          className="flex justify-start font-medium text-white text-lg "
         >
-          Contraseña
+          Password
         </label>
         <div className="relative">
           <input
@@ -146,11 +146,11 @@ function RegisterForm(props: Props) {
             {...register("password", {
               required: {
                 value: true,
-                message: "La contraseña es requerida",
+                message: "The password is required",
               },
               minLength: {
                 value: 6,
-                message: "La contraseña debe ser mayor a 6 caracteres",
+                message: "The password is must be at least 6 characters",
               },
             })}
             className="w-80 mb-2 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-600 placeholder:font-medium"
@@ -169,22 +169,22 @@ function RegisterForm(props: Props) {
         </span>
       )}
       <div>
-        <label className="flex justify-start font-medium text-white">
-          Confirmar Contraseña:
+        <label className="flex justify-start font-medium text-white text-lg">
+          Confirm Password:
         </label>
         <div className="relative">
           <input
             placeholder="******"
-            id="confirmarPassword"
+            id="confirmPassword"
             type="password"
             {...register("password", {
               required: {
                 value: true,
-                message: "La contraseña es requerida",
+                message: "The password is required",
               },
               minLength: {
                 value: 6,
-                message: "La contraseña debe ser mayor a 6 caracteres",
+                message: "The password is must be at least 6 characters",
               },
             })}
             className="w-80 mb-2 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-600 placeholder:font-medium"
@@ -198,8 +198,8 @@ function RegisterForm(props: Props) {
         </div>
       </div>
       <div className="flex">
-        <label className="flex justify-start font-medium text-white ">
-          Acepto los términos y condiciones
+        <label className="flex justify-start font-medium text-white text-lg">
+          I accept the terms and conditions
         </label>
         <input
           type="checkbox"
@@ -216,7 +216,7 @@ function RegisterForm(props: Props) {
           type="submit"
           className="flex justify-center items-center w-80 bg-blue-700 h-10 p-3 m-3 rounded-full text-white text-lg font-medium hover:bg-blue-800 disabled:bg-gray-600 disabled:cursor-not-allowed"
         >
-          Enviar
+          Submit
         </button>
       </div>
     </form>

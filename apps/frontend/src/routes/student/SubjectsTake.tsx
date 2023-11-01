@@ -90,17 +90,19 @@ function SubjectsTake() {
       )}
       <div className="h-[100dvh] w-[100dvw]">
         <div className="mx-auto w-[90dvw] sm:w-[85dvw] md:w-[80dvw]">
-          <h1 className="text-4xl font-bold my-8">Toma de ramos</h1>
+          <h1 className="text-4xl font-bold my-8">
+            Professor:{`${firstname} ${lastname}`}
+          </h1>
           <p className="my-6 font-semibold text-xl">
-            Seleccione el ramo que desea tomar:
+            Select the class you want to take:
           </p>
           <table className="w-full">
             <tbody>
               <tr className="text-left">
                 <th className="text-gray-600 font-semibold text-lg">
-                  Profesor
+                  Professor
                 </th>
-                <th className="text-gray-600 font-semibold text-lg">Ramo</th>
+                <th className="text-gray-600 font-semibold text-lg">Class</th>
               </tr>
               {Array.isArray(Allsubjects) ? (
                 Allsubjects.map((subject: Subject) => (
@@ -124,7 +126,7 @@ function SubjectsTake() {
                 ))
               ) : (
                 <tr>
-                  <td>Error al obtener los ramos desde el servidor</td>
+                  <td>Error at the time to get data from server</td>
                 </tr>
               )}
             </tbody>

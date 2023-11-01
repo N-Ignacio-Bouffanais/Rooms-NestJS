@@ -10,7 +10,7 @@ function BackButton() {
       <i className="mr-1">
         <AiOutlineArrowLeft />
       </i>
-      Regresar
+      Back
     </Link>
   );
 }

@@ -71,22 +71,22 @@ function ChangeVisibility() {
     <form onSubmit={onSubmit} className="flex flex-col items-center">
       <div>
         <label
-          htmlFor="correo"
+          htmlFor="email"
           className="flex justify-start font-medium text-white text-lg"
         >
-          Correo
+          Email
         </label>
         <input
-          placeholder="ingrese su correo"
+          placeholder="enter your email"
           type="email"
           {...register("email", {
             required: {
               value: true,
-              message: "El correo es requerido",
+              message: "Email is required",
             },
             pattern: {
               value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-              message: "El correo no es válido",
+              message: "Email is not valid",
             },
           })}
           className="w-80 mb-2 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-600 placeholder:font-medium"
@@ -102,7 +102,7 @@ function ChangeVisibility() {
           htmlFor="password"
           className="flex justify-start font-medium text-white text-lg"
         >
-          Contraseña
+          Password
         </label>
         <div className="relative">
           <input
@@ -112,11 +112,11 @@ function ChangeVisibility() {
             {...register("password", {
               required: {
                 value: true,
-                message: "La contraseña es requerida",
+                message: "The password is required",
               },
               minLength: {
                 value: 6,
-                message: "La contraseña debe ser mayor a 6 caracteres",
+                message: "The password is must be at least 6 characters",
               },
             })}
             className="w-80 mb-2 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-600 placeholder:font-medium"
@@ -140,7 +140,7 @@ function ChangeVisibility() {
           type="submit"
           className="flex justify-center items-center w-80 bg-blue-700 p-3 rounded-full text-white text-lg font-medium hover:bg-blue-800"
         >
-          Enviar
+          Submit
         </button>
       </div>
     </form>

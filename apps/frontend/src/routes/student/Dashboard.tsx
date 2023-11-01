@@ -15,7 +15,9 @@ const Dashboard = () => {
   return (
     <div className="flex flex-col">
       <div className="w-[90dvw] mx-auto">
-        <h1 className="flex justify-start font-bold text-2xl text-blue-900 my-6">Estudiante:{`${firstname} ${lastname}`}</h1>
+        <h1 className="flex justify-start font-bold text-2xl text-blue-900 my-6">
+          student:{`${firstname} ${lastname}`}
+        </h1>
         <div className="grid grid-cols-1 grid-rows-2 gap-y-6 my-6 xs:grid-cols-2">
           <div className="flex flex-col items-center justify-center w-full xs:w-56  h-40 bg-[#FF0060] rounded-xl sm:h-52 sm:w-64 md:w-80 lg:w-[400px]">
             <i>
@@ -23,8 +25,8 @@ const Dashboard = () => {
             </i>
             <Link
               className="flex mt-3"
-              to={`/estudiante/mysubjects/${firstname}-${lastname}`}
-              title="Mis Materias"
+              to={`/student/mysubjects/${firstname}-${lastname}`}
+              title="My subjects"
             >
               <p className="font-bold text-2xl">Mis ramos</p>
               <BsArrowRightShort className="w-9 h-9" />
@@ -36,10 +38,10 @@ const Dashboard = () => {
             </i>
             <Link
               className="flex mt-3"
-              to={`/estudiante/toma-de-ramos/${firstname}-${lastname}`}
-              title="Tomar Ramos"
+              to={`/student/subjects-take/${firstname}-${lastname}`}
+              title="Subjects take"
             >
-              <p className="font-bold text-2xl">Tomar ramos</p>
+              <p className="font-bold text-2xl">Take class</p>
               <BsArrowRightShort className="w-9 h-9" />
             </Link>
           </div>
@@ -47,8 +49,8 @@ const Dashboard = () => {
             <i>
               <MdTask className="w-14 h-14" />
             </i>
-            <Link className="flex mt-3" to={``} title="Mis tareas">
-              <p className="font-bold text-2xl">Mis tareas</p>
+            <Link className="flex mt-3" to={``} title="My classes">
+              <p className="font-bold text-2xl">My classes</p>
               <BsArrowRightShort className="w-9 h-9" />
             </Link>
           </div>
@@ -58,10 +60,10 @@ const Dashboard = () => {
             </i>
             <Link
               className="flex mt-3"
-              to={`/estudiante/toma-de-ramos/${firstname}-${lastname}`}
-              title="Tomar Ramos"
+              to={`/student/subjects-take/${firstname}-${lastname}`}
+              title="Subjects take"
             >
-              <p className="font-bold text-2xl">Tomar ramos</p>
+              <p className="font-bold text-2xl">Take class</p>
               <BsArrowRightShort className="w-9 h-9" />
             </Link>
           </div>
@@ -73,7 +75,7 @@ const Dashboard = () => {
               logout(), navigate("/");
             }}
           >
-            Salir
+            Exit
             <BiExit className="ml-2" />
           </button>
         </div>

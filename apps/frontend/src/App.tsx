@@ -30,11 +30,11 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        {role != "" && <Navbar redirectTo={`/${role}/panel-de-control`} />}
+        {role != "" && <Navbar redirectTo={`/${role}/dashboard`} />}
         <Routes>
           <Route index element={<Home />} />
           <Route
-            path="/estudiante/login"
+            path="/student/login"
             element={
               <React.Suspense fallback={<>...</>}>
                 <S_Login />
@@ -42,7 +42,7 @@ const App = () => {
             }
           />
           <Route
-            path="/estudiante/registro"
+            path="/student/register"
             element={
               <React.Suspense fallback={<>...</>}>
                 <S_Register />
@@ -50,7 +50,7 @@ const App = () => {
             }
           />
           <Route
-            path="/profesor/login"
+            path="/professor/login"
             element={
               <React.Suspense fallback={<>...</>}>
                 <P_Login />
@@ -58,7 +58,7 @@ const App = () => {
             }
           />
           <Route
-            path="/profesor/registro"
+            path="/professor/register"
             element={
               <React.Suspense fallback={<>...</>}>
                 <P_Register />
@@ -68,13 +68,13 @@ const App = () => {
           <Route
             element={
               <ProtectedRoute
-                redirectTo="/estudiante/login"
-                isAllowed={role == "estudiante"}
+                redirectTo="/student/login"
+                isAllowed={role == "student"}
               />
             }
           >
             <Route
-              path="/estudiante/panel-de-control"
+              path="/student/dashboard"
               element={
                 <React.Suspense fallback={<>...</>}>
                   <S_Dashboard />
@@ -82,7 +82,7 @@ const App = () => {
               }
             />
             <Route
-              path="/estudiante/mis-notas"
+              path="/student/my-subjects"
               element={
                 <React.Suspense fallback={<>...</>}>
                   <MyNotes />
@@ -90,7 +90,7 @@ const App = () => {
               }
             />
             <Route
-              path="/estudiante/toma-de-ramos/:estudiante"
+              path="/student/subjects-take/:student"
               element={
                 <React.Suspense fallback={<>...</>}>
                   <SubjectsTake />
@@ -98,7 +98,7 @@ const App = () => {
               }
             />
             <Route
-              path="/estudiante/mysubjects/:estudiante"
+              path="/student/mysubjects/:student"
               element={
                 <React.Suspense fallback={<>...</>}>
                   <MySubjects />
@@ -106,7 +106,7 @@ const App = () => {
               }
             />
             <Route
-              path="/estudiante/:id"
+              path="/student/:id"
               element={
                 <React.Suspense fallback={<>...</>}>
                   <Subject />
@@ -117,13 +117,13 @@ const App = () => {
           <Route
             element={
               <ProtectedRoute
-                redirectTo="/profesor/login"
-                isAllowed={role == "profesor"}
+                redirectTo="/professor/login"
+                isAllowed={role == "professor"}
               />
             }
           >
             <Route
-              path="/profesor/panel-de-control"
+              path="/professor/dashboard"
               element={
                 <React.Suspense fallback={<>...</>}>
                   <P_Dashboard />
@@ -131,7 +131,7 @@ const App = () => {
               }
             />
             <Route
-              path="/profesor/toma-de-ramos/:profesor"
+              path="/professor/subjects-take/:professor"
               element={
                 <React.Suspense fallback={<>...</>}>
                   <Subjects />
@@ -139,7 +139,7 @@ const App = () => {
               }
             />
             <Route
-              path="/profesor/mis-ramos/:profesor"
+              path="/professor/mysubjects/:professor"
               element={
                 <React.Suspense fallback={<>...</>}>
                   <P_MySubjects />

@@ -20,19 +20,19 @@ export class AuthService {
       },
     });
 
-    if (!findUser) throw new HttpException('Estudiante no encontrado', 404);
+    if (!findUser) throw new HttpException('Student not found', 404);
 
     const checkPassword = await bcrypt.compare(
       loginDto.password,
       findUser.hash,
     );
 
-    if (!checkPassword) throw new HttpException('Contraseña incorrecta', 403);
+    if (!checkPassword) throw new HttpException('Wrong Password', 403);
 
     const payload = {
       firstname: findUser.firstname,
       lastname: findUser.lastname,
-      role: 'estudiante',
+      role: 'student',
       email: findUser.email,
     };
 
@@ -50,19 +50,19 @@ export class AuthService {
       },
     });
 
-    if (!findUser) throw new HttpException('Profesor no encontrado', 404);
+    if (!findUser) throw new HttpException('Professor not found', 404);
 
     const checkPassword = await bcrypt.compare(
       loginDto.password,
       findUser.hash,
     );
 
-    if (!checkPassword) throw new HttpException('Contraseña incorrecta', 403);
+    if (!checkPassword) throw new HttpException('Wrong Password', 403);
 
     const payload = {
       firstname: findUser.firstname,
       lastname: findUser.lastname,
-      role: 'profesor',
+      role: 'professor',
       email: findUser.email,
     };
 
@@ -97,43 +97,40 @@ export class AuthService {
         lastname: newUser.lastname,
       };
 
-      return `Estudiante ${user.firstname} ${user.lastname} creado con exito`
+      return `Student ${user.firstname} ${user.lastname} created successfully`
     }
 
     throw new Error(
-      'Ya existe un estudiante con este correo, Por favor intente con otro',
+      'This User already exists, Please create a new one',
     );
   }
 
   async ProfSignUp(registerDto: RegisterDto) {
-    console.log(registerDto)
-    // const findUser = await this.prisma.professor.findUnique({
-    //   where: {
-    //     email: registerDto.email,
-    //   },
-    // });
+    const findUser = await this.prisma.professor.findUnique({
+      where: {
+        email: registerDto.email,
+      },
+    });
 
-    // if (!findUser) {
-    //   const hashedPassword = await bcrypt.hash(registerDto.password, 10);
-    //   const newUser = await this.prisma.professor.create({
-    //     data: {
-    //       email: registerDto.email,
-    //       firstname: registerDto.firstname,
-    //       lastname: registerDto.lastname,
-    //       hash: hashedPassword,
-    //     },
-    //   });
+    if (!findUser) {
+      const hashedPassword = await bcrypt.hash(registerDto.password, 10);
+      const newUser = await this.prisma.professor.create({
+        data: {
+          email: registerDto.email,
+          firstname: registerDto.firstname,
+          lastname: registerDto.lastname,
+          hash: hashedPassword,
+        },
+      });
 
-    //   const user = {
-    //     firstname: newUser.firstname,
-    //     lastname: newUser.lastname,
-    //   };
+      const user = {
+        firstname: newUser.firstname,
+        lastname: newUser.lastname,
+      };
 
-    //   return `Profesor ${user.firstname} ${user.lastname} creado con exito`
-    // }
+      return `Professor ${user.firstname} ${user.lastname} created successfully`
+    }
 
-    // throw new Error(
-    //   'Ya existe un profesor con este correo, Por favor intente con otro',
-    // );
+    throw new Error('This User already exists, Please create a new one');
   }
 }

@@ -54,7 +54,7 @@ function Navbar(props: Props) {
               logout(), navigate("/");
             }}
           >
-            Cerrar sesion
+            Sign Out
           </button>
         </li>
       </ul>

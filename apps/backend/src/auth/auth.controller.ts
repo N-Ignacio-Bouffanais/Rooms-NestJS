@@ -24,7 +24,7 @@ export class AuthController {
   }
 
   @HttpCode(HttpStatus.OK)
-  @Post('profesor/login')
+  @Post('professor/login')
   async ProfSignIn(@Body() loginDto: LoginDto): Promise<any> {
     try {
       return this.authService.ProfSignIn(loginDto);
@@ -38,18 +38,18 @@ export class AuthController {
   async StuSignUp(@Body() registerDto: RegisterDto): Promise<any> {
     try {
       const newUser = await this.authService.StuSignUp(registerDto);
-      return { message: 'Estudiante creado con éxito', user: newUser };
+      return { message: 'Student created successfully', user: newUser };
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
   @HttpCode(HttpStatus.CREATED)
-  @Post('profesor/register')
+  @Post('professor/register')
   async ProfSignUp(@Body() ProfregisterDto: RegisterDto): Promise<any> {
     try {
       const newUser = await this.authService.ProfSignUp(ProfregisterDto);
-      return { message: 'Profesor creado con éxito', user: newUser };
+      return { message: 'Professor created successfully', user: newUser };
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }

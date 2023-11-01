@@ -64,7 +64,7 @@ function Subjects() {
               </div>
               <div className="flex justify-center my-4">
                 <p className="text-xl text-center font-bold">
-                  Agregar {selectSubject}?
+                  Add {selectSubject}?
                 </p>
               </div>
               <div className="flex justify-center my-3">
@@ -75,7 +75,7 @@ function Subjects() {
                   }}
                   className="rounded-lg font-semibold mx-2 text-white w-12 h-10 bg-[#0177fb]"
                 >
-                  Si
+                  Yes
                 </button>
                 <button
                   className="rounded-lg font-semibold mx-2 text-white w-12 h-10 bg-[#fb3b52]"
@@ -91,18 +91,18 @@ function Subjects() {
       <div className="flex flex-col">
         <div className="w-[90dvw] mx-auto">
           <h1 className="flex justify-start font-bold text-2xl text-blue-900 my-6">
-            Profesor:{`${firstname} ${lastname}`}
+            Professor:{`${firstname} ${lastname}`}
           </h1>
           <p className="my-6 font-semibold text-xl">
-            Seleccione el ramo que desea tomar:
+            Select the class you want to take:
           </p>
           <table className="w-full">
             <tbody>
               <tr className="text-left">
                 <th className="text-gray-600 font-semibold text-lg">
-                  Estudiantes
+                  Students
                 </th>
-                <th className="text-gray-600 font-semibold text-lg">Ramo</th>
+                <th className="text-gray-600 font-semibold text-lg">Class</th>
               </tr>
               {Array.isArray(Allsubjects) ? (
                 Allsubjects.map((subject: Subject) => (
@@ -124,7 +124,7 @@ function Subjects() {
                 ))
               ) : (
                 <tr>
-                  <td>Error al obtener los ramos desde el servidor</td>
+                  <td>Error at the time to get data from server</td>
                 </tr>
               )}
             </tbody>
