@@ -13,10 +13,10 @@ const Dashboard = () => {
   const logout = useAppStore((state) => state.logout);
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col dark:bg-slate-950">
       <div className="w-[90dvw] mx-auto">
-        <h1 className="flex justify-start font-bold text-2xl text-blue-900 my-6">
-          student:{`${firstname} ${lastname}`}
+        <h1 className="flex justify-start font-bold text-2xl my-6 dark:text-gray-200">
+          Student: {`${firstname} ${lastname}`}
         </h1>
         <div className="grid grid-cols-1 grid-rows-2 gap-y-6 my-6 xs:grid-cols-2">
           <div className="flex flex-col items-center justify-center w-full xs:w-56  h-40 bg-[#FF0060] rounded-xl sm:h-52 sm:w-64 md:w-80 lg:w-[400px]">
@@ -28,7 +28,7 @@ const Dashboard = () => {
               to={`/student/mysubjects/${firstname}-${lastname}`}
               title="My subjects"
             >
-              <p className="font-bold text-2xl">Mis ramos</p>
+              <p className="font-bold text-2xl">My classes</p>
               <BsArrowRightShort className="w-9 h-9" />
             </Link>
           </div>
@@ -70,7 +70,7 @@ const Dashboard = () => {
         </div>
         <div className="flex justify-center">
           <button
-            className="flex justify-center font-semibold bg-black rounded-xl w-full xs:w-56 md:w-80  h-12 text-white items-center my-4"
+            className="flex justify-center font-semibold bg-black rounded-xl w-full xs:w-56 md:w-80  h-12 text-white items-center mt-4 mb-10"
             onClick={() => {
               logout(), navigate("/");
             }}

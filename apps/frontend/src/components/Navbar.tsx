@@ -33,13 +33,13 @@ function Navbar(props: Props) {
   };
 
   return (
-    <nav className="flex bg-gray-700 h-[9dvh] w-full text-white font-medium">
-      <ul className="flex w-[90dvw] mx-auto justify-between items-center">
+    <nav className="flex h-[10dvh] w-full text-white font-medium bg-blue-600">
+      <ul className="flex w-[90dvw] mx-auto justify-between items-center sm:text-lg">
         <li>
           <Link
             className="flex items-center"
             to={props.redirectTo}
-            title="Panel de control"
+            title="Dashboard"
           >
             <DiAtom className="h-8 w-8" />
             AtomCenter

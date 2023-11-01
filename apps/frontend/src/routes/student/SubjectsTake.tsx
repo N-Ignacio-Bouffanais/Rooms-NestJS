@@ -88,9 +88,9 @@ function SubjectsTake() {
           </div>
         </div>
       )}
-      <div className="h-[100dvh] w-[100dvw]">
+      <div className="flex flex-col dark:bg-slate-950">
         <div className="mx-auto w-[90dvw] sm:w-[85dvw] md:w-[80dvw]">
-          <h1 className="text-4xl font-bold my-8">
+          <h1 className="text-4xl font-bold my-8 dark:text-gray-200">
             Professor:{`${firstname} ${lastname}`}
           </h1>
           <p className="my-6 font-semibold text-xl">

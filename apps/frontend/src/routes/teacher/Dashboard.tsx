@@ -11,9 +11,9 @@ function Dashboard() {
 
   return (
     <>
-      <div className="flex flex-col">
+      <div className="flex flex-col dark:bg-slate-950">
         <div className="w-[90dvw] mx-auto">
-          <h1 className="flex justify-start font-bold text-2xl text-blue-900 my-6">
+          <h1 className="flex justify-start font-bold text-2xl my-6">
             Profesor:{`${firstname} ${lastname}`}
           </h1>
           <div className="grid grid-cols-1 grid-rows-2 gap-y-6 my-6 xs:grid-cols-2">

@@ -53,14 +53,14 @@ function MySubjects() {
   }
 
   return (
-    <>
+    <div className="flex flex-col dark:bg-slate-950">
       <div className="w-[90dvw] mx-auto">
-        <h1 className="flex justify-start font-bold text-3xl text-blue-900 my-6">
+        <h1 className="flex justify-start font-bold text-4xl my-6 dark:text-white">
           My classes
         </h1>
-        <table className="w-full mb-10 mt-4 bg-white rounded-2xl p-6">
+        <table className="w-full mb-10 mt-4  rounded-2xl p-6">
           <thead>
-            <tr className="text-xl grid grid-cols-2 h-12 items-center border-y">
+            <tr className="text-xl grid grid-cols-2 h-12 items-center font-bold dark:text-white">
               <th>Class</th>
               <th>Action</th>
             </tr>
@@ -69,7 +69,7 @@ function MySubjects() {
             {Array.isArray(subjects) ? (
               subjects.map((subject: Subject) => (
                 <tr
-                  className=" font-semibold text-lg grid grid-cols-2 auto-rows-auto"
+                  className=" font-semibold text-lg grid grid-cols-2 auto-rows-auto dark:text-white"
                   key={subject.id}
                 >
                   <td className="flex justify-center items-center">
@@ -106,7 +106,7 @@ function MySubjects() {
           </tbody>
         </table>
       </div>
-    </>
+    </div>
   );
 }
 
