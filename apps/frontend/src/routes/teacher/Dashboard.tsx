@@ -23,7 +23,7 @@ function Dashboard() {
               </i>
               <Link
                 className="flex mt-3"
-                to={`/profesor/my-subjects/${firstname}-${lastname}`}
+                to={`/professor/mysubjects/${firstname}-${lastname}`}
                 title="My subjects"
               >
                 <p className="font-bold text-2xl">My subjects</p>
