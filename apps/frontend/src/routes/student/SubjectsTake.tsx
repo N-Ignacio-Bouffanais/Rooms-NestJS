@@ -4,6 +4,7 @@ import { RxCross2 } from "react-icons/rx";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import queryClient from "../../queryClient";
 import { Subject } from "../../types/subject.type";
+import BackButton from "../../components/BackButton";
 
 function SubjectsTake() {
   const firstname = useAppStore((state) => state.firstname);
@@ -22,7 +23,7 @@ function SubjectsTake() {
   const GetSubjects = async () => {
     const response = await axios.get(`estudiante/${firstname}-${lastname}`);
     const Allsubjects = response.data;
-    console.log(Allsubjects)
+    console.log(Allsubjects);
     return Allsubjects;
   };
 
@@ -54,7 +55,7 @@ function SubjectsTake() {
   return (
     <>
       {inscrpModal && (
-        <div className="fixed inset-0 bg-zinc-900/20 z-10">
+        <div className="fixed inset-0 bg-zinc-900/40 z-10">
           <div className="container flex items-center justify-center h-full max-w-lg mx-auto">
             <div className="relative bg-white w-72 sm:w-full h-fit p-4 rounded-lg">
               <div className="absolute top-3 right-3">
@@ -88,49 +89,49 @@ function SubjectsTake() {
           </div>
         </div>
       )}
-      <div className="flex flex-col dark:bg-slate-950">
+      <div className="flex flex-col bg-slate-200 dark:bg-slate-950">
         <div className="mx-auto w-[90dvw] sm:w-[85dvw] md:w-[80dvw]">
-          <h1 className="text-4xl font-bold my-8 dark:text-gray-200">
-            Professor:{`${firstname} ${lastname}`}
+          <h1 className="flex justify-center font-bold text-2xl mt-10 mb-6 dark:text-white">
+            Student: {`${firstname} ${lastname}`}
           </h1>
-          <p className="my-6 font-semibold text-xl">
-            Select the class you want to take:
-          </p>
-          <table className="w-full">
-            <tbody>
-              <tr className="text-left">
-                <th className="text-gray-600 font-semibold text-lg">
-                  Professor
-                </th>
-                <th className="text-gray-600 font-semibold text-lg">Class</th>
-              </tr>
-              {Array.isArray(Allsubjects) ? (
-                Allsubjects.map((subject: Subject) => (
-                  <tr key={subject.id}>
-                    <td>
-                      <p>{subject.professorId}</p>
-                    </td>
-                    <td className="flex h-10 my-3 ">
-                      <button
-                        className="w-full font-semibold text-lg text-left "
-                        id={subject.name}
-                        onClick={(e) => {
-                          setModal(false);
-                          setSubjects((e.target as HTMLButtonElement).id);
-                        }}
-                      >
-                        {subject.name}
-                      </button>
-                    </td>
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td>Error at the time to get data from server</td>
+          <div className="bg-white rounded-2xl p-5 mb-10 dark:bg-[#1f222b]">
+            <table className="w-full">
+              <tbody>
+                <tr className="text-center">
+                  <th className="font-bold text-xl dark:text-white">
+                    Professor
+                  </th>
+                  <th className="font-bold text-xl dark:text-white">Class</th>
                 </tr>
-              )}
-            </tbody>
-          </table>
+                {Array.isArray(Allsubjects) ? (
+                  Allsubjects.map((subject: Subject) => (
+                    <tr key={subject.id} className="text-center font-semibold">
+                      <td className="dark:text-white">{subject.professorId}</td>
+                      <td className="flex h-10 my-3 ">
+                        <button
+                          className="w-full text-lg dark:text-blue-500 "
+                          id={subject.name}
+                          onClick={(e) => {
+                            setModal(false);
+                            setSubjects((e.target as HTMLButtonElement).id);
+                          }}
+                        >
+                          {subject.name}
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td>Error at the time to get data from server</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div className="flex justify-center mb-8">
+          <BackButton redirectTo="/student/dashboard" />
         </div>
       </div>
     </>

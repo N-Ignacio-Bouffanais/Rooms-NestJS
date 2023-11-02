@@ -15,7 +15,7 @@ const Dashboard = () => {
   return (
     <div className="flex flex-col dark:bg-slate-950">
       <div className="w-[90dvw] mx-auto">
-        <h1 className="flex justify-start font-bold text-2xl my-6 dark:text-gray-200">
+        <h1 className="flex justify-center font-bold text-2xl mt-10 mb-6 dark:text-white">
           Student: {`${firstname} ${lastname}`}
         </h1>
         <div className="grid grid-cols-1 grid-rows-2 gap-y-6 my-6 xs:grid-cols-2">

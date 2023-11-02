@@ -11,10 +11,10 @@ function Dashboard() {
 
   return (
     <>
-      <div className="flex flex-col dark:bg-slate-950">
+      <div className="flex flex-col bg-slate-200 dark:bg-slate-950">
         <div className="w-[90dvw] mx-auto">
-          <h1 className="flex justify-start font-bold text-2xl my-6">
-            Profesor:{`${firstname} ${lastname}`}
+          <h1 className="flex justify-center font-bold text-2xl mt-10 mb-6 dark:text-white">
+            Professor: {`${firstname} ${lastname}`}
           </h1>
           <div className="grid grid-cols-1 grid-rows-2 gap-y-6 my-6 xs:grid-cols-2">
             <div className="flex flex-col items-center justify-center w-full xs:w-56 h-40 bg-[#ff5e23] rounded-xl sm:h-52 sm:w-64 md:w-80 lg:w-[400px]">

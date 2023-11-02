@@ -4,6 +4,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "../../libs/axios"
 import queryClient from "../../queryClient";
 import { Subject } from "../../types/subject.type";
+import BackButton from "../../components/BackButton";
 
 function MySubjects() {
   const navigate = useNavigate();
@@ -55,7 +56,7 @@ function MySubjects() {
   return (
     <div className="flex flex-col dark:bg-slate-950">
       <div className="w-[90dvw] mx-auto">
-        <h1 className="flex justify-start font-bold text-4xl my-6 dark:text-white">
+        <h1 className="flex justify-center font-bold text-2xl mt-10 mb-6 dark:text-white">
           My classes
         </h1>
         <table className="w-full mb-10 mt-4  rounded-2xl p-6">
@@ -105,6 +106,9 @@ function MySubjects() {
             )}
           </tbody>
         </table>
+      </div>
+      <div className="flex justify-center mb-8">
+        <BackButton redirectTo="/student/dashboard" />
       </div>
     </div>
   );
