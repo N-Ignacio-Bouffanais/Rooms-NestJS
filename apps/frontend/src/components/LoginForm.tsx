@@ -74,7 +74,7 @@ function ChangeVisibility() {
           htmlFor="email"
           className="flex justify-start font-medium text-white text-lg"
         >
-          Email
+          What is your Email?
         </label>
         <input
           placeholder="enter your email"
@@ -102,7 +102,7 @@ function ChangeVisibility() {
           htmlFor="password"
           className="flex justify-start font-medium text-white text-lg"
         >
-          Password
+          What is your Password?
         </label>
         <div className="relative">
           <input

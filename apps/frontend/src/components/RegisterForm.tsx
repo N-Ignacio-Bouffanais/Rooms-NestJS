@@ -63,49 +63,48 @@ function RegisterForm(props: Props) {
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col items-center">
-      <div>
-        <label htmlFor="" className="flex justify-start font-medium text-sm ">
-          Name
-        </label>
-        <input
-          placeholder="Enter your name"
-          type="text"
-          {...register("firstname", {
-            required: true,
-          })}
-          className="w-80 mb-2 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-600 placeholder:font-medium"
-        />
-        {errors.firstname && (
-          <span className="font-semibold text-left">
-            {errors.firstname.message}
-          </span>
-        )}
+      <div className="flex items-center mb-2">
+        <div className="w-40">
+          <label htmlFor="" className="flex justify-start font-medium text-sm ">
+            Your firstname
+          </label>
+          <input
+            type="text"
+            {...register("firstname", {
+              required: true,
+            })}
+            className="flex justify-start w-36 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-500 placeholder:font-medium"
+          />
+          {errors.firstname && (
+            <span className="font-semibold text-left">
+              {errors.firstname.message}
+            </span>
+          )}
+        </div>
+        <div className="w-40">
+          <label htmlFor="" className="flex justify-start font-medium text-sm ">
+            Your lastname
+          </label>
+          <input
+            type="text"
+            {...register("lastname", {
+              required: true,
+            })}
+            className="flex justify-start w-40 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-500 placeholder:font-medium"
+          />
+          {errors.lastname && (
+            <span className="font-semibold text-left">
+              {errors.lastname.message}
+            </span>
+          )}
+        </div>
       </div>
       <div>
         <label htmlFor="" className="flex justify-start font-medium text-sm ">
-          Lastname
-        </label>
-        <input
-          placeholder="Enter your lastname"
-          type="text"
-          {...register("lastname", {
-            required: true,
-          })}
-          className="w-80 mb-2 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-600 placeholder:font-medium"
-        />
-        {errors.lastname && (
-          <span className="font-semibold text-left">
-            {errors.lastname.message}
-          </span>
-        )}
-      </div>
-      <div>
-        <label htmlFor="" className="flex justify-start font-medium text-sm ">
-          Email
+          What is your email address?
         </label>
         <input
           type="email"
-          placeholder="enter your email"
           {...register("email", {
             required: {
               value: true,
@@ -116,7 +115,7 @@ function RegisterForm(props: Props) {
               message: "Email is not valid",
             },
           })}
-          className="w-80 mb-2 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-600 placeholder:font-medium"
+          className="w-80 mb-2 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-500 placeholder:font-medium"
         />
         {errors.email && (
           <span className="font-semibold text-left">
@@ -126,32 +125,25 @@ function RegisterForm(props: Props) {
       </div>
       <div>
         <label htmlFor="" className="flex justify-start font-medium text-sm ">
-          What is your dni/dni?
+          Type your DNI without dashes and periods
         </label>
         <input
           type="text"
-          placeholder="enter your dni"
           {...register("dni", {
             required: {
               value: true,
               message: "dni is required",
             },
-            pattern: {
-              value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-              message: "dni is not valid",
-            },
           })}
-          className="w-80 mb-2 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-600 placeholder:font-medium"
+          className="w-80 mb-2 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-500 placeholder:font-medium"
         />
         {errors.dni && (
-          <span className="font-semibold text-left">
-            {errors.dni.message}
-          </span>
+          <span className="font-semibold text-left">{errors.dni.message}</span>
         )}
       </div>
       <div>
         <label htmlFor="" className="flex justify-start font-medium text-sm ">
-          Password
+          Type your password
         </label>
         <div className="relative">
           <input
@@ -168,7 +160,7 @@ function RegisterForm(props: Props) {
                 message: "The password is must be at least 6 characters",
               },
             })}
-            className="w-80 mb-2 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-600 placeholder:font-medium"
+            className="w-80 mb-2 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-500 placeholder:font-medium"
           />
           <i className="absolute right-2 top-2">
             <AiOutlineEye
@@ -185,7 +177,7 @@ function RegisterForm(props: Props) {
       )}
       <div>
         <label className="flex justify-start font-medium text-sm">
-          Confirm password
+          Confirm your password
         </label>
         <div className="relative">
           <input
@@ -202,7 +194,7 @@ function RegisterForm(props: Props) {
                 message: "The password is must be at least 6 characters",
               },
             })}
-            className="w-80 mb-2 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-600 placeholder:font-medium"
+            className="w-80 mb-2 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-500 placeholder:font-medium"
           />
           <i className="absolute right-2 top-2">
             <AiOutlineEye
@@ -214,7 +206,7 @@ function RegisterForm(props: Props) {
       </div>
       <div className="flex">
         <label className="flex justify-start font-medium text-sm">
-          I accept the terms and conditions
+          Do you accept the terms and conditions?
         </label>
         <input
           type="checkbox"
