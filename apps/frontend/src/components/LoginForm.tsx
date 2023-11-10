@@ -93,7 +93,7 @@ function ChangeVisibility() {
         />
       </div>
       {errors.email && (
-        <span className="flex text-black font-bold text-left w-80 items-center my-1">
+        <span className="flex font-bold text-left w-80 items-center mb-1">
           {errors.email.message}
         </span>
       )}
@@ -130,7 +130,7 @@ function ChangeVisibility() {
         </div>
       </div>
       {errors.password && (
-        <span className="text-black font-bold text-left w-80 sm:w-96 sm:text-center my-1">
+        <span className=" font-bold text-left w-80 sm:w-96 sm:text-center mb-1">
           {errors.password.message}
         </span>
       )}

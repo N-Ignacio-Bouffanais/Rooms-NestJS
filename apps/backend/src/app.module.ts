@@ -6,8 +6,8 @@ import { ConfigModule } from '@nestjs/config';
 import { PrismaModule } from './prisma/prisma.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
-import { ProfesorModule } from './profesor/profesor.module';
-import { EstudianteModule } from './estudiante/estudiante.module';
+import { ProfessorModule } from './professor/professor.module';
+import { StudentModule } from './student/student.module';
 
 
 @Module({
@@ -18,8 +18,8 @@ import { EstudianteModule } from './estudiante/estudiante.module';
     ConfigModule.forRoot({ isGlobal: true }),
     AuthModule,
     PrismaModule,
-    ProfesorModule,
-    EstudianteModule,
+    ProfessorModule,
+    StudentModule,
   ],
   providers: [AppService],
   controllers: [AppController],

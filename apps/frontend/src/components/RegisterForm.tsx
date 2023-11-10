@@ -20,6 +20,7 @@ function RegisterForm(props: Props) {
     password: string;
     firstname: string;
     lastname: string;
+    dni: string;
   };
 
   const {
@@ -35,6 +36,7 @@ function RegisterForm(props: Props) {
       password: data.password,
       firstname: data.firstname,
       lastname: data.lastname,
+      dni: data.dni,
     });
     console.log(response);
     navigate(redirectTo);
@@ -51,7 +53,7 @@ function RegisterForm(props: Props) {
   }
 
   function ChangeVisibility2() {
-    let y = document.getElementById("confirmarPassword") as HTMLInputElement;
+    let y = document.getElementById("confirmPassword") as HTMLInputElement;
     if (y.type === "password") {
       y.type = "text";
     } else {
@@ -62,10 +64,7 @@ function RegisterForm(props: Props) {
   return (
     <form onSubmit={onSubmit} className="flex flex-col items-center">
       <div>
-        <label
-          htmlFor=""
-          className="flex justify-start font-medium text-white text-lg "
-        >
+        <label htmlFor="" className="flex justify-start font-medium text-sm ">
           Name
         </label>
         <input
@@ -77,16 +76,13 @@ function RegisterForm(props: Props) {
           className="w-80 mb-2 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-600 placeholder:font-medium"
         />
         {errors.firstname && (
-          <span className="text-red-500 font-semibold text-left">
+          <span className="font-semibold text-left">
             {errors.firstname.message}
           </span>
         )}
       </div>
       <div>
-        <label
-          htmlFor=""
-          className="flex justify-start font-medium text-white text-lg "
-        >
+        <label htmlFor="" className="flex justify-start font-medium text-sm ">
           Lastname
         </label>
         <input
@@ -98,16 +94,13 @@ function RegisterForm(props: Props) {
           className="w-80 mb-2 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-600 placeholder:font-medium"
         />
         {errors.lastname && (
-          <span className="text-red-500 font-semibold text-left">
+          <span className="font-semibold text-left">
             {errors.lastname.message}
           </span>
         )}
       </div>
       <div>
-        <label
-          htmlFor=""
-          className="flex justify-start font-medium text-white text-lg "
-        >
+        <label htmlFor="" className="flex justify-start font-medium text-sm ">
           Email
         </label>
         <input
@@ -126,16 +119,38 @@ function RegisterForm(props: Props) {
           className="w-80 mb-2 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-600 placeholder:font-medium"
         />
         {errors.email && (
-          <span className="text-red-500 font-semibold text-left">
+          <span className="font-semibold text-left">
             {errors.email.message}
           </span>
         )}
       </div>
       <div>
-        <label
-          htmlFor=""
-          className="flex justify-start font-medium text-white text-lg "
-        >
+        <label htmlFor="" className="flex justify-start font-medium text-sm ">
+          What is your dni/dni?
+        </label>
+        <input
+          type="text"
+          placeholder="enter your dni"
+          {...register("dni", {
+            required: {
+              value: true,
+              message: "dni is required",
+            },
+            pattern: {
+              value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+              message: "dni is not valid",
+            },
+          })}
+          className="w-80 mb-2 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-600 placeholder:font-medium"
+        />
+        {errors.dni && (
+          <span className="font-semibold text-left">
+            {errors.dni.message}
+          </span>
+        )}
+      </div>
+      <div>
+        <label htmlFor="" className="flex justify-start font-medium text-sm ">
           Password
         </label>
         <div className="relative">
@@ -164,13 +179,13 @@ function RegisterForm(props: Props) {
         </div>
       </div>
       {errors.password && (
-        <span className="text-black font-bold text-left w-80 sm:w-96 sm:text-center my-1">
+        <span className="font-bold text-left w-80 sm:w-96 sm:text-center mb-1">
           {errors.password.message}
         </span>
       )}
       <div>
-        <label className="flex justify-start font-medium text-white text-lg">
-          Confirm Password:
+        <label className="flex justify-start font-medium text-sm">
+          Confirm password
         </label>
         <div className="relative">
           <input
@@ -198,7 +213,7 @@ function RegisterForm(props: Props) {
         </div>
       </div>
       <div className="flex">
-        <label className="flex justify-start font-medium text-white text-lg">
+        <label className="flex justify-start font-medium text-sm">
           I accept the terms and conditions
         </label>
         <input
