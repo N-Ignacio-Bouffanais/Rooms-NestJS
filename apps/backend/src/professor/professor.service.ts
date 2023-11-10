@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { ProfesorDto } from './dto/profesor.dto';
+import { ProfessorDto } from './dto/professor.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
-export class ProfesorService {
+export class ProfessorService {
   constructor(private prisma: PrismaService) {}
   async findAll(professorId: string) {
     console.log(professorId)
@@ -30,7 +30,7 @@ export class ProfesorService {
     });
   }
 
-  async update(profesorDto: ProfesorDto) {
+  async update(profesorDto: ProfessorDto) {
     console.log(profesorDto)
     const professor = await this.prisma.professor.findFirst({
       where: {
@@ -54,7 +54,7 @@ export class ProfesorService {
     }
   }
 
-  async dropSubject(profesorDto:ProfesorDto) {
+  async dropSubject(profesorDto:ProfessorDto) {
     const professor = await this.prisma.professor.findFirst({
       where: {
         email: profesorDto.email,

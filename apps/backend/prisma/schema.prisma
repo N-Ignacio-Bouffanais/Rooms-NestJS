@@ -13,47 +13,41 @@ model Subject{
   name String @unique
   limit Int
 
-  //Student
   student Student[]
 
-  //professor
   professor Professor? @relation(fields: [professorId], references: [id])
   professorId String?
 
   @@map("subject")
 }
 
-model Student{
-  id String @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  email String  @unique
-  firstname String
-  lastname String
-  hash String
-
-  //Subject
-  subject Subject[]
-
-  @@map("students")
-}
-
 model Professor{
   id String @id @default(cuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
   email String  @unique
   firstname String
   lastname String
   hash String
+  rut String @unique
 
-  //Subject
   subject Subject[]
-
 
   @@map("professors")
 }
 
+model Student{
+  id String @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  email String  @unique
+  firstname String
+  lastname String
+  hash String
+  rut String @unique
+
+  subject Subject[]
+
+  @@map("students")
+}
 
