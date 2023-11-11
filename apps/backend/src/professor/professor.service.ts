@@ -66,5 +66,18 @@ export class ProfessorService {
 
   async dropSubject(profesorDto: ProfessorDto) {
     console.log(profesorDto);
+    const subject = await this.prisma.subject.update({
+      data: {
+        professor: {
+          disconnect: {
+            email: profesorDto.email,
+          },
+        },
+      },
+      where: {
+        name: profesorDto.subjectName,
+      },
+    });
+    return subject
   }
 }
