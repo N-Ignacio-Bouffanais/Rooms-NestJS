@@ -2,12 +2,12 @@ import { Controller, Get, Body, Patch, Param } from '@nestjs/common';
 import { StudentService } from './student.service';
 import { StudentDto} from './dto/student.dto';
 
-@Controller('Student')
+@Controller('student')
 export class StudentController {
   constructor(private readonly studentService: StudentService) {}
 
-  @Get(':StudentId')
-  findAll(@Param('StudentId') studentId: string) {
+  @Get(':studentId')
+  findAll(@Param('studentId') studentId: string) {
     return this.studentService.findAll(studentId);
   }
 

@@ -7,21 +7,24 @@ export class StudentService {
   constructor(private prisma: PrismaService) {}
 
   async findAll(studentId: string) {
-    // const id = studentId.split('-');
-    // const lastname = id[1];
-    // const firstname = id[0];
-    // return this.prisma.subject.findMany({
-    //   where: {
-    //     NOT: {
-    //       student: {
-    //         some: {
-    //           firstname: firstname,
-    //           lastname: lastname,
-    //         },
-    //       },
-    //     },
-    //   },
-    // });
+    const id = studentId.split('-');
+    const lastname = id[1];
+    const firstname = id[0];
+    return this.prisma.subject.findMany({
+      where: {
+        NOT: {
+          student: {
+            some: {
+              firstname: firstname,
+              lastname: lastname,
+            },
+          },
+        },
+      },
+      include:{
+        professor:true,
+      }
+    });
   }
 
   async findInscriptions(studentId: string) {
