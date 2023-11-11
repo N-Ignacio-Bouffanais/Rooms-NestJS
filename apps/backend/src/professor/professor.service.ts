@@ -7,32 +7,61 @@ export class ProfessorService {
   constructor(private prisma: PrismaService) {}
   async findAll(professorId: string) {
     console.log(professorId);
-    // return this.prisma.subject.findMany({
-    //   where: {
-    //     professor: {
-    //       is: null,
-    //     },
-    //   },
-    // });
+    const subjects = await this.prisma.subject.findMany({
+      include:{
+        student:{
+          include:{
+            _count: true,
+          }
+        }
+      },
+      where:{
+        professorId:null,
+      }
+    });
+
+    return subjects;
   }
   async findInscripted(professorId: string) {
     console.log(professorId);
-    // const id = professorId.split('-');
-    // const lastname = id[1];
-    // const firstname = id[0];
-    // return this.prisma.subject.findMany({
-    //   where: {
-    //     professor: {
-    //       firstname: firstname,
-    //       lastname: lastname,
-    //     },
-    //   },
-    // });
+    const id = professorId.split('-');
+    const lastname = id[1];
+    const firstname = id[0];
+
+    const professor = await this.prisma.professor.findFirst({
+      where:{
+        firstname: firstname,
+        lastname: lastname,
+      }
+    })
+
+    if(!professor) throw new Error('No existe este profesor')
+
+    const subjects = await this.prisma.subject.findMany({
+      where:{
+        professor:{
+          dni: professor.dni,
+        }
+      }
+    });
+    return subjects
   }
 
   async update(profesorDto: ProfessorDto) {
     console.log(profesorDto);
-    return profesorDto.subjectName;
+    const subject = await this.prisma.subject.update({
+      data:{
+        professor:{
+          connect: {
+            email: profesorDto.email,
+          }
+        }
+      },
+      where:{
+        name: profesorDto.subjectName
+      }
+    })
+    return subject
   }
 
   async dropSubject(profesorDto: ProfessorDto) {
