@@ -15,7 +15,7 @@ export class AuthController {
 
   @HttpCode(HttpStatus.OK)
   @Post('student/login')
-  async StuSignIn(@Body() loginDto: LoginDto): Promise<any> {
+  async StuSignIn(@Body() loginDto: LoginDto): Promise<{}> {
     try {
       return this.authService.StuSignIn(loginDto);
     } catch (error) {
@@ -25,7 +25,7 @@ export class AuthController {
 
   @HttpCode(HttpStatus.OK)
   @Post('professor/login')
-  async ProfSignIn(@Body() loginDto: LoginDto): Promise<any> {
+  async ProfSignIn(@Body() loginDto: LoginDto): Promise<{}> {
     try {
       return this.authService.ProfSignIn(loginDto);
     } catch (error) {
@@ -35,7 +35,7 @@ export class AuthController {
 
   @HttpCode(HttpStatus.CREATED)
   @Post('student/register')
-  async StuSignUp(@Body() registerDto: RegisterDto): Promise<any> {
+  async StuSignUp(@Body() registerDto: RegisterDto): Promise<{}> {
     try {
       const newUser = await this.authService.StuSignUp(registerDto);
       return { message: 'Student created successfully', user: newUser };
@@ -46,7 +46,7 @@ export class AuthController {
 
   @HttpCode(HttpStatus.CREATED)
   @Post('professor/register')
-  async ProfSignUp(@Body() ProfregisterDto: RegisterDto): Promise<any> {
+  async ProfSignUp(@Body() ProfregisterDto: RegisterDto): Promise<{}> {
     try {
       const newUser = await this.authService.ProfSignUp(ProfregisterDto);
       return { message: 'Professor created successfully', user: newUser };

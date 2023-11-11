@@ -1,6 +1,6 @@
 import { IsString, IsEmail } from "class-validator";
 
-export class ProfesorDto {
+export class ProfessorDto {
   @IsString()
   subjectName: string;
   @IsEmail()

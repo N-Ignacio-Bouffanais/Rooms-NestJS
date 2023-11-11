@@ -68,16 +68,16 @@ function ChangeVisibility() {
 }
 
   return (
-    <form onSubmit={onSubmit} className="flex flex-col items-center">
+    <form onSubmit={onSubmit} className="flex flex-col items-center gap-2">
       <div>
         <label
           htmlFor="email"
-          className="flex justify-start font-medium text-white text-lg"
+          className="flex justify-start font-medium text-sm"
         >
-          Email
+          What is your Email?
         </label>
         <input
-          placeholder="enter your email"
+          placeholder="example@example.com"
           type="email"
           {...register("email", {
             required: {
@@ -89,20 +89,20 @@ function ChangeVisibility() {
               message: "Email is not valid",
             },
           })}
-          className="w-80 mb-2 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-600 placeholder:font-medium"
+          className="w-80 mb-2 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-500 placeholder:font-medium"
         />
       </div>
       {errors.email && (
-        <span className="flex text-black font-bold text-left w-80 items-center my-1">
+        <span className="flex font-bold text-left w-80 items-center mb-1">
           {errors.email.message}
         </span>
       )}
       <div>
         <label
           htmlFor="password"
-          className="flex justify-start font-medium text-white text-lg"
+          className="flex justify-start font-medium text-sm"
         >
-          Password
+          What is your Password?
         </label>
         <div className="relative">
           <input
@@ -119,7 +119,7 @@ function ChangeVisibility() {
                 message: "The password is must be at least 6 characters",
               },
             })}
-            className="w-80 mb-2 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-600 placeholder:font-medium"
+            className="w-80 mb-2 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-500 placeholder:font-medium"
           />
           <i className="absolute right-2 top-2">
             <AiOutlineEye
@@ -130,7 +130,7 @@ function ChangeVisibility() {
         </div>
       </div>
       {errors.password && (
-        <span className="text-black font-bold text-left w-80 sm:w-96 sm:text-center my-1">
+        <span className=" font-bold text-left w-80 sm:w-96 sm:text-center mb-1">
           {errors.password.message}
         </span>
       )}

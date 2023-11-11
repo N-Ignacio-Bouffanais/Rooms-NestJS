@@ -89,6 +89,7 @@ export class AuthService {
           firstname: registerDto.firstname,
           lastname: registerDto.lastname,
           hash: hashedPassword,
+          dni: registerDto.dni,
         },
       });
 
@@ -97,12 +98,10 @@ export class AuthService {
         lastname: newUser.lastname,
       };
 
-      return `Student ${user.firstname} ${user.lastname} created successfully`
+      return `Student ${user.firstname} ${user.lastname} created successfully`;
     }
 
-    throw new Error(
-      'This User already exists, Please create a new one',
-    );
+    throw new Error('This User already exists, Please create a new one');
   }
 
   async ProfSignUp(registerDto: RegisterDto) {
@@ -120,6 +119,7 @@ export class AuthService {
           firstname: registerDto.firstname,
           lastname: registerDto.lastname,
           hash: hashedPassword,
+          dni: registerDto.dni,
         },
       });
 
@@ -128,7 +128,7 @@ export class AuthService {
         lastname: newUser.lastname,
       };
 
-      return `Professor ${user.firstname} ${user.lastname} created successfully`
+      return `Professor ${user.firstname} ${user.lastname} created successfully`;
     }
 
     throw new Error('This User already exists, Please create a new one');

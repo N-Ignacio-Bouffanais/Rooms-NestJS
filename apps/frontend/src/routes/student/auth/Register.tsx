@@ -14,7 +14,7 @@ const Register = () => {
         >
           Login
         </Link>
-        <BackButton />
+        <BackButton redirectTo="/" />
       </div>
     </div>
   );

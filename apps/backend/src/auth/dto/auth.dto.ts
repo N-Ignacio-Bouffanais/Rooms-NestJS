@@ -20,6 +20,10 @@ export class RegisterDto extends LoginDto {
   @IsNotEmpty()
   lastname: string;
 
+  @IsString()
+  @IsNotEmpty()
+  dni: string;
+
 }
 
 
