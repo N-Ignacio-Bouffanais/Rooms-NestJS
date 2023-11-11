@@ -68,16 +68,16 @@ function ChangeVisibility() {
 }
 
   return (
-    <form onSubmit={onSubmit} className="flex flex-col items-center">
+    <form onSubmit={onSubmit} className="flex flex-col items-center gap-2">
       <div>
         <label
           htmlFor="email"
-          className="flex justify-start font-medium text-white text-lg"
+          className="flex justify-start font-medium text-sm"
         >
           What is your Email?
         </label>
         <input
-          placeholder="enter your email"
+          placeholder="example@example.com"
           type="email"
           {...register("email", {
             required: {
@@ -89,7 +89,7 @@ function ChangeVisibility() {
               message: "Email is not valid",
             },
           })}
-          className="w-80 mb-2 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-600 placeholder:font-medium"
+          className="w-80 mb-2 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-500 placeholder:font-medium"
         />
       </div>
       {errors.email && (
@@ -100,7 +100,7 @@ function ChangeVisibility() {
       <div>
         <label
           htmlFor="password"
-          className="flex justify-start font-medium text-white text-lg"
+          className="flex justify-start font-medium text-sm"
         >
           What is your Password?
         </label>
@@ -119,7 +119,7 @@ function ChangeVisibility() {
                 message: "The password is must be at least 6 characters",
               },
             })}
-            className="w-80 mb-2 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-600 placeholder:font-medium"
+            className="w-80 mb-2 h-8 pl-2 font-medium bg-white rounded-md outline-none placeholder:text-gray-500 placeholder:font-medium"
           />
           <i className="absolute right-2 top-2">
             <AiOutlineEye

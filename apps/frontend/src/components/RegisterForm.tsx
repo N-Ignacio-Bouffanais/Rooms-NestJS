@@ -2,7 +2,6 @@ import axios from "../libs/axios";
 import { useForm } from "react-hook-form";
 import { AiOutlineEye } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
-import { useAppStore } from "../store/app";
 
 interface Props {
   redirectTo: string;
@@ -11,7 +10,6 @@ interface Props {
 
 function RegisterForm(props: Props) {
   const { endpoint, redirectTo } = props;
-  const { AcceptTerms,setTerms} = useAppStore()
 
   const navigate = useNavigate();
 
@@ -25,10 +23,13 @@ function RegisterForm(props: Props) {
 
   const {
     register,
+    watch,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm<FormData>();
+
+  const watchDNI = watch("dni");
 
   const onSubmit = handleSubmit(async (data) => {
     const response = await axios.post(`${endpoint}`, {
@@ -61,6 +62,7 @@ function RegisterForm(props: Props) {
     }
   }
 
+
   return (
     <form onSubmit={onSubmit} className="flex flex-col items-center">
       <div className="flex items-center mb-2">
@@ -82,7 +84,7 @@ function RegisterForm(props: Props) {
           )}
         </div>
         <div className="w-40">
-          <label htmlFor="" className="flex justify-start font-medium text-sm ">
+          <label className="flex justify-start font-medium text-sm ">
             Your lastname
           </label>
           <input
@@ -104,7 +106,9 @@ function RegisterForm(props: Props) {
           What is your email address?
         </label>
         <input
+          required
           type="email"
+          placeholder="example@example.com"
           {...register("email", {
             required: {
               value: true,
@@ -128,6 +132,7 @@ function RegisterForm(props: Props) {
           Type your DNI without dashes and periods
         </label>
         <input
+          required
           type="text"
           {...register("dni", {
             required: {
@@ -147,6 +152,7 @@ function RegisterForm(props: Props) {
         </label>
         <div className="relative">
           <input
+            required
             placeholder="******"
             id="password"
             type="password"
@@ -181,6 +187,7 @@ function RegisterForm(props: Props) {
         </label>
         <div className="relative">
           <input
+            required
             placeholder="******"
             id="confirmPassword"
             type="password"
@@ -204,22 +211,10 @@ function RegisterForm(props: Props) {
           </i>
         </div>
       </div>
-      <div className="flex">
-        <label className="flex justify-start font-medium text-sm">
-          Do you accept the terms and conditions?
-        </label>
-        <input
-          type="checkbox"
-          required
-          className="ml-2"
-          onClick={() => {
-            setTerms(AcceptTerms);
-          }}
-        />
-      </div>
       <div className="flex justify-center">
         <button
-          disabled={AcceptTerms}
+          id="accept"
+          disabled={!watchDNI }
           type="submit"
           className="flex justify-center items-center w-80 bg-blue-700 h-10 p-3 m-3 rounded-full text-white text-lg font-medium hover:bg-blue-800 disabled:bg-gray-600 disabled:cursor-not-allowed"
         >
