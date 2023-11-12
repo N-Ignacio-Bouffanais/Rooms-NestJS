@@ -14,14 +14,14 @@ function SubjectsTake() {
   const { inscrpModal, setModal } = useAppStore();
 
   const TakeSubject = async () => {
-    return await axios.patch(`estudiante/`, {
+    return await axios.patch(`student/`, {
       email,
       subjectName: selectSubject,
     });
   };
 
   const GetSubjects = async () => {
-    const response = await axios.get(`estudiante/${firstname}-${lastname}`);
+    const response = await axios.get(`student/${firstname}-${lastname}`);
     const Allsubjects = response.data;
     console.log(Allsubjects);
     return Allsubjects;
@@ -106,7 +106,7 @@ function SubjectsTake() {
                 {Array.isArray(Allsubjects) ? (
                   Allsubjects.map((subject: Subject) => (
                     <tr key={subject.id} className="text-center font-semibold">
-                      <td className="dark:text-white">{subject.professorId}</td>
+                      <td className="dark:text-white">{subject.professor?.firstname}</td>
                       <td className="flex h-10 my-3 ">
                         <button
                           className="w-full text-lg dark:text-blue-500 "

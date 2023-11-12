@@ -8,7 +8,7 @@ function P_Dashboard() {
   return (
     <>
       <Dashboard
-        title="Professor:"
+        title="Professor"
         firstname={firstname}
         lastname={lastname}
         redirectMySubjects={`/professor/mysubjects/${firstname}-${lastname}`}

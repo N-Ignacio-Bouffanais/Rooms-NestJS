@@ -5,6 +5,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import queryClient from "../../queryClient";
 import { Subject } from "../../types/subject.type";
 import BackButton from "../../components/BackButton";
+import { RxCross2 } from "react-icons/rx";
 
 function MyStudents() {
   const navigate = useNavigate();
@@ -12,17 +13,18 @@ function MyStudents() {
   const lastname = useAppStore((state) => state.lastname);
   const email = useAppStore((state) => state.email);
   const { setSubjects, selectSubject } = useAppStore();
+  const { inscrpModal, setModal } = useAppStore();
 
   const GetSubjects = async () => {
     const response = await axios.get(
-      `profesor/mysubjects/${firstname}-${lastname}`
+      `professor/mysubjects/${firstname}-${lastname}`
     );
     const subjects = response.data;
     return subjects;
   };
 
   const DropSubject = async () => {
-    return await axios.patch(`profesor/dropSubject`, {
+    return await axios.patch(`professor/dropSubject`, {
       email,
       subjectName: selectSubject,
     });
@@ -38,7 +40,7 @@ function MyStudents() {
     queryFn: GetSubjects,
   });
 
-  const { mutateAsync: UpdateSubject } = useMutation({
+  const { mutateAsync: DeleteSubject } = useMutation({
     mutationFn: DropSubject,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["subjects"] });
@@ -55,33 +57,68 @@ function MyStudents() {
 
   return (
     <>
+      {inscrpModal && (
+        <div className="fixed inset-0 bg-zinc-900/20 z-10">
+          <div className="container flex items-center justify-center h-full max-w-lg mx-auto">
+            <div className="relative bg-white w-72 sm:w-full h-fit p-4 rounded-lg">
+              <div className="absolute top-3 right-3">
+                <button onClick={() => setModal(true)}>
+                  <RxCross2 className="w-7 h-7" />
+                </button>
+              </div>
+              <div className="flex justify-center my-4">
+                <p className="text-xl text-center font-bold">
+                  Add {selectSubject}?
+                </p>
+              </div>
+              <div className="flex justify-center my-3">
+                <button
+                  onClick={() => {
+                    setModal(true);
+                    DeleteSubject();
+                  }}
+                  className="rounded-lg font-semibold mx-2 text-white w-12 h-10 bg-[#0177fb]"
+                >
+                  Yes
+                </button>
+                <button
+                  className="rounded-lg font-semibold mx-2 text-white w-12 h-10 bg-[#fb3b52]"
+                  onClick={() => setModal(true)}
+                >
+                  No
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
       <div className="flex flex-col dark:bg-slate-950">
         <div className="w-[90dvw] mx-auto">
           <h1 className="flex justify-center font-bold text-2xl mt-10 mb-6 dark:text-white">
             My classes
           </h1>
-          <div className="bg-white rounded-2xl p-5 mb-10 dark:bg-[#1f222b]">
-            <table className="w-full mb-10 mt-4  rounded-2xl p-6">
+          <div className="bg-white rounded-2xl p-2 mb-10 dark:bg-[#1f222b]">
+            <table className="w-full mb-10 mt-4  rounded-2xl">
               <thead>
-                <tr className="text-xl grid grid-cols-2 h-12 items-center font-bold dark:text-white">
-                  <th>Class</th>
-                  <th>Action</th>
+                <tr className="text-xl grid grid-cols-3 h-12 items-center font-bold dark:text-white">
+                  <th className="col-span-1">Class</th>
+                  <th className="col-span-2">Action</th>
                 </tr>
               </thead>
               <tbody>
                 {Array.isArray(subjects) ? (
                   subjects.map((subject: Subject) => (
                     <tr
-                      className=" font-semibold text-lg grid grid-cols-2 auto-rows-auto dark:text-white"
+                      className=" font-semibold text-lg grid grid-cols-3 auto-rows-auto dark:text-white"
                       key={subject.id}
                     >
-                      <td className="flex justify-center items-center">
+                      <td className="flex justify-center items-center col-span-1">
                         {subject.name}
                       </td>
-                      <td className="flex justify-center items-center">
+                      <td className="flex justify-center items-center col-span-2">
                         <button
                           id={subject.name}
-                          className="w-16 h-11 my-3 rounded-lg text-white bg-[#0177fb] mx-2"
+                          className="w-28 h-11 my-3 rounded-lg text-white bg-[#0177fb] mx-2"
                           onClick={() => {
                             navigate(`/professor/${subject.name}`);
                           }}
@@ -93,7 +130,7 @@ function MyStudents() {
                           className="w-24 h-11 my-3 rounded-lg text-white bg-[#fb3b52] mx-2"
                           onClick={(e: React.SyntheticEvent<EventTarget>) => {
                             setSubjects((e.target as HTMLButtonElement).id);
-                            UpdateSubject();
+                            setModal(false);
                           }}
                         >
                           Delete
