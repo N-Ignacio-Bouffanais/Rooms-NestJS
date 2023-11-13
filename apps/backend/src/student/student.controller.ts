@@ -11,9 +11,9 @@ export class StudentController {
     return this.studentService.findAll(studentId);
   }
 
-  @Get('mysubjects/:StudentId')
-  findInscriptions(@Param('StudentId') StudentId: string) {
-    return this.studentService.findInscriptions(StudentId);
+  @Get('mysubjects/:studentId')
+  findInscriptions(@Param('studentId') studentId: string) {
+    return this.studentService.findInscriptions(studentId);
   }
 
   @Patch()

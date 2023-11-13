@@ -68,7 +68,7 @@ function MyStudents() {
               </div>
               <div className="flex justify-center my-4">
                 <p className="text-xl text-center font-bold">
-                  Add {selectSubject}?
+                  You want to drop {selectSubject}?
                 </p>
               </div>
               <div className="flex justify-center my-3">
