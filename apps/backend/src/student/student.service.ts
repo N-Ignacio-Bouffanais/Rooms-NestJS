@@ -38,17 +38,18 @@ export class StudentService {
     const lastname = id[1];
     const firstname = id[0];
     console.log(studentId);
-    const scriptions = this.prisma.subject.findMany({
-      where:{
-        student:{
-          some:{
-            firstname
-          }
-        }
+    const inscribed = this.prisma.subject.findMany({
+      where: {
+        student: {
+          some: {
+            firstname,
+            lastname,
+          },
+        },
       }
     });
       
-    return scriptions
+    return inscribed;
   }
 
   async update(studentDto: StudentDto) {
