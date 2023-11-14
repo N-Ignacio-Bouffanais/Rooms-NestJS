@@ -1,39 +1,25 @@
 import { useQuery } from "@tanstack/react-query";
-import {
-  flexRender,
-  useReactTable,
-  getCoreRowModel,
-} from "@tanstack/react-table";
 import axios from "../libs/axios";
 
 type Props = {
   subjectName?: string
 }
 
-const ClassList = (props:Props) => {
-
-  const columns = [
+type DataList = {
+  student: [
     {
-      header: "Student",
-      accessorKey: "student",
-    },
-    {
-      header: "Id",
-      accessorKey: "idstudent",
-    },
-    {
-      header: "email",
-      accessorKey: "email",
-    },
-    {
-      header: "dni",
-      accessorKey: "dni",
-    },
+      dni: string;
+      email: string;
+      id: string;
+    }
   ];
+};
+
+const ClassList = (props:Props) => {
 
   const GetInfo = async () => {
     const res = await axios.get(`/myclass/${props.subjectName}`);
-    const info = res.data
+    const info: DataList = await res.data;
     console.log(info);
     return info;
   };
@@ -43,15 +29,19 @@ const ClassList = (props:Props) => {
     queryFn: GetInfo,
   });
 
-  // const table = useReactTable({
-  //   data:,
-  //   columns,
-  //   getCoreRowModel: getCoreRowModel(),
-  // });
-
   return (
     <>
-      <table></table>
+      <table className="w-full">
+        <thead>
+          <tr className="text-xl grid grid-cols-4 h-12 items-center font-bold dark:text-white">
+            <th className="font-bold text-xl dark:text-white">Id</th>
+            <th className="font-bold text-xl dark:text-white">Student</th>
+            <th className="font-bold text-xl dark:text-white">Email</th>
+            <th className="font-bold text-xl dark:text-white">DNI</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
     </>
   );
 };

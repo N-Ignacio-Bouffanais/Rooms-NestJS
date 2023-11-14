@@ -11,6 +11,9 @@ export class AppService {
       where: {
         name: name.name
       },
+      include:{
+        student: true
+      }
     });
     return myClass
   }
