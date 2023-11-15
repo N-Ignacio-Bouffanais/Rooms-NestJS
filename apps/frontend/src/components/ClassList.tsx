@@ -51,8 +51,10 @@ const ClassList = (props: Props) => {
       <div className="rounded-2xl p-5 mb-10 bg-[#1f222b] dark:bg-gray-800">
         <table className="w-full">
           <thead>
-            <tr className="text-xl grid grid-cols-5 h-12 items-center font-bold text-white sm:grid-cols-7">
-              <th className="font-bold text-xl col-span-1">Id</th>
+            <tr className="text-xl grid grid-cols-4 h-12 items-center font-bold text-white sm:grid-cols-6 md:grid-cols-7">
+              <th className="hidden font-bold text-xl col-span-1 md:table">
+                Id
+              </th>
               <th className="font-bold text-xl col-span-2">Student</th>
               <th className="font-bold text-xl col-span-2">Email</th>
               <th className="hidden font-bold text-xl col-span-2 sm:table">
@@ -65,18 +67,18 @@ const ClassList = (props: Props) => {
               info.map((student: DataList) => (
                 <tr
                   key={student.id}
-                  className="font-semibold grid grid-cols-5 my-2 auto-rows-auto text-white sm:grid-cols-7"
+                  className="font-semibold grid grid-cols-4 my-2 auto-rows-auto text-white sm:grid-cols-6 md:grid-cols-7"
                 >
-                  <td className="flex justify-center items-center col-span-1 text-sm sm:text-base">
-                    {student.id.slice(0 - 8)}
+                  <td className="hidden justify-center items-center mx-auto col-span-1 text-sm sm:text-base md:flex">
+                    {student.id.slice(0 - 10)}
                   </td>
-                  <td className="flex justify-center items-center col-span-2 text-sm sm:text-base">
+                  <td className="flex justify-center items-center mx-auto col-span-2 text-sm sm:text-base">
                     {student.firstname} {student.lastname}
                   </td>
-                  <td className="flex justify-center items-center col-span-2 text-sm sm:text-base">
+                  <td className="flex justify-center items-center mx-auto col-span-2 text-sm sm:text-base">
                     {student.email}
                   </td>
-                  <td className="hidden justify-center items-center col-span-2 text-sm sm:text-base sm:flex">
+                  <td className="hidden justify-center items-center mx-auto col-span-2 text-sm sm:text-base sm:flex">
                     {student.dni}
                   </td>
                 </tr>
