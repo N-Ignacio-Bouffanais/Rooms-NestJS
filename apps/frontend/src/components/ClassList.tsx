@@ -11,6 +11,13 @@ type DataList = {
   id: string;
   firstname: string;
   lastname: string;
+  subject: {
+    limit: number;
+    professor: {
+      firstname: string,
+      lastname: string
+    }
+  }
 };
 
 const ClassList = (props: Props) => {
@@ -24,6 +31,7 @@ const ClassList = (props: Props) => {
   const {
     isPending,
     isError,
+    error,
     data: info,
   } = useQuery({
     queryKey: ["info"],
@@ -32,6 +40,10 @@ const ClassList = (props: Props) => {
 
   if (isPending) {
     return <span>Loading...</span>;
+  }
+
+  if (isError) {
+    return <span>Error: {error.message}</span>;
   }
 
   return (
@@ -53,7 +65,7 @@ const ClassList = (props: Props) => {
               info.map((student: DataList) => (
                 <tr
                   key={student.id}
-                  className="font-semibold grid grid-cols-5 auto-rows-auto text-white sm:grid-cols-7"
+                  className="font-semibold grid grid-cols-5 my-2 auto-rows-auto text-white sm:grid-cols-7"
                 >
                   <td className="flex justify-center items-center col-span-1 text-sm sm:text-base">
                     {student.id.slice(0 - 8)}
