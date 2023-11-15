@@ -2,46 +2,79 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "../libs/axios";
 
 type Props = {
-  subjectName?: string
-}
-
-type DataList = {
-  student: [
-    {
-      dni: string;
-      email: string;
-      id: string;
-    }
-  ];
+  subjectName?: string;
 };
 
-const ClassList = (props:Props) => {
+type DataList = {
+  dni: string;
+  email: string;
+  id: string;
+  firstname: string;
+  lastname: string;
+};
 
+const ClassList = (props: Props) => {
   const GetInfo = async () => {
     const res = await axios.get(`/myclass/${props.subjectName}`);
-    const info: DataList = await res.data;
+    const info = await res.data;
     console.log(info);
     return info;
   };
 
-  const { isPending, isError, data:info } = useQuery({
+  const {
+    isPending,
+    isError,
+    data: info,
+  } = useQuery({
     queryKey: ["info"],
     queryFn: GetInfo,
   });
 
+  if (isPending) {
+    return <span>Loading...</span>;
+  }
+
   return (
     <>
-      <table className="w-full">
-        <thead>
-          <tr className="text-xl grid grid-cols-4 h-12 items-center font-bold dark:text-white">
-            <th className="font-bold text-xl dark:text-white">Id</th>
-            <th className="font-bold text-xl dark:text-white">Student</th>
-            <th className="font-bold text-xl dark:text-white">Email</th>
-            <th className="font-bold text-xl dark:text-white">DNI</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
+      <div className="rounded-2xl p-5 mb-10 bg-[#1f222b] dark:bg-gray-800">
+        <table className="w-full">
+          <thead>
+            <tr className="text-xl grid grid-cols-5 h-12 items-center font-bold text-white sm:grid-cols-7">
+              <th className="font-bold text-xl col-span-1">Id</th>
+              <th className="font-bold text-xl col-span-2">Student</th>
+              <th className="font-bold text-xl col-span-2">Email</th>
+              <th className="hidden font-bold text-xl col-span-2 sm:table">
+                DNI
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {Array.isArray(info) ? (
+              info.map((student: DataList) => (
+                <tr
+                  key={student.id}
+                  className="font-semibold grid grid-cols-5 auto-rows-auto text-white sm:grid-cols-7"
+                >
+                  <td className="flex justify-center items-center col-span-1 text-sm sm:text-base">
+                    {student.id.slice(0 - 8)}
+                  </td>
+                  <td className="flex justify-center items-center col-span-2 text-sm sm:text-base">
+                    {student.firstname} {student.lastname}
+                  </td>
+                  <td className="flex justify-center items-center col-span-2 text-sm sm:text-base">
+                    {student.email}
+                  </td>
+                  <td className="hidden justify-center items-center col-span-2 text-sm sm:text-base sm:flex">
+                    {student.dni}
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>Error at the time to get data from server</tr>
+            )}
+          </tbody>
+        </table>
+      </div>
     </>
   );
 };

@@ -15,17 +15,21 @@ interface Props {
 const Dashboard = (props:Props) => {
 
   return (
-    <div className="flex flex-col bg-slate-200 dark:bg-slate-950">
+    <div className="flex flex-col bg-white dark:bg-slate-950">
       <div className="w-[90dvw] mx-auto">
         <h1 className="flex justify-center font-bold text-2xl mt-10 mb-6 dark:text-white">
           {props.title}: {`${props.firstname} ${props.lastname}`}
         </h1>
-        <div className="grid grid-cols-1 justify-items-center grid-rows-2 gap-y-6 my-6 xs:grid-cols-2">
+        <div className="grid grid-cols-1 justify-items-center grid-rows-2 gap-y-6 xs:grid-cols-2 ">
           <div className="flex flex-col items-center justify-center w-full xs:w-56  h-40 bg-[#FF0060] rounded-xl sm:h-52 sm:w-64 md:w-80 lg:w-[400px]">
             <i>
               <AiFillSchedule className="w-14 h-14" />
             </i>
-            <Link className="flex mt-3" to={props.redirectMySubjects} title="My subjects">
+            <Link
+              className="flex mt-3"
+              to={props.redirectMySubjects}
+              title="My subjects"
+            >
               <p className="font-bold text-2xl">My classes</p>
               <BsArrowRightShort className="w-9 h-9" />
             </Link>

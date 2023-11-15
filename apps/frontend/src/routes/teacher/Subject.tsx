@@ -2,7 +2,7 @@
 
 const Subject = () => {
   return (
-    <div>Subject dinamica</div>
+    <></>
   )
 }
 

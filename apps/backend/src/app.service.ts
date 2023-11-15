@@ -7,12 +7,13 @@ export class AppService {
 
   async getMyClass(name: { name: string }) {
     console.log(name.name);
-    const myClass = await this.prisma.subject.findUnique({
-      where: {
-        name: name.name
-      },
-      include:{
-        student: true
+    const myClass = await this.prisma.student.findMany({
+      where:{
+        subject:{
+          some:{
+            name: name.name,
+          }
+        }
       }
     });
     return myClass
