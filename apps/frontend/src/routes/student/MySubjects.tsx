@@ -93,7 +93,7 @@ function MySubjects() {
           </div>
         </div>
       )}
-      <div className="flex flex-col dark:bg-slate-950">
+      <div className="flex flex-col dark:bg-[#0c1942]">
         <div className="w-[90dvw] mx-auto">
           <h1 className="flex justify-center font-bold text-2xl mt-10 mb-6 dark:text-white">
             My classes
