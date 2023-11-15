@@ -69,16 +69,16 @@ const ClassList = (props: Props) => {
                   key={student.id}
                   className="font-semibold grid grid-cols-4 my-2 auto-rows-auto text-white sm:grid-cols-6 md:grid-cols-7"
                 >
-                  <td className="hidden justify-center items-center mx-auto col-span-1 text-sm sm:text-base md:flex">
+                  <td className="hidden justify-center items-center mx-auto col-span-1 md:flex">
                     {student.id.slice(0 - 10)}
                   </td>
-                  <td className="flex justify-center items-center mx-auto col-span-2 text-sm sm:text-base">
+                  <td className="flex justify-center items-center mx-auto col-span-2">
                     {student.firstname} {student.lastname}
                   </td>
-                  <td className="flex justify-center items-center mx-auto col-span-2 text-sm sm:text-base">
+                  <td className="flex justify-center items-center mx-auto col-span-2">
                     {student.email}
                   </td>
-                  <td className="hidden justify-center items-center mx-auto col-span-2 text-sm sm:text-base sm:flex">
+                  <td className="hidden justify-center items-center mx-auto col-span-2 sm:flex">
                     {student.dni}
                   </td>
                 </tr>
