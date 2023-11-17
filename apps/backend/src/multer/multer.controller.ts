@@ -31,6 +31,6 @@ export class FileUploadController {
     @UploadedFiles() files: Express.Multer.File[],
     @Res() res: Response,
   ): Promise<void> {
-    console.log(subject)
+    console.log(subject,username)
   }
 }

@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import ClassList from "../../components/ClassList";
 import FileUpload from "../../components/FileUpload";
 import { useAppStore } from "../../store/app";
+import MyTasks from "../../components/MyTasks";
 
 const Subject = () => {
   let { classId } = useParams();
@@ -15,10 +16,12 @@ const Subject = () => {
           Class: {classId}
         </h1>
         {classId && (
-          <FileUpload subjectName={classId} username={firstname + lastname} />
+          <>
+            <FileUpload subjectName={classId} username={firstname + lastname} />
+            <ClassList subjectName={classId} />
+            <MyTasks subjectName={classId} username={firstname + lastname} />
+          </>
         )}
-
-        <ClassList subjectName={classId} />
       </div>
     </div>
   );
