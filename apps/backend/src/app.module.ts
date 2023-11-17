@@ -8,6 +8,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { ProfessorModule } from './professor/professor.module';
 import { StudentModule } from './student/student.module';
+import { FileUploadModule } from './multer/multer.module';
 
 
 @Module({
@@ -20,6 +21,7 @@ import { StudentModule } from './student/student.module';
     PrismaModule,
     ProfessorModule,
     StudentModule,
+    FileUploadModule,
   ],
   providers: [AppService],
   controllers: [AppController],

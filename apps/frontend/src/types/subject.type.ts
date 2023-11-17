@@ -3,4 +3,9 @@ export type Subject = {
   id: string;
   limit: number;
   professorId?: string;
+  student:[]
+  professor?:{
+    firstname:string
+    lastname:string
+  }
 };

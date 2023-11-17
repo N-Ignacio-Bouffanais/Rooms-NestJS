@@ -13,18 +13,18 @@ function Subjects() {
   const { setSubjects, selectSubject } = useAppStore();
   const { inscrpModal, setModal } = useAppStore();
 
+  const GetSubjects = async () => {
+    const res = await axios.get(`professor/${firstname}-${lastname}`);
+    const subjects = res.data;
+    console.log(subjects);
+    return subjects;
+  };
+
   const TakeSubject = async () => {
-    return await axios.patch(`profesor/`, {
+    return await axios.patch(`professor/`, {
       email,
       subjectName: selectSubject,
     });
-  };
-
-  const GetSubjects = async () => {
-    const res = await axios.get(`profesor/${firstname}-${lastname}`);
-    const subjects = res.data;
-    console.log(subjects)
-    return subjects;
   };
 
   const {
@@ -33,7 +33,7 @@ function Subjects() {
     isError,
     isPending,
   } = useQuery({
-    queryKey: ["mysubjects"],
+    queryKey: ["Allsubjects"],
     queryFn: GetSubjects,
   });
 
@@ -106,14 +106,14 @@ function Subjects() {
                 {Array.isArray(Allsubjects) ? (
                   Allsubjects.map((subject: Subject) => (
                     <tr key={subject.id} className="text-center font-semibold">
-                      <td className="dark:text-white">0/{subject.limit}</td>
+                      <td className="dark:text-white">{subject.student.length}/{subject.limit}</td>
                       <td className="flex h-10 my-3 ">
                         <button
                           className="w-full text-lg dark:text-blue-500"
                           id={subject.name}
                           onClick={(e) => {
-                            setModal(false);
                             setSubjects((e.target as HTMLButtonElement).id);
+                            setModal(false);
                           }}
                         >
                           {subject.name}

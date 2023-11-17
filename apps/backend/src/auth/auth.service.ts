@@ -78,8 +78,10 @@ export class AuthService {
     const findUser = await this.prisma.student.findUnique({
       where: {
         email: registerDto.email,
+        dni: registerDto.dni
       },
     });
+    if(findUser) throw new Error(`User already registered`)
 
     if (!findUser) {
       const hashedPassword = await bcrypt.hash(registerDto.password, 10);
@@ -108,8 +110,10 @@ export class AuthService {
     const findUser = await this.prisma.professor.findUnique({
       where: {
         email: registerDto.email,
+        dni: registerDto.dni
       },
     });
+    if (findUser) throw new Error(`User already registered`);
 
     if (!findUser) {
       const hashedPassword = await bcrypt.hash(registerDto.password, 10);

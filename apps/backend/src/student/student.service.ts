@@ -7,81 +7,81 @@ export class StudentService {
   constructor(private prisma: PrismaService) {}
 
   async findAll(studentId: string) {
-    // const id = studentId.split('-');
-    // const lastname = id[1];
-    // const firstname = id[0];
-    // return this.prisma.subject.findMany({
-    //   where: {
-    //     NOT: {
-    //       student: {
-    //         some: {
-    //           firstname: firstname,
-    //           lastname: lastname,
-    //         },
-    //       },
-    //     },
-    //   },
-    // });
+    const id = studentId.split('-');
+    const lastname = id[1];
+    const firstname = id[0];
+    console.log(studentId)
+    return this.prisma.subject.findMany({
+      where: {
+        student:{
+          none:{
+            firstname:{
+              equals: firstname
+            },
+            lastname:{
+              equals: lastname
+            }
+          }
+        },
+        professorId:{
+          not: null,
+        }
+      },
+      include:{
+        professor:true,
+      }
+    });
   }
 
   async findInscriptions(studentId: string) {
-    // const id = studentId.split('-');
-    // const lastname = id[1];
-    // const firstname = id[0];
-    // return this.prisma.subject.findMany({
-    //   where: {
-    //     student: {
-    //       some: {
-    //         firstname: firstname,
-    //         lastname,
-    //       },
-    //     },
-    //   },
-    // });
+    const id = studentId.split('-');
+    const lastname = id[1];
+    const firstname = id[0];
+    console.log(studentId);
+    const inscribed = this.prisma.subject.findMany({
+      where: {
+        student: {
+          some: {
+            firstname,
+            lastname,
+          },
+        },
+      }
+    });
+      
+    return inscribed;
   }
 
   async update(studentDto: StudentDto) {
-    // const student = await this.prisma.student.findFirst({
-    //   where: {
-    //     email: studentDto.email,
-    //   },
-    // });
-    // if (student) {
-    //   const updatedSubject = await this.prisma.subject.update({
-    //     where: {
-    //       name: studentDto.subjectName,
-    //     },
-    //     data: {
-    //       student: {
-    //         connect: {
-    //           id: student.id,
-    //         },
-    //       },
-    //     },
-    //   });
-    //   return updatedSubject;
-    // }
-  }
+    console.log(studentDto.email)
+    const updateSubject = await this.prisma.subject.update({
+      data:{
+        student:{
+          connect:{
+            email: studentDto.email
+          }
+        }
+      },
+      where:{
+        name: studentDto.subjectName
+      }
+    })
+    return updateSubject;
+    }
   async dropSubject(studentDto: StudentDto) {
-    // const student = await this.prisma.student.findFirst({
-    //   where: {
-    //     email: studentDto.email,
-    //   },
-    // });
-    // if (student) {
-    //   const updatedSubject = await this.prisma.subject.update({
-    //     where: {
-    //       name: studentDto.subjectName,
-    //     },
-    //     data: {
-    //       student: {
-    //         disconnect: {
-    //           id: student.id,
-    //         },
-    //       },
-    //     },
-    //   });
-    //   return updatedSubject;
-    // }
+    console.log(studentDto);
+    const dropSubject = await this.prisma.subject.update({
+      data: {
+        student: {
+          disconnect: {
+            email: studentDto.email,
+          },
+        },
+      },
+      where: {
+        name: studentDto.subjectName
+      },
+    });
+    return dropSubject
   }
 }

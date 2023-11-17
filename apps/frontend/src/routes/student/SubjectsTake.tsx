@@ -14,14 +14,14 @@ function SubjectsTake() {
   const { inscrpModal, setModal } = useAppStore();
 
   const TakeSubject = async () => {
-    return await axios.patch(`estudiante/`, {
+    return await axios.patch(`student/`, {
       email,
       subjectName: selectSubject,
     });
   };
 
   const GetSubjects = async () => {
-    const response = await axios.get(`estudiante/${firstname}-${lastname}`);
+    const response = await axios.get(`student/${firstname}-${lastname}`);
     const Allsubjects = response.data;
     console.log(Allsubjects);
     return Allsubjects;
@@ -97,7 +97,7 @@ function SubjectsTake() {
           <div className="bg-white rounded-2xl p-5 mb-10 dark:bg-[#1f222b]">
             <table className="w-full">
               <tbody>
-                <tr className="text-center">
+                <tr className="text-xl grid grid-cols-2 h-12 items-center font-bold dark:text-white">
                   <th className="font-bold text-xl dark:text-white">
                     Professor
                   </th>
@@ -105,9 +105,15 @@ function SubjectsTake() {
                 </tr>
                 {Array.isArray(Allsubjects) ? (
                   Allsubjects.map((subject: Subject) => (
-                    <tr key={subject.id} className="text-center font-semibold">
-                      <td className="dark:text-white">{subject.professorId}</td>
-                      <td className="flex h-10 my-3 ">
+                    <tr
+                      key={subject.id}
+                      className="font-semibold text-lg grid grid-cols-2 auto-rows-auto dark:text-white"
+                    >
+                      <td className="flex justify-center items-center col-span-1">
+                        {subject.professor?.firstname}{" "}
+                        {subject.professor?.lastname}
+                      </td>
+                      <td className="flex justify-center items-center col-span-1">
                         <button
                           className="w-full text-lg dark:text-blue-500 "
                           id={subject.name}
