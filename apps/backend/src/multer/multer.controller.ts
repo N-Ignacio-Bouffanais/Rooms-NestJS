@@ -1,14 +1,17 @@
 import {
   Controller,
   Get,
+  HttpStatus,
   Param,
   Post,
   Res,
-  UploadedFile,
   UploadedFiles,
   UseInterceptors,
 } from '@nestjs/common';
 import { FilesInterceptor } from '@nestjs/platform-express/multer';
+import { Response } from 'express';
+import * as fs from 'fs';
+import { join } from 'path';
 
 @Controller('files')
 export class FileUploadController {
@@ -28,9 +31,21 @@ export class FileUploadController {
   async serveImages(
     @Param('subject') subject: string,
     @Param('username') username: string,
-    @UploadedFiles() files: Express.Multer.File[],
     @Res() res: Response,
-  ): Promise<void> {
-    console.log(subject,username)
+    @UploadedFiles() files: Array<Express.Multer.File[]>,
+  ) {
+    const uploadDirectory = `./uploads/${subject}/${username}`;
+    if (!fs.existsSync(uploadDirectory)) {
+      return res
+        .status(HttpStatus.NOT_FOUND)
+        .json({ message: 'File not found' });
+    }
+
+    const updatedFiles = files.map((file) => {
+      // Your file processing logic here
+      return file
+    });
+
+    return updatedFiles;
   }
 }
