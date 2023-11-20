@@ -1,5 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
 import axios from "../libs/axios";
+import Task from "./Task";
+//import { BiSolidFileJpg } from "react-icons/bi";
 
 type Props = {
   subjectName: string;
@@ -34,7 +36,15 @@ const MyTasks = (props: Props) => {
 
   return (
     <>
-      <div></div>
+      <div>
+        {Array.isArray(tasks) ? (
+          tasks.map((f) => (
+            <Task name={f}/>
+          ))
+        ) : (
+          <p></p>
+        )}
+      </div>
     </>
   );
 };
