@@ -3,6 +3,7 @@ import { MulterModule } from '@nestjs/platform-express';
 import { FileUploadController } from './multer.controller';
 import { diskStorage } from 'multer';
 import { Request } from 'express';
+import { MulterService } from './multer.service';
 
 interface FileReq extends Request {
   user:{
@@ -39,5 +40,6 @@ interface FileReq extends Request {
     }),
   ],
   controllers: [FileUploadController],
+  providers: [MulterService],
 })
 export class FileUploadModule {}

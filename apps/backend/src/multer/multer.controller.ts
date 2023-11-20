@@ -1,7 +1,6 @@
 import {
   Controller,
   Get,
-  HttpStatus,
   Param,
   Post,
   Res,
@@ -9,12 +8,13 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FilesInterceptor } from '@nestjs/platform-express/multer';
+import { MulterService } from './multer.service';
 import { Response } from 'express';
-import * as fs from 'fs';
-import { join } from 'path';
 
 @Controller('files')
 export class FileUploadController {
+  constructor(private readonly multerService: MulterService) {}
+
   @Post(':subject/:username')
   @UseInterceptors(FilesInterceptor('file')) // 'files' debe coincidir con el nombre del campo del formulario
   async uploadFile(
@@ -28,24 +28,20 @@ export class FileUploadController {
 
   @Get(':subject/:username')
   @UseInterceptors(FilesInterceptor('file'))
-  async serveImages(
+  async getFiles(
     @Param('subject') subject: string,
     @Param('username') username: string,
     @Res() res: Response,
-    @UploadedFiles() files: Array<Express.Multer.File[]>,
   ) {
-    const uploadDirectory = `./uploads/${subject}/${username}`;
-    if (!fs.existsSync(uploadDirectory)) {
-      return res
-        .status(HttpStatus.NOT_FOUND)
-        .json({ message: 'File not found' });
-    }
+    return this.multerService.getAllFiles(res, subject, username);
+  }
 
-    const updatedFiles = files.map((file) => {
-      // Your file processing logic here
-      return file
-    });
-
-    return updatedFiles;
+  @Get(':subject/:username')
+  @UseInterceptors(FilesInterceptor('file'))
+  async getSubjectFiles(
+    @Param('subject') subject: string,
+    @Res() res: Response,
+  ) {
+    return this.multerService.getSubjectsFiles(res, subject);
   }
 }
