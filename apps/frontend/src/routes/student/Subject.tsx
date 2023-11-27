@@ -18,8 +18,8 @@ const Subject = () => {
         {classId && (
           <>
             <FileUpload subjectName={classId} username={firstname + lastname} />
-            <ClassList subjectName={classId} />
             <MyTasks subjectName={classId} username={firstname + lastname} />
+            <ClassList subjectName={classId} />
           </>
         )}
       </div>
