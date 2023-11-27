@@ -36,11 +36,9 @@ const MyTasks = (props: Props) => {
 
   return (
     <>
-      <div>
+      <div className="grid row-auto gap-x-2 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {Array.isArray(tasks) ? (
-          tasks.map((f) => (
-            <Task name={f}/>
-          ))
+          tasks.map((f) => <Task key={f} name={f} />)
         ) : (
           <p></p>
         )}

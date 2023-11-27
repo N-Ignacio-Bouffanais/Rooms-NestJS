@@ -7,7 +7,7 @@ type Props = {
 
 const Task = (props: Props) => {
   return (
-    <div className="flex rounded-2xl p-3 mb-4 bg-[#1f222b] dark:bg-[#222e53]">
+    <div className="flex w-full rounded-2xl p-3 mb-4 bg-[#1f222b] dark:bg-[#222e53]">
       {props.name.toString().includes(".jpg") && (
         <i>
           <BiSolidFileJpg className="text-green-600 w-10 h-10" />

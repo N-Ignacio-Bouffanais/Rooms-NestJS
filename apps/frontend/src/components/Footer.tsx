@@ -1,26 +1,25 @@
 function Footer() {
   return (
-    <div className="bg-[#374151] w-full h-36 p-8">
-      <div className="grid grid-cols-2 text-gray-400 items-end">
-        <div className="flex">
+    <div className="bg-gray-800 w-full h-40 p-8">
+      <div className="flex flex-col justify-center items-center text-gray-300">
+        <div className="flex flex-wrap my-2">
+          <p className="w-max mx-2">Designed & Built by Nicolas Bouffanais</p>
+        </div>
+        <div className="flex flex-col gap-2">
           <a
-            className="m-2"
+            target="_blank"
             href="https://www.linkedin.com/in/nicolas-ignacio-bouffanais-lay-941989236/"
             title="My linkedin profile"
           >
             Linkedin
           </a>
           <a
-            className="m-2"
-            href="https://www.youtube.com/channel/UCYQnrJVG2sKMKH6Um8ORLjQ"
-            title="Nicolas.B youtube channel"
+            target="_blank"
+            href="https://github.com/N-Ignacio-Bouffanais"
+            title="Nicolas.B Github Profile"
           >
-            Youtube
+            Github
           </a>
-        </div>
-        <div className="flex flex-col items-end m-2">
-          <p className="w-max">Nicolas Bouffanais</p>
-          <p className="">Santiago de Chile</p>
         </div>
       </div>
     </div>
