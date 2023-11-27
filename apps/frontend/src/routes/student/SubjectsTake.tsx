@@ -5,6 +5,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import queryClient from "../../queryClient";
 import { Subject } from "../../types/subject.type";
 import BackButton from "../../components/BackButton";
+import Loading from "../../components/Loading";
 
 function SubjectsTake() {
   const firstname = useAppStore((state) => state.firstname);
@@ -28,7 +29,7 @@ function SubjectsTake() {
   };
 
   const {
-    isPending,
+    isLoading,
     isError,
     data: Allsubjects,
     error,
@@ -44,8 +45,8 @@ function SubjectsTake() {
     },
   });
 
-  if (isPending) {
-    return <span>Loading...</span>;
+  if (isLoading) {
+    return <Loading/>
   }
 
   if (isError) {
