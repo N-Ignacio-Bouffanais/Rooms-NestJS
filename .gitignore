@@ -21,3 +21,6 @@ build
 
 #turbo
 .turbo
+
+#images
+uploads

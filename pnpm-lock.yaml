@@ -37,6 +37,7 @@ importers:
       eslint-config-prettier: ^8.3.0
       eslint-plugin-prettier: ^4.0.0
       jest: 29.5.0
+      multer: 1.4.5-lts.1
       passport: ^0.6.0
       passport-jwt: ^4.0.1
       prettier: ^2.3.2
@@ -58,6 +59,7 @@ importers:
       '@nestjs/platform-express': 9.4.3_vw2vky2jc6gkm6gj7lzrgmojyi
       '@prisma/client': 5.2.0_prisma@5.3.0
       bcrypt: 5.1.1
+      multer: 1.4.5-lts.1
       passport: 0.6.0
       passport-jwt: 4.0.1
       reflect-metadata: 0.1.13
@@ -4852,6 +4854,19 @@ packages:
       object-assign: 4.1.1
       type-is: 1.6.18
       xtend: 4.0.2
+
+  /multer/1.4.5-lts.1:
+    resolution: {integrity: sha512-ywPWvcDMeH+z9gQq5qYHCCy+ethsk4goepZ45GLD63fOu0YcNecQxi64nDs3qluZB+murG3/D4dJ7+dGctcCQQ==}
+    engines: {node: '>= 6.0.0'}
+    dependencies:
+      append-field: 1.0.0
+      busboy: 1.6.0
+      concat-stream: 1.6.2
+      mkdirp: 0.5.6
+      object-assign: 4.1.1
+      type-is: 1.6.18
+      xtend: 4.0.2
+    dev: false
 
   /mute-stream/0.0.8:
     resolution: {integrity: sha512-nnbWWOkoWyUsTjKrhgD0dcz22mdkSnpYqbEjIm2nhwhuxlSkpywJmBo8h0ZqJdkp73mb90SssHkN4rsRaBAfAA==}
