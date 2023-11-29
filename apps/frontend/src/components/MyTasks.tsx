@@ -3,7 +3,6 @@ import axios from "../libs/axios";
 import Task from "./Task";
 import ErrorMsg from "./ErrorMsg";
 import Loading from "./Loading";
-//import { BiSolidFileJpg } from "react-icons/bi";
 
 type Props = {
   subjectName: string;
@@ -22,7 +21,6 @@ const MyTasks = (props: Props) => {
     isPending,
     isError,
     data: tasks,
-    error,
   } = useQuery({
     queryKey: ["tasks"],
     queryFn: GetTasks,
@@ -33,7 +31,7 @@ const MyTasks = (props: Props) => {
   }
 
   if (isError) {
-    return <ErrorMsg error={error.message} />;
+    <ErrorMsg error="No folder found"/>;
   }
 
   return (
@@ -42,7 +40,9 @@ const MyTasks = (props: Props) => {
         {Array.isArray(tasks) ? (
           tasks.map((f) => <Task key={f} name={f} />)
         ) : (
-          <p></p>
+          <p className="rounded-2xl p-3 mb-6 bg-[#1f222b] dark:bg-[#222e53] text-white text-center">
+            No files for now
+          </p>
         )}
       </div>
     </>

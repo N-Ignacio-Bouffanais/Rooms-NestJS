@@ -16,6 +16,10 @@ import { FileUploadModule } from './multer/multer.module';
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '../../', 'frontend/dist'),
     }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'uploads'),
+      //serveRoot: '/uploads',
+    }),
     ConfigModule.forRoot({ isGlobal: true }),
     AuthModule,
     PrismaModule,

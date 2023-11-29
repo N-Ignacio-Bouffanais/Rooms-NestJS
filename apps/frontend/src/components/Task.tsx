@@ -1,7 +1,6 @@
 import { AiFillFileWord } from "react-icons/ai";
 import { BiSolidFileJpg, BiSolidFilePdf } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
-import { FaSearch } from "react-icons/fa";
 
 type Props = {
   name: string;
@@ -18,10 +17,7 @@ const WatchFile = (e: React.SyntheticEvent<EventTarget>) => {
 const OptionButton = (file:IdFile) => {
   return (
     <div className="flex">
-      <button id={file.idFile} className="ml-2" onClick={WatchFile}>
-        <FaSearch className="text-blue-600 w-6 h-6" />
-      </button>
-      <button id={file.idFile} className="ml-2">
+      <button id={file.idFile} className="">
         <MdDelete className="text-red-600 w-8 h-8" />
       </button>
     </div>
@@ -31,7 +27,7 @@ const OptionButton = (file:IdFile) => {
 const Task = (props: Props) => {
   return (
     <div className="flex justify-between w-full rounded-2xl p-3 mb-4 bg-[#1f222b] dark:bg-[#222e53]">
-      <div className="flex">
+      <a href={props.name} className="flex items-center w-11/12">
         {props.name.toString().includes(".jpg") && (
           <i>
             <BiSolidFileJpg className="text-green-600 w-10 h-10" />
@@ -50,8 +46,8 @@ const Task = (props: Props) => {
         <p className="flex justify-center items-center text-lg text-white">
           {props.name.slice(5)}
         </p>
-      </div>
-      <OptionButton idFile={props.name}/>
+      </a>
+      <OptionButton idFile={props.name} />
     </div>
   );
 };
