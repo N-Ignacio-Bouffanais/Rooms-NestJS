@@ -1,18 +1,17 @@
 import { AiFillFileWord } from "react-icons/ai";
 import { BiSolidFileJpg, BiSolidFilePdf } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 type Props = {
   name: string;
+  subject: string;
+  student: string;
 };
 
 type IdFile = {
   idFile: string;
 }
-
-const WatchFile = (e: React.SyntheticEvent<EventTarget>) => {
-  console.log(e);
-};
 
 const OptionButton = (file:IdFile) => {
   return (
@@ -27,7 +26,9 @@ const OptionButton = (file:IdFile) => {
 const Task = (props: Props) => {
   return (
     <div className="flex justify-between w-full rounded-2xl p-3 mb-4 bg-[#1f222b] dark:bg-[#222e53]">
-      <a href={props.name} className="flex items-center w-11/12">
+      <Link to={`${props.student}/${props.name}`}
+        className="flex items-center w-11/12"
+      >
         {props.name.toString().includes(".jpg") && (
           <i>
             <BiSolidFileJpg className="text-green-600 w-10 h-10" />
@@ -46,7 +47,7 @@ const Task = (props: Props) => {
         <p className="flex justify-center items-center text-lg text-white">
           {props.name.slice(5)}
         </p>
-      </a>
+      </Link>
       <OptionButton idFile={props.name} />
     </div>
   );
