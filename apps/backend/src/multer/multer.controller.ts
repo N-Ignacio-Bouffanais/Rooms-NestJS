@@ -1,5 +1,6 @@
 import {
   Controller,
+  Delete,
   Get,
   Param,
   Post,
@@ -9,7 +10,8 @@ import {
 } from '@nestjs/common';
 import { FilesInterceptor } from '@nestjs/platform-express/multer';
 import { MulterService } from './multer.service';
-import { Response } from 'express';
+import * as fs from 'fs';
+
 
 @Controller()
 export class FileUploadController {
@@ -31,7 +33,7 @@ export class FileUploadController {
   async getFiles(
     @Param('subject') subject: string,
     @Param('username') username: string,
-    @Res() res: Response,
+    @Res() res,
   ) {
     return this.multerService.getAllFiles(res, subject, username);
   }
@@ -40,7 +42,7 @@ export class FileUploadController {
   @UseInterceptors(FilesInterceptor('file'))
   async getSubjectFiles(
     @Param('subject') subject: string,
-    @Res() res: Response,
+    @Res() res,
   ) {
     return this.multerService.getSubjectsFiles(res, subject);
   }
@@ -55,5 +57,24 @@ export class FileUploadController {
     res.sendFile(filename, {
       root: `uploads/${subject}/${student}/`,
     });
+  }
+
+  @Delete('student/:subject/:student/:filename')
+  async deleteFile(
+    @Param('subject') subject: string,
+    @Param('student') student: string,
+    @Param('filename') filename: string,
+  ) {
+    console.log(filename);
+    const filePath = `./uploads/${subject}/${student}/${filename}`;
+
+    try {
+      // Delete the file using fs-extra
+      fs.unlinkSync(filePath);
+      return { message: 'File deleted successfully' };
+    } catch (error) {
+      return { error: 'Error deleting file', details: error.message };
+    }
+
   }
 }

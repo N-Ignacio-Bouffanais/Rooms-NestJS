@@ -1,7 +1,10 @@
 import { AiFillFileWord } from "react-icons/ai";
 import { BiSolidFileJpg, BiSolidFilePdf } from "react-icons/bi";
-import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { MdDelete } from "react-icons/md";
+import axios from "../libs/axios";
+import { useMutation } from "@tanstack/react-query";
+import queryClient from "../queryClient";
 
 type Props = {
   name: string;
@@ -9,24 +12,26 @@ type Props = {
   student: string;
 };
 
-type IdFile = {
-  idFile: string;
-}
-
-const OptionButton = (file:IdFile) => {
-  return (
-    <div className="flex">
-      <button id={file.idFile} className="">
-        <MdDelete className="text-red-600 w-8 h-8" />
-      </button>
-    </div>
-  );
-};
-
 const Task = (props: Props) => {
+
+  const DropFile = async () => {
+    return await axios.delete(
+      `student/${props.subject}/${props.student}/${props.name}`
+    );
+  };
+
+  const { mutateAsync: DeleteFile } = useMutation({
+    mutationFn: DropFile,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["tasks"] });
+    },
+  });
+
   return (
     <div className="flex justify-between w-full rounded-2xl p-3 mb-4 bg-[#1f222b] dark:bg-[#222e53]">
-      <Link to={`${props.student}/${props.name}`}
+      <Link
+        target="_blank"
+        to={`${props.student}/${props.name}`}
         className="flex items-center w-11/12"
       >
         {props.name.toString().includes(".jpg") && (
@@ -48,7 +53,16 @@ const Task = (props: Props) => {
           {props.name.slice(5)}
         </p>
       </Link>
-      <OptionButton idFile={props.name} />
+      <div className="flex">
+        <button
+          id={props.name}
+          onClick={() => {
+            DeleteFile();
+          }}
+        >
+          <MdDelete className="text-red-600 w-8 h-8" />
+        </button>
+      </div>
     </div>
   );
 };
