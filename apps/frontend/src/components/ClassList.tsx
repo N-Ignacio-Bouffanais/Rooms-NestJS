@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "../libs/axios";
+import ErrorMsg from "./ErrorMsg";
 
 type Props = {
   subjectName?: string;
@@ -43,7 +44,7 @@ const ClassList = (props: Props) => {
   }
 
   if (isError) {
-    return <span>Error: {error.message}</span>;
+    return <ErrorMsg error={error.message}/>
   }
 
   return (

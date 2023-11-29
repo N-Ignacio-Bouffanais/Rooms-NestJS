@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query"
 import axios from "../libs/axios";
 import Task from "./Task";
+import ErrorMsg from "./ErrorMsg";
+import Loading from "./Loading";
 //import { BiSolidFileJpg } from "react-icons/bi";
 
 type Props = {
@@ -27,11 +29,11 @@ const MyTasks = (props: Props) => {
   });
 
   if (isPending) {
-    return <span>Loading...</span>;
+    return <Loading/>;
   }
 
   if (isError) {
-    return <span>Error: {error.message}</span>;
+    return <ErrorMsg error={error.message} />;
   }
 
   return (

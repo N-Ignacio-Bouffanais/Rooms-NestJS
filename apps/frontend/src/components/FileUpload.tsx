@@ -26,18 +26,17 @@ const FileUpload = (props: Props) => {
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log("Enviando:", file);
+    console.log("Sending..:", file);
     mutate();
   };
 
   return (
     <div>
       <div>
-        <h2 className="font-bold text-xl py-4 dark:text-white">My tasks:</h2>
         <ul>{isPending ? "Loading..." : JSON.stringify(data)}</ul>
-        <span>Error: {error?.message}</span>
+        <span>{error?.message}</span>
       </div>
-      <form className="flex items-center space-x-6 my-6" onSubmit={onSubmit}>
+      <form className="flex items-center space-x-6 mt-2 mb-6" onSubmit={onSubmit}>
         <input
           type="file"
           name="files"
@@ -49,12 +48,13 @@ const FileUpload = (props: Props) => {
       file:mr-4 file:py-2 file:px-4
       file:rounded-full file:border-0
       file:text-sm file:font-semibold
-      file:bg-violet-50 file:text-violet-700
-      hover:file:bg-violet-100
+      file:h-11
+      file:bg-blue-600 file:text-white
+      hover:file:bg-blue-700
       
     "
         />
-        <button type="submit" disabled={!file}>Enviar</button>
+        <button className="rounded-md bg-red-600 w-36 h-10 font-medium text-white hover:bg-red-700 cursor-pointer" type="submit" disabled={!file}>Send</button>
       </form>
     </div>
   );
