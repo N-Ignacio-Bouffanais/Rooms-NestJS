@@ -34,11 +34,11 @@ function Navbar(props: Props) {
   };
 
   return (
-    <nav className="flex h-[10dvh] w-full dark:text-white font-medium bg-slate-300 dark:bg-[#121622]">
+    <nav className="flex h-20 w-full dark:text-white font-medium bg-slate-300 dark:bg-[#121622]">
       <ul className="flex w-[90dvw] mx-auto justify-between items-center sm:text-lg">
         <li>
           <Link
-            className="flex items-center text-xl"
+            className="flex items-center text-xl font-bold"
             to={props.redirectTo}
             title="Dashboard"
           >

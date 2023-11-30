@@ -93,12 +93,12 @@ function MySubjects() {
           </div>
         </div>
       )}
-      <div className="flex flex-col dark:bg-[#0c1942]">
+      <div className="flex flex-col bg-slate-300 dark:bg-[#121622]">
         <div className="w-[90dvw] mx-auto">
           <h1 className="flex justify-center font-bold text-2xl mt-10 mb-6 dark:text-white">
             My classes
           </h1>
-          <div className="bg-white rounded-2xl p-5 mb-10 dark:bg-[#1f222b]">
+          <div className="rounded-2xl p-5 mb-10 bg-[#F0F0F0] dark:bg-[#282a37]">
             <table className="w-full mb-10 mt-4  rounded-2xl p-6">
               <thead>
                 <tr className="text-xl grid grid-cols-3 h-12 items-center font-bold dark:text-white">

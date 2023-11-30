@@ -11,8 +11,8 @@ const Subject = () => {
   const lastname = useAppStore((state) => state.lastname);
 
   return (
-    <div className="dark:bg-[#0c1942] w-[100dvw] h-[100dvh] my-0">
-      <div className="w-[90dvw] mx-auto bg-white dark:bg-[#0c1942]">
+    <div className="w-[100dvw] h-[100dvh] my-0 bg-slate-300 dark:bg-[#121622]">
+      <div className="w-[90dvw] mx-auto bg-slate-300 dark:bg-[#121622]">
         <h1 className="font-bold text-4xl py-11 dark:text-white">
           Class: {classId}
         </h1>

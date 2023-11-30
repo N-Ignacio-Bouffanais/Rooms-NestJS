@@ -90,12 +90,12 @@ function SubjectsTake() {
           </div>
         </div>
       )}
-      <div className="flex flex-col bg-slate-200 dark:bg-slate-950">
+      <div className="flex flex-col bg-slate-300 dark:bg-[#121622]">
         <div className="mx-auto w-[90dvw] sm:w-[85dvw] md:w-[80dvw]">
           <h1 className="flex justify-center font-bold text-2xl mt-10 mb-6 dark:text-white">
             Student: {`${firstname} ${lastname}`}
           </h1>
-          <div className="bg-white rounded-2xl p-5 mb-10 dark:bg-[#1f222b]">
+          <div className="rounded-2xl p-5 mb-10 bg-[#F0F0F0] dark:bg-[#282a37]">
             <table className="w-full">
               <tbody>
                 <tr className="text-xl grid grid-cols-2 h-12 items-center font-bold dark:text-white">

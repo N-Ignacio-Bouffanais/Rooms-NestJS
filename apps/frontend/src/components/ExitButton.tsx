@@ -9,7 +9,7 @@ const ExitButton = () => {
   return (
     <div className="flex justify-center">
       <button
-        className="flex justify-center font-semibold bg-black rounded-xl w-full xs:w-56 md:w-80  h-12 text-white items-center mt-4 mb-10"
+        className="flex justify-center items-center w-80 bg-[#100f1d] dark:bg-yellow-400 h-10 p-3 rounded-full text-white dark:text-black text-lg font-semibold hover:bg-black my-12"
         onClick={() => {
           logout(), navigate("/");
         }}

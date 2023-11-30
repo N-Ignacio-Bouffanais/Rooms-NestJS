@@ -49,7 +49,7 @@ const ClassList = (props: Props) => {
 
   return (
     <>
-      <div className="rounded-2xl p-4 mb-10 bg-[#1f222b] dark:bg-[#222e53]">
+      <div className="rounded-2xl p-4 mb-10 bg-[#F0F0F0] dark:bg-[#282a37]">
         <table className="w-full">
           <thead>
             <tr className="text-xl grid grid-cols-4 h-12 items-center font-bold text-white sm:grid-cols-6 md:grid-cols-7">

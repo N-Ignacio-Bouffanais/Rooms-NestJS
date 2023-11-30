@@ -38,9 +38,16 @@ const MyTasks = (props: Props) => {
     <>
       <div className="grid row-auto gap-x-2 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {Array.isArray(tasks) ? (
-          tasks.map((f) => <Task student={props.username} subject={props.subjectName} key={f} name={f} />)
+          tasks.map((f) => (
+            <Task
+              student={props.username}
+              subject={props.subjectName}
+              key={f}
+              name={f}
+            />
+          ))
         ) : (
-          <p className="rounded-2xl p-3 mb-6 bg-[#1f222b] dark:bg-[#222e53] text-white text-center">
+          <p className="rounded-2xl p-3 mb-6 bg-[#F0F0F0] dark:bg-[#282a37] text-white text-center">
             No files for now
           </p>
         )}
