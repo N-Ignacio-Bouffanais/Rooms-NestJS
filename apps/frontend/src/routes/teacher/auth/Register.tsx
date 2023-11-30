@@ -5,8 +5,8 @@ import BackButton from "../../../components/BackButton";
 
 const Register = () => {
   return (
-    <div className="flex w-full flex-col justify-center bg-gradient-to-r from-cyan-500 to-blue-500 h-[100dvh]">
-      <div className="flex flex-col items-center mb-6 mx-auto text-center w-[340px] sm:w-[420px]">
+    <div className="flex w-full flex-col pt-16 bg-slate-300 dark:bg-[#121622] h-[100dvh]">
+      <div className="flex flex-col items-center mb-10 mx-auto text-center w-[340px] sm:w-[420px]">
         <RegisterForm redirectTo="/" endpoint="/auth/professor/register" />
         <Link
           to="/professor/login"

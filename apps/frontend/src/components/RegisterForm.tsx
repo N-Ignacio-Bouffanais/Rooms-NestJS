@@ -64,14 +64,15 @@ function RegisterForm(props: Props) {
 
 
   return (
-    <form onSubmit={onSubmit} className="flex flex-col items-center">
-      <div className="flex items-center mb-2">
+    <form onSubmit={onSubmit} className="flex flex-col items-center gap-3">
+      <div className="flex items-center">
         <div className="w-40">
-          <label htmlFor="" className="flex justify-start font-medium text-sm ">
+          <label htmlFor="" className="flex justify-start font-medium text-sm dark:text-white ">
             Your firstname
           </label>
           <input
             type="text"
+            autoFocus
             {...register("firstname", {
               required: true,
             })}
@@ -84,7 +85,7 @@ function RegisterForm(props: Props) {
           )}
         </div>
         <div className="w-40">
-          <label className="flex justify-start font-medium text-sm ">
+          <label className="flex justify-start font-medium text-sm dark:text-white ">
             Your lastname
           </label>
           <input
@@ -102,7 +103,7 @@ function RegisterForm(props: Props) {
         </div>
       </div>
       <div>
-        <label htmlFor="" className="flex justify-start font-medium text-sm ">
+        <label htmlFor="" className="flex justify-start font-medium text-sm dark:text-white ">
           What is your email address?
         </label>
         <input
@@ -128,7 +129,7 @@ function RegisterForm(props: Props) {
         )}
       </div>
       <div>
-        <label htmlFor="" className="flex justify-start font-medium text-sm ">
+        <label htmlFor="" className="flex justify-start font-medium text-sm dark:text-white ">
           Type your DNI without dashes and periods
         </label>
         <input
@@ -147,7 +148,7 @@ function RegisterForm(props: Props) {
         )}
       </div>
       <div>
-        <label htmlFor="" className="flex justify-start font-medium text-sm ">
+        <label htmlFor="" className="flex justify-start font-medium text-sm dark:text-white ">
           Type your password
         </label>
         <div className="relative">
@@ -182,7 +183,7 @@ function RegisterForm(props: Props) {
         </span>
       )}
       <div>
-        <label className="flex justify-start font-medium text-sm">
+        <label className="flex justify-start font-medium text-sm dark:text-white">
           Confirm your password
         </label>
         <div className="relative">

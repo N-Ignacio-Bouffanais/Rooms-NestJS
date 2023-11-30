@@ -68,15 +68,16 @@ function ChangeVisibility() {
 }
 
   return (
-    <form onSubmit={onSubmit} className="flex flex-col items-center gap-2">
+    <form onSubmit={onSubmit} className="flex flex-col items-center gap-3">
       <div>
         <label
           htmlFor="email"
-          className="flex justify-start font-medium text-sm"
+          className="flex justify-start font-medium text-sm dark:text-white"
         >
           What is your Email?
         </label>
         <input
+          autoFocus
           placeholder="example@example.com"
           type="email"
           {...register("email", {
@@ -100,7 +101,7 @@ function ChangeVisibility() {
       <div>
         <label
           htmlFor="password"
-          className="flex justify-start font-medium text-sm"
+          className="flex justify-start font-medium text-sm dark:text-white"
         >
           What is your Password?
         </label>

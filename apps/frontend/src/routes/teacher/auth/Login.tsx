@@ -4,7 +4,7 @@ import BackButton from "../../../components/BackButton";
 
 const Login = () => {
   return (
-    <div className="flex w-full flex-col justify-center bg-gradient-to-r from-cyan-500 to-blue-500 h-[100dvh]">
+    <div className="flex w-full flex-col justify-center bg-slate-300 dark:bg-[#121622] h-[100dvh]">
       <div className="flex flex-col items-center mb-6 mx-auto space-y-3 text-center py-6 w-[340px] sm:w-[420px]">
         <LoginForm
           endpoint="/auth/professor/login"

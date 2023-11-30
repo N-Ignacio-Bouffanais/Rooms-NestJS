@@ -31,7 +31,7 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        {role != "" && <Navbar redirectTo={`/${role}/dashboard`} />}
+        <Navbar redirectTo={`/${role}/dashboard`} role={role}/>
         <Routes>
           <Route index element={<Home />} />
           <Route

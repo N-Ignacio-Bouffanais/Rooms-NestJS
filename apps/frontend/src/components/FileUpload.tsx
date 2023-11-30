@@ -1,6 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import axios from "../libs/axios";
 import { FormEvent, useState } from "react";
+import queryClient from "../queryClient";
 
 type Props = {
   subjectName: string;
@@ -17,10 +18,16 @@ const FileUpload = (props: Props) => {
       if (file) {
         const formData = new FormData();
         formData.append("file", file);
-        const { data } = await axios.post(`files/${props.subjectName}/${props.username}`, formData);
+        const { data } = await axios.post(
+          `files/${props.subjectName}/${props.username}`,
+          formData
+        );
         console.log(data);
         return data as Data;
       }
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["tasks"] });
     },
   });
 

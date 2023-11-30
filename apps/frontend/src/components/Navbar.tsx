@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 
 interface Props {
   redirectTo: string;
+  role: string;
 }
 
 function Navbar(props: Props) {
@@ -33,7 +34,7 @@ function Navbar(props: Props) {
   };
 
   return (
-    <nav className="flex h-[10dvh] w-full text-white font-medium bg-blue-600">
+    <nav className="flex h-[10dvh] w-full dark:text-white font-medium bg-slate-300 dark:bg-[#121622]">
       <ul className="flex w-[90dvw] mx-auto justify-between items-center sm:text-lg">
         <li>
           <Link
@@ -49,13 +50,21 @@ function Navbar(props: Props) {
           <button className="mr-5" onClick={HandleTheme}>
             <BsMoonStarsFill />
           </button>
-          <button
-            onClick={() => {
-              logout(), navigate("/");
-            }}
-          >
-            Sign Out
-          </button>
+          {props.role != "" ? (
+            <button
+              className="rounded-lg h-10 bg-blue-600 w-28 text-white"
+              onClick={() => {
+                logout(), navigate("/");
+              }}
+            >Sign Out</button>
+          ) : (
+            <button
+              className="rounded-lg h-10 bg-blue-600 w-28 text-white"
+              onClick={() => {
+                navigate("/student/login");
+              }}
+            >Sign In</button>
+          )}
         </li>
       </ul>
     </nav>
