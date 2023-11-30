@@ -38,7 +38,7 @@ function Navbar(props: Props) {
       <ul className="flex w-[90dvw] mx-auto justify-between items-center sm:text-lg">
         <li>
           <Link
-            className="flex items-center"
+            className="flex items-center text-xl"
             to={props.redirectTo}
             title="Dashboard"
           >

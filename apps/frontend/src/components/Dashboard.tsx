@@ -15,7 +15,7 @@ interface Props {
 const Dashboard = (props:Props) => {
 
   return (
-    <div className="flex flex-col bg-white dark:bg-slate-950">
+    <div className="flex flex-col bg-slate-300 dark:bg-[#121622]">
       <div className="w-[90dvw] mx-auto">
         <h1 className="flex justify-center font-bold text-2xl mt-10 mb-6 dark:text-white">
           {props.title}: {`${props.firstname} ${props.lastname}`}
