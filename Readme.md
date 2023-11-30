@@ -3,11 +3,16 @@
 
 - For the store I implement zustand to persist some data like names and email, to be available to send some data to server, the zustand code is in the store folder.
 
-- For the forms I ussed React Hook Form with Typescript and axios/fetch.
+- For the forms I ussed React Hook Form with Typescript
 
-- I will implement Sooner, that is a toast library for reactjs.
+- I use Tanstack query with axios to get,delete, post and update the data with the Api
+
 
 ## Screenshot
 Login screenshot
 
-![student_login](./project_views/std_login.png)
+![login](./project_views/login.png)
+
+Home page
+
+![Home](./project_views/home.png)
