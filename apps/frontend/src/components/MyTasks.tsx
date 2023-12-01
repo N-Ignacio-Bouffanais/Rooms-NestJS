@@ -6,14 +6,15 @@ import Loading from "./Loading";
 
 type Props = {
   subjectName: string;
+  url: string;
   username: string;
 };
 
 const MyTasks = (props: Props) => {
+
   const GetTasks = async () => {
-    const res = await axios.get(`files/${props.subjectName}/${props.username}`);
+    const res = await axios.get(props.url);
     const tasks = res.data;
-    console.log(tasks)
     return tasks
   };
 

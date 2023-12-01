@@ -35,16 +35,16 @@ export class FileUploadController {
     @Param('username') username: string,
     @Res() res,
   ) {
-    return this.multerService.getAllFiles(res, subject, username);
+    return this.multerService.getFiles(res, subject, username);
   }
 
-  @Get('files/:subject/:username')
+  @Get('files/:subject')
   @UseInterceptors(FilesInterceptor('file'))
-  async getSubjectFiles(
+  async getAllFiles(
     @Param('subject') subject: string,
     @Res() res,
   ) {
-    return this.multerService.getSubjectsFiles(res, subject);
+    return this.multerService.getAllFiles(res, subject);
   }
 
   @Get('student/:subject/:student/:filename')
@@ -75,6 +75,5 @@ export class FileUploadController {
     } catch (error) {
       return { error: 'Error deleting file', details: error.message };
     }
-
   }
 }

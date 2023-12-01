@@ -19,7 +19,11 @@ const Subject = () => {
         {classId && (
           <>
             <FileUpload subjectName={classId} username={firstname + lastname} />
-            <MyTasks subjectName={classId} username={firstname + lastname} />
+            <MyTasks
+              url={`files/${classId}/${firstname+lastname}`}
+              subjectName={classId}
+              username={firstname + lastname}
+            />
             <ClassList subjectName={classId} />
           </>
         )}
