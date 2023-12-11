@@ -15,6 +15,7 @@ const MyTasks = (props: Props) => {
   const GetTasks = async () => {
     const res = await axios.get(props.url);
     const tasks = res.data;
+    console.log(tasks)
     return tasks
   };
 

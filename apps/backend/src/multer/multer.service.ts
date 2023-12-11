@@ -1,7 +1,6 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { Response } from 'express';
 import * as fs from 'fs';
-import path from 'path';
 
 @Injectable()
 export class MulterService {
@@ -26,35 +25,35 @@ export class MulterService {
     return res;
   }
 
-  async getAllFiles(res: Response, subject: string, arrayOfFiles) {
-    const dir = `./uploads/${subject}/`;
-    if (!fs.existsSync(dir)) {
+  async readAllFiles(subject: string, res: Response) {
+    const path = `./uploads/${subject}/`;
+    if (!fs.existsSync(path)) {
       return res
         .status(HttpStatus.NOT_FOUND)
         .json({ message: 'Files not found' });
     }
 
+    const arrayOfFiles:Array<string> = []
+
     try {
-      arrayOfFiles = arrayOfFiles || [];
-
-      const files = fs.readdirSync(dir);
-
-      files.forEach(function (file) {
-        if (fs.statSync(dir + '/' + file).isDirectory()) {
-          arrayOfFiles = getAllFiles(dir + '/' + file, arrayOfFiles);
-        } else {
-          arrayOfFiles.push(path.join(__dirname, dir, '/', file));
+      
+      const folders = await fs.promises.readdir(path);
+      const x = folders.map((i) =>  {
+        const stat = fs.statSync(`${path}`);
+        if (stat.isDirectory()) {
+          console.log("directory: " + path);
+          const files = fs.readdirSync(`${path}/${i}`);
+          console.log("los archivos son:"+files)
+          arrayOfFiles.push(String(files));
+          console.log("array:"+arrayOfFiles);
         }
       });
-
-      return arrayOfFiles;
-
-      res.status(HttpStatus.ACCEPTED).json(files);
+      console.log(x)
+      res.status(HttpStatus.ACCEPTED).json(arrayOfFiles);
     } catch (error) {
       console.error(error);
       res.status(HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
     return res;
   }
 }

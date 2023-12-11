@@ -30,6 +30,7 @@ const Task = (props: Props) => {
   return (
     <div className="flex justify-between w-full rounded-2xl p-3 mb-4 bg-[#1f222b] dark:bg-[#222e53]">
       <Link
+        key={props.name}
         target="_blank"
         to={`${props.student}/${props.name}`}
         className="flex items-center w-11/12"

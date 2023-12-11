@@ -44,7 +44,7 @@ export class FileUploadController {
     @Param('subject') subject: string,
     @Res() res,
   ) {
-    return this.multerService.getAllFiles(res, subject);
+    return this.multerService.readAllFiles(subject, res);
   }
 
   @Get('student/:subject/:student/:filename')
